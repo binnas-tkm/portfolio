@@ -91,6 +91,7 @@ const splitEl = (el) => {
   const addWord = (word, cloneOf) => {
     const u = document.createElement("span"); u.className = "u"; u.textContent = word;
     if (cloneOf) { const c = cloneOf.cloneNode(false); c.textContent = word; u.textContent = ""; u.appendChild(c); }
+    if (units.length) wrap.append(" ");
     wrap.appendChild(u); units.push(u);
   };
   for (const node of [...el.childNodes]) {
@@ -263,13 +264,13 @@ const makeSlider = (root) => {
 
 // ───────── 3 · Trajetória vertical ─────────
 const TRAJ = [
-  { ano: "2017 – 2019", onde: "EEEP Leonel de Moura Brizola", papel: "Comunicação, Imagem e Styling", txt: "Onde comecei a produzir conteúdo: cena, luz, foto e narrativa. É a base visual que levo até hoje para campanhas." },
-  { ano: "2020 – 2021", onde: "AGP Marketing", papel: "Social media", txt: "Meu primeiro trabalho no digital: conteúdo para marcas de moda infantil, moda casual, moda praia e acessórios." },
-  { ano: "2021", onde: "Fargo · Bolsas e sapatos", papel: "Assistente de Marketing e E-commerce", txt: "Campanhas de social media e e-commerce com foco em conversão, copy, peças e vídeos, ações com influenciadores e lançamento de coleção com catálogos temáticos. Em paralelo, atendi como freelancer marcas como UAU Conceito, La Reine e Theresa Montenegro." },
-  { ano: "2023 – 2025", onde: "Desenrolado · Enem Action (YDUQS)", papel: "Analista de Marketing Digital", txt: "Inbound, CRO, conteúdo e mídia paga para o Enem Action. Em 2024, o Enem Action e o Simuladão responderam por 49% de todas as matrículas do grupo." },
-  { ano: "2025 – hoje", onde: "Cineteatro São Luiz", papel: "Supervisor de Comunicação Digital", txt: "Supervisiono o time de conteúdo, redação e atendimento, gerencio as campanhas das páginas de venda dos eventos e escrevi o plano de comunicação digital 2027–2030. No 2º semestre de 2025, os cliques cresceram 230,6% e o awareness, 189,3%." },
+  { ano: "2017\u00a0–\u00a02019", onde: "EEEP Leonel de Moura Brizola", papel: "Comunicação, Imagem e Styling", txt: "Onde comecei a produzir conteúdo: cena, luz, foto e narrativa. É a base visual que levo até hoje para campanhas." },
+  { ano: "2020\u00a0–\u00a02021", onde: "AGP Marketing", papel: "Social media", txt: "Meu primeiro trabalho no digital: conteúdo para marcas de moda infantil, moda casual, moda praia e acessórios." },
+  { ano: "2021", onde: "Fargo\u00a0· Bolsas e sapatos", papel: "Assistente de Marketing e E\u2060-\u2060commerce", txt: "Campanhas de social media e e\u2060-\u2060commerce com foco em conversão, copy, peças e vídeos, ações com influenciadores e lançamento de coleção com catálogos temáticos. Em paralelo, atendi como freelancer marcas como UAU Conceito, La Reine e Theresa Montenegro." },
+  { ano: "2023\u00a0–\u00a02025", onde: "Desenrolado\u00a0· Enem Action (YDUQS)", papel: "Analista de Marketing Digital", txt: "Inbound, CRO, conteúdo e mídia paga para o Enem Action. Em 2024, o Enem Action e o Simuladão responderam por 49% de todas as matrículas do grupo." },
+  { ano: "2025\u00a0–\u00a0hoje", onde: "Cineteatro São Luiz", papel: "Supervisor de Comunicação Digital", txt: "Supervisiono o time de conteúdo, redação e atendimento, gerencio as campanhas das páginas de venda dos eventos e escrevi o plano de comunicação digital 2027–2030. No 2º semestre de 2025, os cliques cresceram 230,6% e o awareness, 189,3%." },
   { ano: "Nov 2025", onde: "UFC", papel: "Workshop Estratégias Digitais", txt: "Conduzi o workshop Estratégias Digitais para alunos de Publicidade e Jornalismo da UFC." },
-  { ano: "2026 – hoje", onde: "Universidade de Fortaleza", papel: "Marketing", txt: "Graduação em Marketing na Unifor, em andamento." },
+  { ano: "2026\u00a0–\u00a0hoje", onde: "Universidade de Fortaleza", papel: "Marketing", txt: "Graduação em Marketing na Unifor, em andamento." },
   { ano: "Set 2026", onde: "Colégio César Cals", papel: "Roda de conversa", txt: "Participei da roda de conversa O mercado e o profissional de comunicação, na Feira das Profissões do Colégio César Cals, em Fortaleza." },
 ];
 const initTimeline = () => {
@@ -300,7 +301,7 @@ const initTimeline = () => {
     return [x, y];
   };
   const show = (i) => {
-    if (ativo !== i) { ativo = i; $(".rotulo", float).textContent = `${TRAJ[i].ano} · ${TRAJ[i].onde}`; $("p", float).textContent = TRAJ[i].txt; }
+    if (ativo !== i) { ativo = i; $(".rotulo", float).textContent = `${TRAJ[i].ano}\u00a0· ${TRAJ[i].onde}`; $("p", float).textContent = TRAJ[i].txt; }
     const [x, y] = alvo(i);
     if (fo.target < 1) { fx.v = fx.target = x; fy.v = fy.target = y; place(); }
     fx.to(x); fy.to(y); fo.to(1);
@@ -347,9 +348,9 @@ const FRENTES = [
     marca: "+189,3% de awareness no mesmo período",
     como: "Planejamento de comunicação, divisão de tarefas e orientação do time de conteúdo, redação e atendimento. Campanhas para as páginas de venda dos eventos, ajustadas por testes A/B, e automações com Claude e Zapier ligadas ao ClickUp.",
     ferr: ["ClickUp", "Meta Ads", "Google Analytics 4", "Looker Studio", "Claude", "Zapier"] },
-  { n: "02", frente: "Inbound e conversão em matrícula", onde: "Enem Action · YDUQS", num: "+28%", metrica: "na taxa de inscritos que finalizaram a prova", base: "ciclo 2025.1 (25%) → ciclo 2025.3 (32%)",
+  { n: "02", frente: "Inbound e conversão em matrícula", onde: "Enem Action\u00a0· YDUQS", num: "+28%", metrica: "na taxa de inscritos que finalizaram a prova", base: "ciclo 2025.1 (25%) → ciclo 2025.3 (32%)",
     marca: "49% de todas as matrículas do grupo em 2024, somando Enem Action e Simuladão",
-    como: "Iscas digitais (e-books e planner), nutrição por e-mail e WhatsApp e testes A/B de criativos, formatos e abordagens para otimizar CPL, CTR e conversão.",
+    como: "Iscas digitais (e\u2060-\u2060books e planner), nutrição por e\u2060-\u2060mail e WhatsApp e testes A/B de criativos, formatos e abordagens para otimizar CPL, CTR e conversão.",
     ferr: ["Meta Ads", "Google Ads", "RD Station", "Google Analytics 4", "CapCut", "Trello"] },
   { n: "03", frente: "Campanhas de captação", onde: "Simuladão do Enem", num: "412", metrica: "matrículas geradas pela campanha", base: "edição de 2024", marca: "",
     como: "Na segunda edição, os participantes de 2023 que entraram na faculdade viraram prova social para atrair os novos estudantes, em redes, site, newsletter e publi com a artista Maitê Padilha.",
@@ -498,7 +499,7 @@ const initCarousels = () => {
     if (i === shown) return; shown = i;
     const c = CARR[i];
     track.innerHTML = Array.from({ length: c.n }, (_, k) => `<div class="slide"><img src="assets/carrosseis/c${i + 1}-${pad(k + 1)}.webp" alt="${c.t}, lâmina ${k + 1} de ${c.n}" ${k > 1 ? 'loading="lazy"' : ""} draggable="false"></div>`).join("");
-    $(".visor-n", visor).textContent = `Carrossel ${pad(i + 1)} · ${c.n} lâminas`;
+    $(".visor-n", visor).textContent = `Carrossel ${pad(i + 1)}\u00a0· ${c.n} lâminas`;
     $("h3", visor).textContent = c.t;
     $(".visor-linha", visor).textContent = c.l;
     mini.innerHTML = Array.from({ length: c.n }, (_, k) => `<button type="button" aria-label="Lâmina ${k + 1}" ${k === 0 ? 'aria-current="true"' : ""}><img src="assets/carrosseis/mini/c${i + 1}-${pad(k + 1)}.webp" alt="" loading="lazy" decoding="async" draggable="false"></button>`).join("");
@@ -512,7 +513,7 @@ const initCarousels = () => {
     // as lâminas entram ao contrário para a capa ficar na frente da pilha, mais perto do vidro
     const files = Array.from({ length: Math.min(4, c.n) }, (_, k) => ({ name: `Lâmina ${k + 1}`, meta: `${pad(k + 1)}/${pad(c.n)}`, image: `assets/carrosseis/mini/c${i + 1}-${pad(k + 1)}.webp`, k })).reverse();
     const folder = createGlassFolder({
-      label: c.t, meta: `${pad(i + 1)} · ${c.n} lâminas`, tone: "dark", art: recipe, seed: i * 7 + 3,
+      label: c.t, meta: `${pad(i + 1)}\u00a0· ${c.n} lâminas`, tone: "dark", art: recipe, seed: i * 7 + 3,
       labelPlacement: "top-left", width: fw, appearDelay: i * 120, files,
       onHit: () => { if (i === cur) folder.setOpen(!folder.open); else go(i); },
       onFileSelect: (file) => {
@@ -583,18 +584,18 @@ const initCarousels = () => {
 
 // ───────── Contato, gaveta e menu ─────────
 // ───────── Materiais dos cases: o texto acompanha a imagem do carrossel ─────────
-const ISCA_OQUE = ["Pesquisa de pautas e temas sociais em alta entre os estudantes", "Briefing da isca digital: público, tema e objetivo", "Diretrizes de redação e de design para a equipe de criação", "Plano de divulgação inbound: redes, landing page, e-mail e WhatsApp", "Meta de geração de leads e acompanhamento dos resultados por campanha"];
+const ISCA_OQUE = ["Pesquisa de pautas e temas sociais em alta entre os estudantes", "Briefing da isca digital: público, tema e objetivo", "Diretrizes de redação e de design para a equipe de criação", "Plano de divulgação inbound: redes, landing page, e\u2060-\u2060mail e WhatsApp", "Meta de geração de leads e acompanhamento dos resultados por campanha"];
 const ISCA_COMO = "Defini o tema a partir da pesquisa de pauta, escrevi o briefing, orientei a redação e a direção de arte e acompanhei os leads gerados pela landing page e pelas campanhas.";
 const ISCA_HAB = ["Inbound marketing", "Pesquisa de pauta", "Briefing", "Nutrição de leads"];
 const ISCA_FERR = ["RD Station", "Meta Ads", "Google Analytics 4", "WhatsApp"];
 const MATERIAIS = {
   csl: [
-    { t: "Plano de Comunicação Digital · documento", l: "A versão completa do plano: do diagnóstico à execução, com cada estratégia apoiada em dados.", b: "Entender o plano",
-      oque: ["Pesquisa e análise do ambiente de marketing, externo e interno", "Escuta do público e da equipe: pesquisa de satisfação, questionário antes das sessões e entrevistas", "Definição do objetivo do ciclo, dos resultados-chave e das metas até 2030", "Estratégias de canais e de conteúdos construídas a partir dos dados", "Plano de mensuração, recursos, fluxo de trabalho e cronograma"],
+    { t: "Plano de Comunicação Digital\u00a0· documento", l: "A versão completa do plano: do diagnóstico à execução, com cada estratégia apoiada em dados.", b: "Entender o plano",
+      oque: ["Pesquisa e análise do ambiente de marketing, externo e interno", "Escuta do público e da equipe: pesquisa de satisfação, questionário antes das sessões e entrevistas", "Definição do objetivo do ciclo, dos resultados\u2060-\u2060chave e das metas até 2030", "Estratégias de canais e de conteúdos construídas a partir dos dados", "Plano de mensuração, recursos, fluxo de trabalho e cronograma"],
       porque: "A comunicação digital precisava de uma direção para quatro anos que reduzisse a dependência de um único canal e desse à curadoria dados para decidir.",
       como: "Cruzei dados dos canais, do site e da bilheteria com pesquisas de mercado e com a escuta do público, e transformei o diagnóstico em objetivos mensuráveis.",
       hab: ["Pesquisa de mercado", "Análise de dados", "Planejamento estratégico", "OKRs", "Escrita estratégica"], ferr: ["Google Analytics 4", "Search Console", "Looker Studio", "Google Sheets"] },
-    { t: "Plano de Comunicação Digital · apresentação", l: "A versão em slides, feita para apresentar a estratégia aos gestores. O plano foi aprovado pela diretoria.", b: "Entender o plano",
+    { t: "Plano de Comunicação Digital\u00a0· apresentação", l: "A versão em slides, feita para apresentar a estratégia aos gestores. O plano foi aprovado pela diretoria.", b: "Entender o plano",
       oque: ["Síntese da pesquisa e da análise do ambiente de marketing", "Objetivos e metas do ciclo em formato de leitura rápida", "Estratégias de canais e de conteúdos, com os dados que as sustentam", "Narrativa em três partes: diagnóstico, decisão e execução"],
       porque: "O documento é a referência completa, mas os gestores precisavam ver a tese, os dados e as decisões em poucos minutos para aprovar o plano. A apresentação foi aprovada pela diretoria.",
       como: "Condensei os 14 capítulos do documento numa narrativa visual, priorizando os dados que justificam cada decisão.",
@@ -606,10 +607,10 @@ const MATERIAIS = {
       hab: ["Planejamento editorial", "Análise de conteúdo", "Pesquisa de audiência"], ferr: ["Instagram", "Google Sheets", "ClickUp"] },
   ],
   ea: [
-    { t: "E-book Estudos sobre Cinema", l: "Isca digital da campanha Férias com Conteúdo, para atrair estudantes interessados em cinema.", b: "Entender o material",
+    { t: "E\u2060-\u2060book Estudos sobre Cinema", l: "Isca digital da campanha Férias com Conteúdo, para atrair estudantes interessados em cinema.", b: "Entender o material",
       oque: ISCA_OQUE, porque: "Julho tem menos conversões. Um conteúdo útil e temático mantém a plataforma relevante nas férias e traz novos leads qualificados para o funil.",
       como: ISCA_COMO, hab: ISCA_HAB, ferr: ISCA_FERR },
-    { t: "E-book História da Moda", l: "Isca digital da campanha Férias com Conteúdo, sobre o que a moda e a indumentária dizem da cultura e da história de um povo.", b: "Entender o material",
+    { t: "E\u2060-\u2060book História da Moda", l: "Isca digital da campanha Férias com Conteúdo, sobre o que a moda e a indumentária dizem da cultura e da história de um povo.", b: "Entender o material",
       oque: ISCA_OQUE, porque: "Um tema de repertório cultural, útil para a redação e para as questões de humanas, atrai um público interessado e mantém a base ativa no período de menos conversões.",
       como: ISCA_COMO, hab: ISCA_HAB, ferr: ISCA_FERR },
     { t: "Planner 30 dias de Redação", l: "Isca digital para o estudante organizar 30 dias de prática de redação antes do Enem.", b: "Entender o material",
@@ -622,8 +623,8 @@ const MATERIAIS = {
       hab: ["Análise de dados", "Storytelling com dados", "Apresentação de resultados"], ferr: ["Instagram", "TikTok"] },
   ],
   eventos: [
-    { d: "Set 2026 · Feira das Profissões · Colégio César Cals, Fortaleza", t: "Roda de conversa: O mercado e o profissional de comunicação", l: "Participei da roda de conversa O mercado e o profissional de comunicação, na programação da Feira das Profissões do Colégio César Cals, conversando com estudantes do ensino médio sobre carreira e o dia a dia da área." },
-    { d: "13 nov 2025 · Universidade Federal do Ceará", t: "Workshop Estratégias Digitais", l: "Conduzi o workshop Estratégias Digitais para alunos de Publicidade e Jornalismo da UFC. Trabalhamos segmentação, proposta de valor e como transformar dados em decisões de comunicação." },
+    { d: "Set 2026\u00a0· Feira das Profissões\u00a0· Colégio César Cals, Fortaleza", t: "Roda de conversa: O mercado e o profissional de comunicação", l: "Participei da roda de conversa O mercado e o profissional de comunicação, na programação da Feira das Profissões do Colégio César Cals, conversando com estudantes do ensino médio sobre carreira e o dia a dia da área." },
+    { d: "13 nov 2025\u00a0· Universidade Federal do Ceará", t: "Workshop Estratégias Digitais", l: "Conduzi o workshop Estratégias Digitais para alunos de Publicidade e Jornalismo da UFC. Trabalhamos segmentação, proposta de valor e como transformar dados em decisões de comunicação." },
   ],
 };
 const initMateriais = () => {
@@ -646,7 +647,7 @@ const initMateriais = () => {
   });
   $$("[data-material]").forEach((btn) => btn.addEventListener("click", () => {
     const caso = btn.dataset.material, m = MATERIAIS[caso][atual[caso] || 0];
-    $(".mat-rotulo", dlg).textContent = caso === "csl" ? "Cineteatro São Luiz" : "Enem Action · YDUQS";
+    $(".mat-rotulo", dlg).textContent = caso === "csl" ? "Cineteatro São Luiz" : "Enem Action\u00a0· YDUQS";
     $("#material-titulo").textContent = m.t;
     $(".mat-lead", dlg).textContent = m.l;
     $(".mat-oque", dlg).innerHTML = m.oque.map((x) => `<li>${x}</li>`).join("");

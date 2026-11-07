@@ -10,7 +10,7 @@
 <link rel="icon" href="assets/marca/simbolo_cor_negativo.svg">
 <link rel="preload" href="assets/fonts/Unbounded.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Manrope.woff" as="font" type="font/woff" crossorigin>
-<link rel="modulepreload" href="assets/app.js">
+<link rel="modulepreload" href="assets/app.js?v=4">
 <link rel="modulepreload" href="assets/icones.js">
 <link rel="modulepreload" href="assets/glass-folder.js">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -60,6 +60,8 @@ ul, ol { list-style: none; }
 
 /* Tipografia (manual, slide 16): Unbounded nos títulos, Manrope no texto, Instrument Serif só como destaque raro */
 .titulo { font-family: var(--font-titulo); font-weight: 500; line-height: 1.02; letter-spacing: -.03em; }
+h1, h2, h3, h4, .titulo, .rotulo, .tl-head b, .plate-frente, .slide-leg, blockquote { text-wrap: balance; }
+p, li, dd, .lead { text-wrap: pretty; }
 .h2 { font-size: clamp(32px, 3.6vw, 56px); }
 .acento { font-family: var(--font-acento); font-style: italic; font-weight: 400; letter-spacing: 0; color: var(--ambar); }
 .ponto { color: var(--brasa); }
@@ -72,14 +74,14 @@ ul, ol { list-style: none; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chips li { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px 6px 9px; border-radius: 99px; border: 1px solid var(--nevoa-12); font-size: 12.5px; color: var(--nevoa-70); }
 /* Toda ferramenta ou plataforma citada leva o símbolo dela ao lado */
-.tool { display: inline-flex; align-items: center; gap: .32em; white-space: nowrap; }
+.tool { white-space: nowrap; }
 .ico { width: 1.05em; height: 1.05em; flex: none; display: inline-block; }
 .chips .ico { width: 15px; height: 15px; }
 .ico-img { border-radius: 3px; object-fit: cover; }
 .hwf-link.tool .ico { width: 12px; height: 12px; }
 
 /* Revelações de texto */
-.split { display: flex; flex-wrap: wrap; column-gap: .28em; }
+.split { display: block; }
 .split .u { display: inline-block; }
 .split .w { display: inline-flex; white-space: nowrap; }
 .js [data-rise], .js [data-fade] { opacity: 0; }
@@ -371,7 +373,7 @@ dialog { color: var(--nevoa); }
 .auto ul.lista { display: grid; gap: var(--s2); }
 .auto ul.lista li { position: relative; padding-left: 26px; color: var(--nevoa-70); }
 .auto ul.lista li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--brasa); }
-.tool .ico { vertical-align: -.15em; }
+.tool .ico { vertical-align: -.15em; margin-right: .32em; }
 .grupos { margin-top: var(--s2); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
 .grupo { padding: var(--s3); }
 .grupo .chips { margin-top: var(--s2); }
@@ -386,8 +388,8 @@ dialog { color: var(--nevoa); }
 .formacao span { font-size: 14px; color: var(--nevoa-50); }
 .bloco-t { margin-top: var(--s5); }
 .certs-lista { margin-top: var(--s2); display: grid; gap: var(--s1); }
-.certs-lista li { display: flex; gap: 10px; font-size: 14.5px; }
-.certs-lista li::before { content: ""; flex: none; margin-top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--brasa); }
+.certs-lista li { position: relative; padding-left: var(--s3); font-size: 14.5px; }
+.certs-lista li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--brasa); }
 .certs-lista span { color: var(--nevoa-50); }
 
 /* ───────── 9 · Contato ───────── */
@@ -468,6 +470,15 @@ dialog { color: var(--nevoa); }
   .anel { height: 330px; }
   .anel-item { top: 56px; }
   .contato { padding: var(--s1); }
+  .contato-redes { flex-direction: column; gap: var(--s2); }
+  .case { margin-top: var(--s6); }
+  .sec-head + .case { margin-top: var(--head); }
+  .plate-head { flex-direction: column; align-items: flex-start; gap: var(--s2); }
+  .plate-num { display: block; }
+  .plate-num span { display: block; margin-top: var(--s1); }
+  .contato-esq { padding: var(--s3) var(--s3) var(--s4); gap: var(--s4); }
+  .contato-acoes { flex-direction: column; gap: var(--s1); }
+  .contato-acoes .btn { width: 100%; justify-content: space-between; padding: 0 var(--s2) 0 var(--s3); font-size: 11.5px; letter-spacing: 0; }
   .visor-mini { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s1); margin-top: var(--s4); }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -539,7 +550,7 @@ dialog { color: var(--nevoa); }
         <h2 id="sobre-t" class="titulo" data-split="words" data-stagger="70">Marketing digital com visão de funil e <span class="acento">decisão</span> baseada em dados</h2>
         <div class="sobre-textos" data-rise data-delay="250">
           <p class="lead">Sou Vinicius Teixeira. Atualmente, Supervisor de Comunicação Digital no Cineteatro São Luiz, em Fortaleza, onde faço a gestão do ecossistema de canais e estratégias digitais.</p>
-          <p class="lead">Comecei na moda, produzindo cena, foto e conteúdo. Fui para o digital pelo caminho da performance: social media, e-commerce, inbound, CRO e mídia paga, sempre olhando o funil inteiro.</p>
+          <p class="lead">Comecei na moda, produzindo cena, foto e conteúdo. Fui para o digital pelo caminho da performance: social media, e&#8288;-&#8288;commerce, inbound, CRO e mídia paga, sempre olhando o funil inteiro.</p>
           <p class="lead">Gosto de organizar times e processos. Trabalho com hipótese, teste e leitura, e uso automação para tirar o trabalho repetitivo do caminho da equipe.</p>
         </div>
         <dl class="fatos" data-rise data-delay="350">
@@ -597,26 +608,26 @@ dialog { color: var(--nevoa); }
     <article class="case" aria-labelledby="csl-t">
       <div class="case-media slider" data-slider data-case="csl" data-rise data-delay="100">
         <div class="slider-view"><div class="slider-track">
-          <div class="slide"><div class="palco"><div class="mk-doc"><span class="folha"></span><span class="folha"></span><img loading="lazy" decoding="async" src="assets/capas/plano-doc.webp" alt="Capa do Plano de Comunicação Digital 2027–2030 do Cineteatro São Luiz" data-leg="Plano de Comunicação Digital 2027–2030 · documento"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/plano-apresentacao.webp" alt="Capa da apresentação do plano" loading="lazy" data-leg="Plano de Comunicação Digital · apresentação"></div><div class="mk-base"></div></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-doc"><span class="folha"></span><span class="folha"></span><img loading="lazy" decoding="async" src="assets/capas/plano-doc.webp" alt="Capa do Plano de Comunicação Digital 2027&#8288;–&#8288;2030 do Cineteatro São Luiz" data-leg="Plano de Comunicação Digital 2027&#8288;–&#8288;2030&nbsp;· documento"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/plano-apresentacao.webp" alt="Capa da apresentação do plano" loading="lazy" data-leg="Plano de Comunicação Digital&nbsp;· apresentação"></div><div class="mk-base"></div></div></div></div>
           <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/linha-editorial.webp" alt="Capa da Linha Editorial para os canais digitais" loading="lazy" data-leg="Linha Editorial para os canais digitais"></div><div class="mk-base"></div></div></div></div>
         </div></div>
         <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
         <div class="material" data-material-box="csl" aria-live="polite">
-          <p class="rotulo"><span class="material-n">01 / 03</span> · Material em destaque</p>
+          <p class="rotulo"><span class="material-n">01 / 03</span>&nbsp;· Material em destaque</p>
           <h4 class="material-t"></h4>
           <p class="material-l"></p>
           <button class="btn btn--escuro" data-material="csl"><span class="material-b">Entender o plano</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
         </div>
       </div>
       <div class="case-texto" data-rise data-delay="200">
-        <p class="rotulo">Cineteatro São Luiz · ago/2025 – hoje</p>
-        <h3 id="csl-t">Plano de Comunicação Digital 2027–2030</h3>
+        <p class="rotulo">Cineteatro São Luiz&nbsp;· ago/2025&nbsp;–&nbsp;hoje</p>
+        <h3 id="csl-t">Plano de Comunicação Digital 2027&#8288;–&#8288;2030</h3>
         <p class="lead">Escrevi o plano que orienta a comunicação digital do São Luiz pelos próximos quatro anos. A comunicação passa a formar repertório além de divulgar a agenda, e os dados dos canais passam a apoiar a curadoria.</p>
         <dl class="case-nums">
           <div><dt>+230,6%</dt><dd>em cliques, 1º → 2º sem. de 2025</dd></div>
           <div><dt>+189,3%</dt><dd>em awareness, 1º → 2º sem. de 2025</dd></div>
-          <div><dt>17</dt><dd>resultados-chave em 6 objetivos até 2030</dd></div>
+          <div><dt>17</dt><dd>resultados&#8288;-&#8288;chave em 6 objetivos até 2030</dd></div>
         </dl>
         <ul class="entregas">
           <li><span><b>Dashboard de KPIs</b> dos canais digitais em Google Sheets, com os OKRs e marcos anuais</span></li>
@@ -630,28 +641,28 @@ dialog { color: var(--nevoa); }
     <article class="case inverso" aria-labelledby="ea-t">
       <div class="case-media slider" data-slider data-case="ea" data-rise data-delay="100">
         <div class="slider-view"><div class="slider-track">
-          <div class="slide"><div class="palco"><div class="mk-livro"><img loading="lazy" decoding="async" src="assets/capas/ebook-cinema.webp" alt="Capa do e-book Estudos sobre Cinema" data-leg="E-book Estudos sobre Cinema · isca digital"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-livro"><img decoding="async" src="assets/capas/ebook-moda.webp" alt="Capa do e-book sobre História da Moda" loading="lazy" data-leg="E-book História da Moda · isca digital"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/planner-redacao.webp" alt="Capa do Planner 30 dias de Redação" loading="lazy" data-leg="Planner 30 dias de Redação · isca digital"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-livro"><img loading="lazy" decoding="async" src="assets/capas/ebook-cinema.webp" alt="Capa do e-book Estudos sobre Cinema" data-leg="E&#8288;-&#8288;book Estudos sobre Cinema&nbsp;· isca digital"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-livro"><img decoding="async" src="assets/capas/ebook-moda.webp" alt="Capa do e-book sobre História da Moda" loading="lazy" data-leg="E&#8288;-&#8288;book História da Moda&nbsp;· isca digital"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/planner-redacao.webp" alt="Capa do Planner 30 dias de Redação" loading="lazy" data-leg="Planner 30 dias de Redação&nbsp;· isca digital"></div></div></div>
           <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/relatorio-2025.webp" alt="Capa do relatório anual de desempenho das redes sociais" loading="lazy" data-leg="Relatório anual de desempenho das redes"></div><div class="mk-base"></div></div></div></div>
         </div></div>
         <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
         <div class="material" data-material-box="ea" aria-live="polite">
-          <p class="rotulo"><span class="material-n">01 / 04</span> · Material em destaque</p>
+          <p class="rotulo"><span class="material-n">01 / 04</span>&nbsp;· Material em destaque</p>
           <h4 class="material-t"></h4>
           <p class="material-l"></p>
           <button class="btn btn--escuro" data-material="ea"><span class="material-b">Entender o material</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
         </div>
       </div>
       <div class="case-texto" data-rise data-delay="200">
-        <p class="rotulo">Enem Action · YDUQS · jan/2023 – jul/2025</p>
+        <p class="rotulo">Enem Action&nbsp;· YDUQS&nbsp;· jan/2023&nbsp;–&nbsp;jul/2025</p>
         <h3 id="ea-t">Inbound e captação de leads para o Enem Action</h3>
-        <p class="lead">Na agência Desenrolado, cuidei de conteúdo, inbound, CRO e mídia paga do Enem Action. Criei iscas digitais como os e-books de Cinema e de Moda e o planner de redação, com nutrição por e-mail e <span class="tool" data-tool="whatsapp">WhatsApp</span>, para manter a base ativa até a prova.</p>
+        <p class="lead">Na agência Desenrolado, cuidei de conteúdo, inbound, CRO e mídia paga do Enem Action. Criei iscas digitais como os e&#8288;-&#8288;books de Cinema e de Moda e o planner de redação, com nutrição por e&#8288;-&#8288;mail e <span class="tool" data-tool="whatsapp">WhatsApp</span>, para manter a base ativa até a prova.</p>
         <dl class="case-nums">
           <div><dt>49%</dt><dd>de todas as matrículas do grupo em 2024, somando Enem Action e Simuladão</dd></div>
           <div><dt>+28%</dt><dd>na taxa de inscritos que finalizaram a prova (25% → 32%, ciclo 2025.1 → 2025.3)</dd></div>
         </dl>
-        <ul class="chips"><li data-tool="meta">Meta Ads</li><li data-tool="googleads">Google Ads</li><li data-tool="rdstation">RD Station</li><li data-tool="googleanalytics">Google Analytics 4</li><li data-tool="capcut">CapCut</li><li data-tool="trello">Trello</li></ul>
+        <ul class="chips"><li data-tool="meta">Meta&nbsp;Ads</li><li data-tool="googleads">Google&nbsp;Ads</li><li data-tool="rdstation">RD Station</li><li data-tool="googleanalytics">Google Analytics 4</li><li data-tool="capcut">CapCut</li><li data-tool="trello">Trello</li></ul>
       </div>
     </article>
 
@@ -664,7 +675,7 @@ dialog { color: var(--nevoa); }
   <div class="carr-luz" aria-hidden="true"></div>
   <div class="wrap" style="position:relative;z-index:31">
     <div class="sec-head">
-      <p class="rotulo" data-fade>Conteúdo · Cineteatro São Luiz</p>
+      <p class="rotulo" data-fade>Conteúdo&nbsp;· Cineteatro São Luiz</p>
       <h2 id="carr-t" class="titulo h2" data-split="words" data-stagger="80">Carrosséis educativos</h2>
       <p class="lead" data-fade data-delay="200">Série criada para a editoria educativa do São Luiz, no <span class="tool" data-tool="instagram">Instagram</span>: contexto sobre cinema, música e artes cênicas antes da sessão. Gire as pastas, clique na da frente para abrir e escolha uma lâmina.</p>
     </div>
@@ -716,7 +727,7 @@ dialog { color: var(--nevoa); }
     <div class="grupos">
       <div class="grupo glass" data-rise data-delay="100"><p class="rotulo">Gestão de projetos</p><ul class="chips"><li data-tool="clickup">ClickUp</li><li data-tool="trello">Trello</li><li data-tool="asana">Asana</li><li data-tool="notion">Notion</li></ul></div>
       <div class="grupo glass" data-rise data-delay="160"><p class="rotulo">Dados</p><ul class="chips"><li data-tool="googleanalytics">Google Analytics 4</li><li data-tool="googlesearchconsole">Search Console</li><li data-tool="looker">Looker Studio</li><li data-tool="googlesheets">Google Sheets</li></ul></div>
-      <div class="grupo glass" data-rise data-delay="220"><p class="rotulo">Mídia paga</p><ul class="chips"><li data-tool="meta">Meta Ads</li><li data-tool="googleads">Google Ads</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="220"><p class="rotulo">Mídia paga</p><ul class="chips"><li data-tool="meta">Meta&nbsp;Ads</li><li data-tool="googleads">Google&nbsp;Ads</li></ul></div>
       <div class="grupo glass" data-rise data-delay="280"><p class="rotulo">Relacionamento</p><ul class="chips"><li data-tool="rdstation">RD Station</li><li data-tool="manychat">Manychat</li><li data-tool="whatsapp">WhatsApp</li></ul></div>
       <div class="grupo glass" data-rise data-delay="340"><p class="rotulo">Automação e IA</p><ul class="chips"><li data-tool="claude">Claude</li><li data-tool="zapier">Zapier</li><li data-tool="openai">ChatGPT</li></ul></div>
       <div class="grupo glass" data-rise data-delay="400"><p class="rotulo">Criação</p><ul class="chips"><li data-tool="adobephotoshop">Photoshop</li><li data-tool="capcut">CapCut</li></ul></div>
@@ -734,36 +745,36 @@ dialog { color: var(--nevoa); }
     <div class="form-grid">
       <div data-rise data-delay="100">
         <ul class="formacao">
-          <li><b>Marketing</b><span>Universidade de Fortaleza (Unifor) · 2026 – 2028, em andamento</span></li>
-          <li><b>Comunicação, Imagem e Styling</b><span>EEEP Leonel de Moura Brizola · 2017 – 2019</span></li>
+          <li><b>Marketing</b><span>Universidade de Fortaleza (Unifor)&nbsp;· 2026&nbsp;–&nbsp;2028, em andamento</span></li>
+          <li><b>Comunicação, Imagem e Styling</b><span>EEEP Leonel de Moura Brizola&nbsp;· 2017&nbsp;–&nbsp;2019</span></li>
         </ul>
         <p class="rotulo bloco-t">Certificados</p>
         <ul class="certs-lista">
-          <li>Analista de Growth Marketing <span>· Escola DNC · 246 h · 2026</span></li>
-          <li>Analista de Social Media <span>· Escola DNC · 164 h · 2026</span></li>
-          <li>Gestor de Tráfego <span>· Escola DNC · 134 h · 2026</span></li>
-          <li>Analista de Marketing <span>· Escola DNC · 120 h · 2026</span></li>
-          <li>Analista de CRM <span>· Escola DNC · 114 h · 2026</span></li>
-          <li>Subido de Tráfego: <span class="tool" data-tool="googleads">Google Ads</span> <span>· Pedro Sobral · 2026</span></li>
-          <li>Subido de Tráfego: <span class="tool" data-tool="meta">Meta Ads</span> <span>· Pedro Sobral · 2026</span></li>
+          <li>Analista de Growth Marketing <span>· Escola&nbsp;DNC&nbsp;· 246&nbsp;h&nbsp;· 2026</span></li>
+          <li>Analista de Social Media <span>· Escola&nbsp;DNC&nbsp;· 164&nbsp;h&nbsp;· 2026</span></li>
+          <li>Gestor de Tráfego <span>· Escola&nbsp;DNC&nbsp;· 134&nbsp;h&nbsp;· 2026</span></li>
+          <li>Analista de Marketing <span>· Escola&nbsp;DNC&nbsp;· 120&nbsp;h&nbsp;· 2026</span></li>
+          <li>Analista de CRM <span>· Escola&nbsp;DNC&nbsp;· 114&nbsp;h&nbsp;· 2026</span></li>
+          <li>Subido de Tráfego: <span class="tool" data-tool="googleads">Google&nbsp;Ads</span> <span>· Pedro&nbsp;Sobral&nbsp;· 2026</span></li>
+          <li>Subido de Tráfego: <span class="tool" data-tool="meta">Meta&nbsp;Ads</span> <span>· Pedro&nbsp;Sobral&nbsp;· 2026</span></li>
         </ul>
         <p class="rotulo bloco-t">Outros cursos</p>
         <ul class="certs-lista">
-          <li><span class="tool" data-tool="googleanalytics">Google Analytics 4</span> + <span class="tool" data-tool="looker">Looker Studio</span> <span>· Escola DNC · 2026</span></li>
-          <li>Análise de Dados + Estatística para Growth <span>· Escola DNC · 2026</span></li>
-          <li>Conteúdo e SEO <span>· Escola DNC · 2026</span></li>
-          <li>Growth Marketing <span>· Coderhouse · 2025</span></li>
+          <li><span class="tool" data-tool="googleanalytics">Google Analytics 4</span> + <span class="tool" data-tool="looker">Looker Studio</span> <span>· Escola&nbsp;DNC&nbsp;· 2026</span></li>
+          <li>Análise de Dados + Estatística para Growth <span>· Escola&nbsp;DNC&nbsp;· 2026</span></li>
+          <li>Conteúdo e SEO <span>· Escola&nbsp;DNC&nbsp;· 2026</span></li>
+          <li>Growth Marketing <span>· Coderhouse&nbsp;· 2025</span></li>
         </ul>
       </div>
       <div class="slider" data-slider data-rise data-delay="200">
         <div class="slider-view"><div class="slider-track">
-          <div class="slide"><div class="palco"><div class="mk-print"><img loading="lazy" decoding="async" src="assets/capas/cert-dnc-1.webp" alt="Certificado de Analista de Growth Marketing, Escola DNC" data-leg="Analista de Growth Marketing · Escola DNC · 246 h"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-4.webp" alt="Certificado de Analista de Social Media, Escola DNC" loading="lazy" data-leg="Analista de Social Media · Escola DNC · 164 h"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-2.webp" alt="Certificado de Gestor de Tráfego, Escola DNC" loading="lazy" data-leg="Gestor de Tráfego · Escola DNC · 134 h"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-5.webp" alt="Certificado de Analista de Marketing, Escola DNC" loading="lazy" data-leg="Analista de Marketing · Escola DNC · 120 h"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-3.webp" alt="Certificado de Analista de CRM, Escola DNC" loading="lazy" data-leg="Analista de CRM · Escola DNC · 114 h"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-google-ads.webp" alt="Certificado Subido de Tráfego, Google Ads" loading="lazy" data-leg="Subido de Tráfego · Google Ads · Pedro Sobral"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-meta-ads.webp" alt="Certificado Subido de Tráfego, Meta Ads" loading="lazy" data-leg="Subido de Tráfego · Meta Ads · Pedro Sobral"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img loading="lazy" decoding="async" src="assets/capas/cert-dnc-1.webp" alt="Certificado de Analista de Growth Marketing, Escola&nbsp;DNC" data-leg="Analista de Growth Marketing&nbsp;· Escola&nbsp;DNC&nbsp;· 246&nbsp;h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-4.webp" alt="Certificado de Analista de Social Media, Escola&nbsp;DNC" loading="lazy" data-leg="Analista de Social Media&nbsp;· Escola&nbsp;DNC&nbsp;· 164&nbsp;h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-2.webp" alt="Certificado de Gestor de Tráfego, Escola&nbsp;DNC" loading="lazy" data-leg="Gestor de Tráfego&nbsp;· Escola&nbsp;DNC&nbsp;· 134&nbsp;h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-5.webp" alt="Certificado de Analista de Marketing, Escola&nbsp;DNC" loading="lazy" data-leg="Analista de Marketing&nbsp;· Escola&nbsp;DNC&nbsp;· 120&nbsp;h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-3.webp" alt="Certificado de Analista de CRM, Escola&nbsp;DNC" loading="lazy" data-leg="Analista de CRM&nbsp;· Escola&nbsp;DNC&nbsp;· 114&nbsp;h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-google-ads.webp" alt="Certificado Subido de Tráfego, Google&nbsp;Ads" loading="lazy" data-leg="Subido de Tráfego&nbsp;· Google&nbsp;Ads&nbsp;· Pedro&nbsp;Sobral"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-meta-ads.webp" alt="Certificado Subido de Tráfego, Meta&nbsp;Ads" loading="lazy" data-leg="Subido de Tráfego&nbsp;· Meta&nbsp;Ads&nbsp;· Pedro&nbsp;Sobral"></div></div></div>
         </div></div>
         <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Certificado anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo certificado"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
       </div>
@@ -776,8 +787,8 @@ dialog { color: var(--nevoa); }
   <div class="wrap work-grid">
     <div class="slider work-media" data-slider data-case="eventos" data-rise data-delay="100">
       <div class="slider-view"><div class="slider-track">
-        <figure class="slide work-foto"><img loading="lazy" decoding="async" src="assets/fotos/roda-conversa.webp" alt="Vinicius com estudantes do Colégio César Cals depois da roda de conversa" style="object-position:50% 45%" data-leg="Feira das Profissões · Colégio César Cals · set 2026"></figure>
-        <figure class="slide work-foto"><img decoding="async" src="assets/fotos/workshop.webp" alt="Vinicius conduzindo o workshop Estratégias Digitais, apontando para um quadro de segmentação e proposta de valor" loading="lazy" data-leg="Workshop Estratégias Digitais · UFC · 13 nov 2025"></figure>
+        <figure class="slide work-foto"><img loading="lazy" decoding="async" src="assets/fotos/roda-conversa.webp" alt="Vinicius com estudantes do Colégio César Cals depois da roda de conversa" style="object-position:50% 45%" data-leg="Feira das Profissões&nbsp;· Colégio César Cals&nbsp;· set 2026"></figure>
+        <figure class="slide work-foto"><img decoding="async" src="assets/fotos/workshop.webp" alt="Vinicius conduzindo o workshop Estratégias Digitais, apontando para um quadro de segmentação e proposta de valor" loading="lazy" data-leg="Workshop Estratégias Digitais&nbsp;· UFC&nbsp;· 13 nov 2025"></figure>
       </div></div>
       <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Evento anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo evento"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
     </div>
@@ -803,7 +814,7 @@ dialog { color: var(--nevoa); }
         <p class="lead" data-fade data-delay="250">Estou aberto a novos projetos e oportunidades em comunicação digital, growth e projetos de marketing.</p>
       </div>
       <div class="contato-acoes" data-rise data-delay="300">
-        <a class="btn" href="#contato" data-k="mail"><span data-t="email">Enviar e-mail</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></a>
+        <a class="btn" href="#contato" data-k="mail"><span data-t="email">Enviar e&#8288;-&#8288;mail</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></a>
         <a class="btn" href="#contato" data-k="cv" download>Baixar currículo <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></a>
       </div>
       <ul class="contato-redes" data-fade data-delay="400">
@@ -825,15 +836,15 @@ dialog { color: var(--nevoa); }
   <canvas aria-hidden="true"></canvas>
   <span class="hwf-sr">vinni</span>
   <div class="hwf-top">
-    <div class="hwf-brand"><strong>Vinicius Teixeira</strong><span>©2026 · Fortaleza, CE</span></div>
+    <div class="hwf-brand"><strong>Vinicius Teixeira</strong><span>©2026&nbsp;· Fortaleza, CE</span></div>
     <nav class="hwf-col" aria-label="Portfólio"><h3>Portfólio</h3><ul>
       <li><a class="hwf-link" href="#sobre">Sobre</a></li><li><a class="hwf-link" href="#cases">Cases</a></li><li><a class="hwf-link" href="#carrosseis">Carrosséis</a></li></ul></nav>
     <nav class="hwf-col" aria-label="Contato"><h3>Contato</h3><ul>
-      <li><a class="hwf-link hwf-link--mail" href="#contato" data-k="mail"><span data-t="email">E-mail</span></a></li><li><a class="hwf-link" href="#contato" data-k="tel"><span data-t="fone">Telefone</span></a></li></ul></nav>
+      <li><a class="hwf-link hwf-link--mail" href="#contato" data-k="mail"><span data-t="email">E&#8288;-&#8288;mail</span></a></li><li><a class="hwf-link" href="#contato" data-k="tel"><span data-t="fone">Telefone</span></a></li></ul></nav>
     <nav class="hwf-col" aria-label="Redes"><h3>Redes</h3><ul>
       <li><a class="hwf-link tool" data-tool="linkedin" href="#contato" data-k="in" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a class="hwf-link tool" data-tool="instagram" href="#contato" data-k="ig" target="_blank" rel="noopener noreferrer">Instagram</a></li></ul></nav>
   </div>
-  <div class="hwf-rule"><span class="hwf-credito">Desenvolvido por Vinicius Teixeira com o Claude Code</span><button type="button" class="hwf-up">Voltar ao topo ↑</button></div>
+  <div class="hwf-rule"><span class="hwf-credito">Desenvolvido por Vinicius Teixeira com o Claude&nbsp;Code</span><button type="button" class="hwf-up">Voltar ao topo ↑</button></div>
 </footer>
 <style>
 .hwf-root { position: relative; width: 100%; overflow: hidden; isolation: isolate; container-type: inline-size; background: var(--hwf-bg); color: var(--hwf-ink); -webkit-font-smoothing: antialiased; height: max(380px, calc(18vw + 300px)); }
@@ -850,8 +861,9 @@ a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColo
 .hwf-rule { position: relative; z-index: 1; display: flex; justify-content: flex-end; align-items: center; gap: 16px; margin: clamp(18px, 2.6cqw, 30px) clamp(20px, 3.4cqw, 44px) 0; padding-top: 12px; border-top: 0.5px solid color-mix(in srgb, var(--hwf-ink) 16%, transparent); font-family: var(--hwf-mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; }
 .hwf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .hwf-rule { flex-wrap: wrap; }
-.hwf-credito { margin-right: auto; opacity: .55; letter-spacing: .12em; }
-@container (max-width: 720px) { .hwf-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 18px; } .hwf-brand { grid-column: 1 / -1; } }
+.hwf-credito { margin-right: auto; opacity: .55; letter-spacing: .12em; text-wrap: balance; }
+@container (max-width: 720px) { .hwf-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 24px; } .hwf-brand, .hwf-col[aria-label="Contato"] { grid-column: 1 / -1; } .hwf-col[aria-label="Contato"] { order: 3; } .hwf-link { overflow-wrap: normal; } }
+@media (max-width: 720px) { .hwf-root { height: 500px; } }
 @media (prefers-reduced-motion: reduce) { .hwf-link, .hwf-up { transition: none; } }
 </style>
 
@@ -873,6 +885,6 @@ a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColo
   </div>
 </dialog>
 
-<script type="module" src="assets/app.js"></script>
+<script type="module" src="assets/app.js?v=4"></script>
 </body>
 </html>
