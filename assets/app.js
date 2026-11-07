@@ -657,8 +657,18 @@ const initMateriais = () => {
     $(".mat-ferr", dlg).innerHTML = m.ferr.map((x) => `<li data-tool="${TOOL_SLUG[x] || ""}">${x}</li>`).join("");
     $(".mat-ferr-t", dlg).hidden = !m.ferr.length;
     decorateTools(dlg);
+    aba(0);
     dlg.showModal(); lenis?.stop();
   }));
+  // no celular, as abas mostram uma parte por vez para o texto caber sem rolagem
+  const abas = $$(".mat-abas button", dlg), partes = $$(".mat-blocos .passo", dlg);
+  // a quarta aba ("Recursos") mostra as habilidades e ferramentas da parte "Como"
+  const aba = (k) => {
+    abas.forEach((b, i) => b.setAttribute("aria-selected", i === k));
+    partes.forEach((p, i) => p.classList.toggle("ativo", i === Math.min(k, 2)));
+    dlg.dataset.sub = k === 2 ? "como" : k === 3 ? "recursos" : "";
+  };
+  abas.forEach((b, i) => b.addEventListener("click", () => aba(i)));
   $(".fechar", dlg).addEventListener("click", () => dlg.close());
   dlg.addEventListener("close", () => lenis?.start());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });

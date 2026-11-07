@@ -10,7 +10,7 @@
 <link rel="icon" href="assets/marca/simbolo_cor_negativo.svg">
 <link rel="preload" href="assets/fonts/Unbounded.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Manrope.woff" as="font" type="font/woff" crossorigin>
-<link rel="modulepreload" href="assets/app.js?v=4">
+<link rel="modulepreload" href="assets/app.js?v=6">
 <link rel="modulepreload" href="assets/icones.js">
 <link rel="modulepreload" href="assets/glass-folder.js">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -332,15 +332,36 @@ dialog { color: var(--nevoa); }
 .passo li { padding-left: 16px; position: relative; }
 .passo li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--brasa); }
 .passo strong { color: var(--nevoa); font-weight: 600; }
-.mat-blocos { margin-top: 28px; display: grid; gap: 12px; }
-.mat-blocos .passo { grid-template-columns: 70px 1fr; }
-.mat-blocos .passo .n { font-size: 12.5px; letter-spacing: .02em; }
-.passo .mat-sub { margin-top: 16px; margin-bottom: 8px; font-size: 11px; color: var(--nevoa-50, rgb(242 238 232 / .5)); }
+#material { width: min(1180px, calc(100vw - 32px)); }
+#material, #material .drawer-scroll { max-height: calc(100svh - 32px); }
+#material .drawer-scroll { padding: clamp(24px, 2.4vw, 32px) clamp(24px, 3vw, 40px); }
+#material .lead { margin-top: var(--s2); font-size: 16px; max-width: 60em; }
+.mat-abas { display: none; }
+.mat-blocos { margin-top: var(--s3); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); align-items: stretch; }
+.mat-blocos .passo { grid-template-columns: 1fr; align-content: start; gap: var(--s1); padding: var(--s3); }
+.mat-blocos .passo .n { grid-row: auto; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; padding: 0; }
+.mat-blocos .passo h3 { font-size: 16px; margin-bottom: var(--s1); }
+.mat-blocos .passo p, .mat-blocos .passo ul { font-size: 14px; line-height: 1.5; }
+.mat-blocos .passo ul:not(.chips) { gap: var(--s1); margin-top: 0; }
+.mat-blocos .passo .mat-sub { font-size: 11px; line-height: 1.6; }
+.passo .mat-sub { margin-top: var(--s2); margin-bottom: var(--s1); font-size: 11px; color: var(--nevoa-50, rgb(242 238 232 / .5)); }
 .passo ul.chips { display: flex; gap: 6px; margin-top: 0; }
-.passo .chips li { padding: 6px 12px 6px 12px; font-size: 12.5px; }
-.passo .chips li[data-tool] { padding-left: 9px; }
+.passo .chips li { padding: 5px 10px; font-size: 12px; }
+.passo .chips li[data-tool] { padding-left: 8px; }
 .passo .chips li::before { content: none; }
-@media (max-width: 720px) { .mat-blocos .passo { grid-template-columns: 1fr; } .mat-blocos .passo .n { grid-row: auto; } }
+/* telas estreitas: uma parte por vez, escolhida nas abas */
+@media (max-width: 900px) {
+  .mat-abas { display: flex; gap: 4px; margin-top: var(--s3); }
+  .mat-abas button { flex: 1 1 auto; padding: 0 8px; white-space: nowrap; text-wrap: nowrap; height: 40px; border-radius: 10px; border: 1px solid var(--nevoa-12); font-family: var(--font-titulo); font-size: 12px; font-weight: 500; color: var(--nevoa-70); transition: background-color .2s, border-color .2s, color .2s; }
+  .mat-abas button[aria-selected="true"] { background: var(--brasa); border-color: var(--brasa); color: var(--noite); }
+  .mat-blocos { grid-template-columns: 1fr; margin-top: var(--s2); }
+  .mat-blocos .passo { display: none; }
+  .mat-blocos .passo.ativo { display: grid; }
+  .mat-blocos .passo .n { display: none; }
+  #material[data-sub="como"] .mat-recursos { display: none; }
+  #material[data-sub="recursos"] .mat-como, #material[data-sub="recursos"] .passo h3 { display: none; }
+  #material[data-sub="recursos"] .mat-recursos > .mat-sub:first-child { margin-top: 0; }
+}
 
 /* ───────── 6 · Carrosséis: anel de pastas de vidro ───────── */
 .carr { overflow: hidden; isolation: isolate; }
@@ -880,14 +901,17 @@ a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColo
       <button class="fechar" aria-label="Fechar"><i></i><i></i></button>
     </div>
     <p class="lead mat-lead"></p>
+    <div class="mat-abas" role="tablist" aria-label="Partes do material">
+      <button type="button" role="tab" aria-selected="true">O quê</button><button type="button" role="tab" aria-selected="false">Por quê</button><button type="button" role="tab" aria-selected="false">Como</button><button type="button" role="tab" aria-selected="false">Recursos</button>
+    </div>
     <div class="mat-blocos">
-      <section class="passo glass"><span class="n">O quê</span><h3>O que foi feito</h3><ul class="mat-oque"></ul></section>
+      <section class="passo glass ativo"><span class="n">O quê</span><h3>O que foi feito</h3><ul class="mat-oque"></ul></section>
       <section class="passo glass"><span class="n">Por quê</span><h3>Por que foi feito</h3><p class="mat-porque"></p></section>
-      <section class="passo glass"><span class="n">Como</span><h3>Como foi feito</h3><div><p class="mat-como"></p><p class="rotulo mat-sub">Habilidades</p><ul class="chips mat-hab"></ul><p class="rotulo mat-sub mat-ferr-t">Ferramentas e plataformas</p><ul class="chips mat-ferr"></ul></div></section>
+      <section class="passo glass"><span class="n">Como</span><h3>Como foi feito</h3><div><p class="mat-como"></p><div class="mat-recursos"><p class="rotulo mat-sub">Habilidades</p><ul class="chips mat-hab"></ul><p class="rotulo mat-sub mat-ferr-t">Ferramentas e plataformas</p><ul class="chips mat-ferr"></ul></div></div></section>
     </div>
   </div>
 </dialog>
 
-<script type="module" src="assets/app.js?v=4"></script>
+<script type="module" src="assets/app.js?v=6"></script>
 </body>
 </html>
