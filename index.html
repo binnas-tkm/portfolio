@@ -390,7 +390,7 @@ dialog { color: var(--nevoa); }
 .certs-lista { margin-top: var(--s2); display: grid; gap: var(--s1); }
 .certs-lista li { position: relative; padding-left: var(--s3); font-size: 14.5px; }
 .certs-lista li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--brasa); }
-.certs-lista span { color: var(--nevoa-50); }
+.certs-lista .meta { color: var(--nevoa-50); }
 
 /* ───────── 9 · Contato ───────── */
 .contato { padding: var(--s2); background: radial-gradient(120% 95% at 62% 118%, var(--ambar) 0%, var(--brasa) 15%, var(--rubro) 28%, rgb(106 76 156 / .9) 41%, var(--hora-azul) 54%, var(--noite) 78%); }
@@ -470,6 +470,9 @@ dialog { color: var(--nevoa); }
   .anel { height: 330px; }
   .anel-item { top: 56px; }
   .contato { padding: var(--s1); }
+  .certs-lista { gap: var(--s2); }
+  .certs-lista .meta { display: block; margin-top: 2px; font-size: 13px; line-height: 1.45; }
+  .certs-lista .sep { display: none; }
   .contato-redes { flex-direction: column; gap: var(--s2); }
   .case { margin-top: var(--s6); }
   .sec-head + .case { margin-top: var(--head); }
@@ -750,20 +753,20 @@ dialog { color: var(--nevoa); }
         </ul>
         <p class="rotulo bloco-t">Certificados</p>
         <ul class="certs-lista">
-          <li>Analista de Growth Marketing <span>· Escola&nbsp;DNC&nbsp;· 246&nbsp;h&nbsp;· 2026</span></li>
-          <li>Analista de Social Media <span>· Escola&nbsp;DNC&nbsp;· 164&nbsp;h&nbsp;· 2026</span></li>
-          <li>Gestor de Tráfego <span>· Escola&nbsp;DNC&nbsp;· 134&nbsp;h&nbsp;· 2026</span></li>
-          <li>Analista de Marketing <span>· Escola&nbsp;DNC&nbsp;· 120&nbsp;h&nbsp;· 2026</span></li>
-          <li>Analista de CRM <span>· Escola&nbsp;DNC&nbsp;· 114&nbsp;h&nbsp;· 2026</span></li>
-          <li>Subido de Tráfego: <span class="tool" data-tool="googleads">Google&nbsp;Ads</span> <span>· Pedro&nbsp;Sobral&nbsp;· 2026</span></li>
-          <li>Subido de Tráfego: <span class="tool" data-tool="meta">Meta&nbsp;Ads</span> <span>· Pedro&nbsp;Sobral&nbsp;· 2026</span></li>
+          <li>Analista de Growth Marketing <span class="meta"><span class="sep">· </span>Escola&nbsp;DNC&nbsp;· 246&nbsp;h&nbsp;· 2026</span></li>
+          <li>Analista de Social Media <span class="meta"><span class="sep">· </span>Escola&nbsp;DNC&nbsp;· 164&nbsp;h&nbsp;· 2026</span></li>
+          <li>Gestor de Tráfego <span class="meta"><span class="sep">· </span>Escola&nbsp;DNC&nbsp;· 134&nbsp;h&nbsp;· 2026</span></li>
+          <li>Analista de Marketing <span class="meta"><span class="sep">· </span>Escola&nbsp;DNC&nbsp;· 120&nbsp;h&nbsp;· 2026</span></li>
+          <li>Analista de CRM <span class="meta"><span class="sep">· </span>Escola&nbsp;DNC&nbsp;· 114&nbsp;h&nbsp;· 2026</span></li>
+          <li>Subido de Tráfego: <span class="tool" data-tool="googleads">Google&nbsp;Ads</span> <span class="meta"><span class="sep">· </span>Pedro&nbsp;Sobral&nbsp;· 2026</span></li>
+          <li>Subido de Tráfego: <span class="tool" data-tool="meta">Meta&nbsp;Ads</span> <span class="meta"><span class="sep">· </span>Pedro&nbsp;Sobral&nbsp;· 2026</span></li>
         </ul>
         <p class="rotulo bloco-t">Outros cursos</p>
         <ul class="certs-lista">
-          <li><span class="tool" data-tool="googleanalytics">Google Analytics 4</span> + <span class="tool" data-tool="looker">Looker Studio</span> <span>· Escola&nbsp;DNC&nbsp;· 2026</span></li>
-          <li>Análise de Dados + Estatística para Growth <span>· Escola&nbsp;DNC&nbsp;· 2026</span></li>
-          <li>Conteúdo e SEO <span>· Escola&nbsp;DNC&nbsp;· 2026</span></li>
-          <li>Growth Marketing <span>· Coderhouse&nbsp;· 2025</span></li>
+          <li><span class="tool" data-tool="googleanalytics">Google Analytics 4</span> + <span class="tool" data-tool="looker">Looker Studio</span> <span class="meta"><span class="sep">· </span>Escola&nbsp;DNC&nbsp;· 2026</span></li>
+          <li>Análise de Dados + Estatística para Growth <span class="meta"><span class="sep">· </span>Escola&nbsp;DNC&nbsp;· 2026</span></li>
+          <li>Conteúdo e SEO <span class="meta"><span class="sep">· </span>Escola&nbsp;DNC&nbsp;· 2026</span></li>
+          <li>Growth Marketing <span class="meta"><span class="sep">· </span>Coderhouse&nbsp;· 2025</span></li>
         </ul>
       </div>
       <div class="slider" data-slider data-rise data-delay="200">
