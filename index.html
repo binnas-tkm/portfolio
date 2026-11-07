@@ -273,10 +273,11 @@ ul, ol { list-style: none; }
 .claro .chips li { border-color: var(--noite-12); color: var(--noite-70); }
 .case-texto .chips { margin-top: var(--s4); }
 /* Material em destaque: acompanha a imagem do carrossel */
-.material { margin-top: var(--s4); padding: var(--s3); border-radius: var(--r); background: rgb(14 12 19 / .045); border: 1px solid var(--noite-12); }
+.case-media .material { margin-top: var(--s3); }
+.material { padding: var(--s3); border-radius: var(--r); background: rgb(14 12 19 / .045); border: 1px solid var(--noite-12); }
 .material h4 { margin-top: var(--s1); font-family: var(--font-titulo); font-weight: 500; font-size: 17px; letter-spacing: -.02em; line-height: 1.25; }
 .material p.material-l { margin-top: var(--s1); font-size: 14.5px; line-height: 1.5; color: var(--noite-70); min-height: 3em; }
-.case-texto .material .btn { margin-top: var(--s3); }
+.material .btn { margin-top: var(--s3); }
 .evento { margin-top: var(--s4); }
 .evento h3 { margin-top: var(--s1); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); letter-spacing: -.02em; line-height: 1.2; }
 .evento .lead { margin-top: var(--s2); }
@@ -424,8 +425,11 @@ dialog { color: var(--nevoa); }
   .layer { position: relative; }
 }
 @media (min-width: 1024px) {
-  .case-media, .form-grid > .slider { position: sticky; top: var(--s7); }
-  .case .palco { aspect-ratio: 1 / 1; }
+  .case-texto, .form-grid > .slider { position: sticky; top: var(--s7); }
+  .case .palco { aspect-ratio: 16 / 10; }
+  .case-media .material { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s4); align-items: center; }
+  .case-media .material > * { grid-column: 1; }
+  .case-media .material .btn { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; }
 }
 @media (max-width: 1023px) {
   .sobre-grid, .case, .case.inverso, .auto, .form-grid, .visor, .work-grid { grid-template-columns: 1fr; }
@@ -598,17 +602,17 @@ dialog { color: var(--nevoa); }
           <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/linha-editorial.webp" alt="Capa da Linha Editorial para os canais digitais" loading="lazy" data-leg="Linha Editorial para os canais digitais"></div><div class="mk-base"></div></div></div></div>
         </div></div>
         <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
-      </div>
-      <div class="case-texto" data-rise data-delay="200">
-        <p class="rotulo">Cineteatro São Luiz · ago/2025 – hoje</p>
-        <h3 id="csl-t">Plano de Comunicação Digital 2027–2030</h3>
-        <p class="lead">Escrevi o plano que orienta a comunicação digital do São Luiz pelos próximos quatro anos. A comunicação passa a formar repertório além de divulgar a agenda, e os dados dos canais passam a apoiar a curadoria.</p>
         <div class="material" data-material-box="csl" aria-live="polite">
           <p class="rotulo"><span class="material-n">01 / 03</span> · Material em destaque</p>
           <h4 class="material-t"></h4>
           <p class="material-l"></p>
           <button class="btn btn--escuro" data-material="csl"><span class="material-b">Entender o plano</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
         </div>
+      </div>
+      <div class="case-texto" data-rise data-delay="200">
+        <p class="rotulo">Cineteatro São Luiz · ago/2025 – hoje</p>
+        <h3 id="csl-t">Plano de Comunicação Digital 2027–2030</h3>
+        <p class="lead">Escrevi o plano que orienta a comunicação digital do São Luiz pelos próximos quatro anos. A comunicação passa a formar repertório além de divulgar a agenda, e os dados dos canais passam a apoiar a curadoria.</p>
         <dl class="case-nums">
           <div><dt>+230,6%</dt><dd>em cliques, 1º → 2º sem. de 2025</dd></div>
           <div><dt>+189,3%</dt><dd>em awareness, 1º → 2º sem. de 2025</dd></div>
@@ -632,17 +636,17 @@ dialog { color: var(--nevoa); }
           <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/relatorio-2025.webp" alt="Capa do relatório anual de desempenho das redes sociais" loading="lazy" data-leg="Relatório anual de desempenho das redes"></div><div class="mk-base"></div></div></div></div>
         </div></div>
         <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
-      </div>
-      <div class="case-texto" data-rise data-delay="200">
-        <p class="rotulo">Enem Action · YDUQS · jan/2023 – jul/2025</p>
-        <h3 id="ea-t">Inbound e captação de leads para o Enem Action</h3>
-        <p class="lead">Na agência Desenrolado, cuidei de conteúdo, inbound, CRO e mídia paga do Enem Action. Criei iscas digitais como os e-books de Cinema e de Moda e o planner de redação, com nutrição por e-mail e <span class="tool" data-tool="whatsapp">WhatsApp</span>, para manter a base ativa até a prova.</p>
         <div class="material" data-material-box="ea" aria-live="polite">
           <p class="rotulo"><span class="material-n">01 / 04</span> · Material em destaque</p>
           <h4 class="material-t"></h4>
           <p class="material-l"></p>
           <button class="btn btn--escuro" data-material="ea"><span class="material-b">Entender o material</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
         </div>
+      </div>
+      <div class="case-texto" data-rise data-delay="200">
+        <p class="rotulo">Enem Action · YDUQS · jan/2023 – jul/2025</p>
+        <h3 id="ea-t">Inbound e captação de leads para o Enem Action</h3>
+        <p class="lead">Na agência Desenrolado, cuidei de conteúdo, inbound, CRO e mídia paga do Enem Action. Criei iscas digitais como os e-books de Cinema e de Moda e o planner de redação, com nutrição por e-mail e <span class="tool" data-tool="whatsapp">WhatsApp</span>, para manter a base ativa até a prova.</p>
         <dl class="case-nums">
           <div><dt>49%</dt><dd>de todas as matrículas do grupo em 2024, somando Enem Action e Simuladão</dd></div>
           <div><dt>+28%</dt><dd>na taxa de inscritos que finalizaram a prova (25% → 32%, ciclo 2025.1 → 2025.3)</dd></div>
