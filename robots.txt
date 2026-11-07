@@ -1,0 +1,6 @@
+# robots.txt · Portfólio Vinicius Teixeira
+User-agent: *
+Allow: /
+Disallow: /*.pdf$
+
+# Sitemap: https://SEU-DOMINIO/sitemap.xml

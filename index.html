@@ -1,0 +1,874 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; worker-src 'none'; manifest-src 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Vinicius Teixeira · Portfólio</title>
+<meta name="description" content="Portfólio de Vinicius Teixeira, Supervisor de Comunicação Digital no Cineteatro São Luiz. Planejamento, conteúdo, inbound e mídia de performance.">
+<link rel="icon" href="assets/marca/simbolo_cor_negativo.svg">
+<link rel="preload" href="assets/fonts/Unbounded.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/fonts/Manrope.woff" as="font" type="font/woff" crossorigin>
+<link rel="modulepreload" href="assets/app.js">
+<link rel="modulepreload" href="assets/icones.js">
+<link rel="modulepreload" href="assets/glass-folder.js">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<script src="assets/boot.js"></script>
+<style>
+@font-face { font-family: "Unbounded"; src: url("assets/fonts/Unbounded.woff") format("woff"), url("assets/fonts/Unbounded.ttf") format("truetype"); font-weight: 200 900; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("assets/fonts/Manrope.woff") format("woff"), url("assets/fonts/Manrope.ttf") format("truetype"); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url("assets/fonts/InstrumentSerif-Italic.woff") format("woff"), url("assets/fonts/InstrumentSerif-Italic.ttf") format("truetype"); font-style: italic; font-display: swap; }
+
+/* Paleta Vinni 2026 — 07_cores/tokens.css */
+:root {
+  --noite: #0E0C13; --concreto: #2B2830; --hora-azul: #2E3566; --crepusculo: #6A4C9C;
+  --brasa: #FF7A1A; --rubro: #D9472B; --ambar: #FFB547; --nevoa: #F2EEE8;
+  --nevoa-70: rgb(242 238 232 / .7); --nevoa-50: rgb(242 238 232 / .5); --nevoa-30: rgb(242 238 232 / .3);
+  --nevoa-12: rgb(242 238 232 / .12); --nevoa-06: rgb(242 238 232 / .06);
+  --noite-70: rgb(14 12 19 / .72); --noite-50: rgb(14 12 19 / .5); --noite-12: rgb(14 12 19 / .12);
+  --font-titulo: "Unbounded", system-ui, sans-serif;
+  --font-texto: "Manrope", system-ui, sans-serif;
+  --font-acento: "Instrument Serif", Georgia, serif;
+  --ease: cubic-bezier(.2, 0, 0, 1);
+  --ease-plate: cubic-bezier(.33, 0, 0, 1);
+  --gutter: clamp(20px, 3.4vw, 56px);
+--max: 1320px;
+/* Escala de espaçamento em múltiplos de 8 e a grade de 12 colunas: toda divisão em duas colunas é 5 + 7, com o mesmo vão */
+--s1: 8px; --s2: 16px; --s3: 24px; --s4: 32px; --s5: 48px; --s6: 64px; --s7: 96px;
+--sec: clamp(72px, 7.5vw, 112px);
+--head: clamp(40px, 4.5vw, 64px);
+--gap: clamp(32px, 5.5vw, 80px);
+--cols: minmax(0, 5fr) minmax(0, 7fr);
+--cols-r: minmax(0, 7fr) minmax(0, 5fr);
+--edge: max(var(--gutter), calc((100% - var(--max)) / 2));
+--r: 18px;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-stopped { overflow: hidden; }
+body { margin: 0; background: var(--noite); color: var(--nevoa); font-family: var(--font-texto); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+img, video, canvas { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+ul, ol, dl, dd, p, h1, h2, h3, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+:focus-visible { outline: 1px solid var(--ambar); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.wrap { width: min(var(--max), 100% - var(--gutter) * 2); margin-inline: auto; }
+
+/* Tipografia (manual, slide 16): Unbounded nos títulos, Manrope no texto, Instrument Serif só como destaque raro */
+.titulo { font-family: var(--font-titulo); font-weight: 500; line-height: 1.02; letter-spacing: -.03em; }
+.h2 { font-size: clamp(32px, 3.6vw, 56px); }
+.acento { font-family: var(--font-acento); font-style: italic; font-weight: 400; letter-spacing: 0; color: var(--ambar); }
+.ponto { color: var(--brasa); }
+.rotulo { font-family: var(--font-titulo); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; line-height: 1.6; color: var(--nevoa-50); }
+.lead { font-size: clamp(16px, 1.25vw, 19px); line-height: 1.6; color: var(--nevoa-70); }
+.sec { position: relative; padding-block: var(--sec); }
+.sec-head { display: grid; gap: var(--s2); max-width: 820px; }
+.sec-head .lead { margin-top: var(--s1); }
+.glass { background: linear-gradient(160deg, rgb(242 238 232 / .09), rgb(242 238 232 / .03)); border: 1px solid var(--nevoa-12); border-radius: var(--r); -webkit-backdrop-filter: blur(18px) saturate(1.2); backdrop-filter: blur(18px) saturate(1.2); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px 6px 9px; border-radius: 99px; border: 1px solid var(--nevoa-12); font-size: 12.5px; color: var(--nevoa-70); }
+/* Toda ferramenta ou plataforma citada leva o símbolo dela ao lado */
+.tool { display: inline-flex; align-items: center; gap: .32em; white-space: nowrap; }
+.ico { width: 1.05em; height: 1.05em; flex: none; display: inline-block; }
+.chips .ico { width: 15px; height: 15px; }
+.ico-img { border-radius: 3px; object-fit: cover; }
+.hwf-link.tool .ico { width: 12px; height: 12px; }
+
+/* Revelações de texto */
+.split { display: flex; flex-wrap: wrap; column-gap: .28em; }
+.split .u { display: inline-block; }
+.split .w { display: inline-flex; white-space: nowrap; }
+.js [data-rise], .js [data-fade] { opacity: 0; }
+
+/* Botões */
+.btn { position: relative; display: inline-flex; align-items: center; gap: 16px; overflow: hidden; isolation: isolate; height: 52px; padding: 0 22px; border-radius: 12px; border: 1px solid var(--brasa); color: var(--brasa); font-family: var(--font-titulo); font-size: 12.5px; font-weight: 500; letter-spacing: .03em; transition: color .25s var(--ease-plate); white-space: nowrap; }
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--brasa); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease-plate); }
+.btn:hover, .btn:focus-visible { color: var(--noite); }
+.btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
+.btn svg { width: 14px; height: 11px; flex: none; transition: transform .15s var(--ease); }
+.btn:hover svg { transform: translateX(4px); }
+.btn--escuro { background: var(--noite); }
+.link { transition: color .15s var(--ease); }
+.link:hover { color: var(--ambar); }
+
+/* Setas e pontos dos carrosséis */
+.seta { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--nevoa-30); display: grid; place-items: center; transition: border-color .2s, background .2s; flex: none; }
+.seta:hover { border-color: var(--brasa); background: rgb(255 122 26 / .12); }
+.seta svg { width: 14px; height: 11px; }
+.seta.prev svg { transform: scaleX(-1); }
+.claro .seta { border-color: var(--noite-50); color: var(--noite); }
+.dots { display: flex; gap: 8px; align-items: center; }
+.dots button { width: 8px; height: 8px; border-radius: 99px; background: var(--nevoa-30); transition: width .3s var(--ease), background .3s; }
+.dots button[aria-current="true"] { width: 22px; background: var(--brasa); }
+.claro .dots button { background: var(--noite-12); }
+.claro .dots button[aria-current="true"] { background: var(--brasa); }
+
+/* ───────── Véu ───────── */
+.veil { position: fixed; inset: 0; z-index: 60; background: var(--noite); }
+.veil i { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--brasa); transform: scaleX(0); transform-origin: left; }
+
+/* ───────── Pilha fixa (hero preso, o Sobre passa por cima) ───────── */
+.stack { position: relative; background: var(--noite); }
+.layer { position: sticky; top: 0; z-index: 0; }
+.layer-inner { transform-origin: center; }
+.shade { position: absolute; inset: 0; background: var(--noite); opacity: 0; pointer-events: none; }
+.layer-last { position: relative; z-index: 10; background: var(--noite); }
+
+/* ───────── 1 · Hero: a assinatura animada ───────── */
+.hero { position: relative; isolation: isolate; height: 100svh; min-height: 560px; overflow: hidden; background: var(--noite); }
+.hero-media { position: absolute; inset: 0; overflow: hidden; }
+.hero-video { position: absolute; max-width: none; object-fit: cover; }
+.hero-video.retrato { -webkit-mask-image: radial-gradient(64% 48% at 50% 50%, #000 52%, transparent 100%); mask-image: radial-gradient(64% 48% at 50% 50%, #000 52%, transparent 100%); }
+.glow { position: absolute; border-radius: 50%; mix-blend-mode: screen; opacity: 0; pointer-events: none; }
+.glow.g1 { width: 70vmax; height: 70vmax; background: radial-gradient(circle, rgb(46 53 102 / .9), rgb(106 76 156 / .25) 45%, transparent 68%); }
+.glow.g2 { width: 80vmax; height: 80vmax; background: radial-gradient(circle, rgb(255 181 71 / .55), rgb(255 122 26 / .35) 28%, rgb(217 71 43 / .18) 46%, transparent 66%); }
+.glow.g3 { width: 50vmax; height: 50vmax; background: radial-gradient(circle, rgb(106 76 156 / .45), transparent 65%); }
+.hero-grain { position: absolute; inset: 0; background: url("assets/marca/grao_tile_256.png"); opacity: .14; mix-blend-mode: overlay; pointer-events: none; }
+.hero-logo { position: absolute; left: 50%; top: 50%; width: min(560px, 72vw); transform: translate(-50%, -50%); opacity: 0; pointer-events: none; }
+.hero.sem-video .hero-logo { opacity: 1; }
+.hero.sem-video .hero-video { display: none; }
+.mast { position: absolute; z-index: 20; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: var(--s3) var(--edge); }
+.mast-sim img { width: 26px; height: 28px; }
+.mast nav ul { display: flex; gap: 36px; }
+.mast nav a, .mast-cv { font-family: var(--font-titulo); font-size: 12px; letter-spacing: .02em; }
+.mast-cv { font-weight: 600; }
+.mast-dir { display: flex; align-items: center; gap: 44px; }
+.burger { display: none; padding: 8px; margin-right: -8px; }
+.burger i { display: block; width: 24px; height: 1px; background: var(--nevoa); }
+.burger i + i { margin-top: 6px; }
+.hero-pe { position: absolute; z-index: 20; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s3); padding: var(--s4) var(--edge); }
+/* a assinatura profissional do manual (pasta 05): o nome nunca é digitado */
+.hero-assinatura { display: block; height: 30px; width: auto; margin-bottom: 12px; }
+@media (max-width: 720px) { .hero-assinatura { height: 26px; } }
+.hero-pe span { font-size: 13.5px; color: var(--nevoa-70); }
+.rolar { display: flex; align-items: center; gap: 12px; font-family: var(--font-titulo); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--nevoa-70); }
+.rolar i { position: relative; width: 1px; height: 38px; background: var(--nevoa-12); overflow: hidden; }
+.rolar i::after { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 40%; background: var(--brasa); transform: translate3d(0, -100%, 0); animation: desce 2.4s var(--ease) infinite; }
+@keyframes desce { to { transform: translate3d(0, 250%, 0); } }
+
+.sheet { position: fixed; inset: 0; z-index: 55; background: var(--noite); padding: 24px 28px; display: none; flex-direction: column; }
+.sheet.open { display: flex; }
+.sheet-top { display: flex; justify-content: space-between; align-items: center; }
+.sheet-top img { width: 26px; }
+.sheet-close { position: relative; width: 40px; height: 40px; }
+.sheet-close i { position: absolute; left: 8px; top: 19px; width: 24px; height: 1px; background: var(--nevoa); transform: rotate(45deg); }
+.sheet-close i + i { transform: rotate(-45deg); }
+.sheet nav { flex: 1; display: flex; align-items: center; }
+.sheet ul { display: grid; gap: 18px; }
+.sheet a { font-family: var(--font-titulo); font-weight: 500; font-size: clamp(28px, 8vw, 48px); letter-spacing: -.03em; line-height: 1; }
+
+/* ───────── 2 · Sobre ───────── */
+.sobre-grid { display: grid; grid-template-columns: var(--cols); gap: var(--gap); align-items: center; }
+.sobre-foto { aspect-ratio: 4 / 5; border-radius: var(--r); overflow: hidden; }
+.sobre-foto img { width: 100%; height: 100%; object-fit: cover; }
+.work-grid { display: grid; grid-template-columns: var(--cols-r); gap: var(--gap); align-items: center; }
+.work-foto { aspect-ratio: 16 / 10; border-radius: var(--r); overflow: hidden; }
+.work-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 45%; }
+.work-texto h2 { margin-top: var(--s2); }
+.work-texto .lead { margin-top: var(--s3); }
+.sobre h2 { font-size: clamp(30px, 3.2vw, 50px); margin-top: var(--s2); }
+.sobre .lead + .lead { margin-top: 16px; }
+.sobre-textos { margin-top: var(--s3); }
+.fatos { margin-top: var(--s4); display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--nevoa-12); }
+.fatos div { padding: var(--s3) var(--s3) 0 0; }
+.fatos div + div { padding-left: var(--s3); border-left: 1px solid var(--nevoa-12); }
+.fatos dt { font-family: var(--font-titulo); font-weight: 500; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.04em; line-height: 1; }
+.fatos dd { margin-top: 8px; font-size: 13.5px; color: var(--nevoa-50); line-height: 1.4; }
+
+/* Carrossel simples (todas as seções com imagens) */
+.slider { position: relative; }
+.slider-view { position: relative; overflow: hidden; border-radius: var(--r); touch-action: pan-y; cursor: grab; }
+.slider-view:active { cursor: grabbing; }
+.slider-track { display: flex; }
+.slide { flex: 0 0 100%; position: relative; }
+.slider-ctrl { margin-top: var(--s2); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.slider-ctrl .botoes { display: flex; gap: 10px; }
+.slide-leg { font-size: 13px; color: var(--nevoa-50); min-height: 1.4em; }
+.claro .slide-leg { color: var(--noite-50); }
+.foto { aspect-ratio: 4 / 5; }
+.foto img { width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+
+/* ───────── 3 · Trajetória: linha do tempo vertical ───────── */
+.traj { overflow-x: clip; }
+.tl { position: relative; margin-top: var(--head); display: grid; gap: 0; }
+.tl-rail { position: absolute; top: 0; bottom: 0; left: 50%; width: 24px; transform: translateX(-50%); pointer-events: none; }
+.tl-rail svg { width: 100%; height: 100%; overflow: visible; }
+.tl-item { position: relative; display: grid; grid-template-columns: 1fr 1fr; padding: var(--s2) 0; }
+.tl-item + .tl-item { margin-top: calc(var(--s5) * -1); }
+.tl-head { position: relative; grid-column: 1; justify-self: end; text-align: right; padding: var(--s1) var(--s5) var(--s1) 0; cursor: default; outline: none; max-width: 460px; }
+.tl-item:nth-child(even of .tl-item) .tl-head { grid-column: 2; justify-self: start; text-align: left; padding: var(--s1) 0 var(--s1) var(--s5); }
+.tl-dot { position: absolute; top: 50%; width: 11px; height: 11px; margin-top: -5.5px; border-radius: 50%; border: 1px solid var(--nevoa-30); background: var(--noite); transition: background .4s, border-color .4s, box-shadow .4s; }
+.tl-item:nth-child(odd of .tl-item) .tl-dot { right: -5.5px; }
+.tl-item:nth-child(even of .tl-item) .tl-dot { left: -5.5px; }
+.tl-item.passou .tl-dot { background: var(--brasa); border-color: var(--brasa); box-shadow: 0 0 14px rgb(255 122 26 / .6); }
+.tl-ano { font-family: var(--font-titulo); font-size: 12px; letter-spacing: .14em; color: var(--ambar); }
+.tl-head b { display: block; margin-top: 6px; font-family: var(--font-titulo); font-weight: 500; font-size: clamp(19px, 1.7vw, 26px); letter-spacing: -.03em; line-height: 1.15; transition: color .2s; }
+.tl-head > span:last-of-type { display: block; margin-top: 4px; font-size: 14.5px; color: var(--nevoa-70); }
+.tl-head:hover b, .tl-head:focus-visible b, .tl-item.open .tl-head b { color: var(--ambar); }
+.tl-texto { display: none; }
+.tl-float { position: fixed; left: 0; top: 0; z-index: 40; width: min(400px, calc(50vw - 96px)); padding: var(--s3); pointer-events: none; opacity: 0; font-size: 14.5px; line-height: 1.55; color: var(--nevoa); background: rgb(26 23 32 / .96); box-shadow: 0 24px 48px -20px rgb(0 0 0 / .7); }
+.tl-float .rotulo { color: var(--ambar); display: block; margin-bottom: 8px; }
+
+/* ───────── 4 · O que eu faço (a volta) ───────── */
+.faz { position: relative; isolation: isolate; min-height: 100svh; overflow: hidden; padding: 0; }
+.faz-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.faz-stops { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.stop { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; display: grid; place-items: center; pointer-events: auto; opacity: 0; transform: scale(.6); transition: opacity .4s var(--ease), transform .5s var(--ease); font-family: var(--font-titulo); font-size: 11px; font-weight: 600; color: var(--noite); }
+.stop::before { content: ""; position: absolute; inset: 10px; border-radius: 50%; background: var(--brasa); box-shadow: 0 0 24px rgb(255 122 26 / .55); transition: inset .3s var(--ease), background .3s; }
+.stop span { position: relative; }
+.stop.lit { opacity: 1; transform: scale(1); }
+.stop:hover::before, .stop.ativo::before { inset: 4px; background: var(--ambar); }
+.faz-inner { position: relative; z-index: 3; min-height: 100svh; display: flex; flex-direction: column; justify-content: space-between; gap: var(--s4); padding: var(--sec) var(--edge) var(--s5); pointer-events: none; }
+.faz-inner > * { pointer-events: auto; }
+.faz-copy { max-width: 400px; }
+.faz-copy h2 { margin-top: var(--s2); }
+.faz-copy .lead { margin-top: var(--s3); }
+.plate { align-self: flex-end; width: min(560px, 100%); padding: var(--s3); }
+.plate-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.tabs { display: flex; gap: 6px; }
+.tabs button { width: 38px; height: 30px; border-radius: 8px; border: 1px solid var(--nevoa-12); font-family: var(--font-titulo); font-size: 11px; font-weight: 500; color: var(--nevoa-70); transition: background-color .2s, border-color .2s, color .2s; }
+.tabs button[aria-selected="true"] { background: var(--brasa); border-color: var(--brasa); color: var(--noite); }
+.tabs button:hover { border-color: var(--brasa); }
+.plate-body { margin-top: 18px; }
+.plate-frente { font-family: var(--font-titulo); font-weight: 500; font-size: 18px; letter-spacing: -.02em; line-height: 1.2; }
+.plate-onde { margin-top: 4px; font-size: 13px; color: var(--ambar); }
+.plate-num { display: flex; align-items: baseline; gap: 14px; margin-top: 14px; }
+.plate-num b { font-family: var(--font-titulo); font-weight: 500; font-size: clamp(42px, 3.8vw, 58px); letter-spacing: -.06em; line-height: 1; }
+.plate-num span { font-size: 15px; line-height: 1.25; }
+.plate-base { margin-top: 6px; font-size: 12.5px; color: var(--nevoa-50); }
+.plate-marca { margin-top: 14px; padding: 11px 14px; border-radius: 10px; background: var(--nevoa-06); font-size: 14px; line-height: 1.4; }
+.plate-marca .rotulo { display: block; color: var(--ambar); font-size: 10px; margin-bottom: 2px; }
+.plate-como { margin-top: 12px; font-size: 13.5px; line-height: 1.55; color: var(--nevoa-70); }
+.plate .chips { margin-top: 12px; }
+.plate-body.troca { animation: troca .45s var(--ease); }
+@keyframes troca { from { opacity: 0; transform: translateY(8px); } }
+
+/* ───────── Costura em pixel ───────── */
+.seam { position: absolute; left: 0; right: 0; top: 0; height: 30svh; width: 100%; pointer-events: none; z-index: 30; }
+
+/* ───────── 5 · Cases (bloco claro) ───────── */
+.claro { background: var(--nevoa); color: var(--noite); }
+.claro .rotulo { color: var(--noite-50); }
+.claro .lead { color: var(--noite-70); }
+.cases .sec-head { position: relative; z-index: 31; }
+.case { margin-top: var(--s7); display: grid; grid-template-columns: var(--cols-r); gap: var(--gap); align-items: start; position: relative; z-index: 31; }
+.sec-head + .case { margin-top: var(--head); }
+.case.inverso { grid-template-columns: var(--cols); }
+.case.inverso .case-media { order: 2; }
+.case-texto h3 { margin-top: var(--s2); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(24px, 2.2vw, 34px); letter-spacing: -.03em; line-height: 1.1; }
+.case-texto .lead { margin-top: var(--s2); }
+.case-nums { margin-top: var(--s4); display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); border-top: 1px solid var(--noite-12); }
+.case-nums div { padding: var(--s2) var(--s2) 0 0; }
+.case-nums div + div { padding-left: var(--s2); border-left: 1px solid var(--noite-12); }
+.case-nums dt { font-family: var(--font-titulo); font-weight: 500; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.05em; line-height: 1; }
+.case-nums dd { margin-top: 8px; font-size: 12.5px; line-height: 1.35; color: var(--noite-70); }
+.entregas { margin-top: var(--s4); display: grid; gap: var(--s1); font-size: 14.5px; }
+.entregas li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; line-height: 1.45; }
+.entregas li::before { content: ""; margin-top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--brasa); }
+.entregas b { font-weight: 700; }
+.claro .chips li { border-color: var(--noite-12); color: var(--noite-70); }
+.case-texto .chips { margin-top: var(--s4); }
+/* Material em destaque: acompanha a imagem do carrossel */
+.material { margin-top: var(--s4); padding: var(--s3); border-radius: var(--r); background: rgb(14 12 19 / .045); border: 1px solid var(--noite-12); }
+.material h4 { margin-top: var(--s1); font-family: var(--font-titulo); font-weight: 500; font-size: 17px; letter-spacing: -.02em; line-height: 1.25; }
+.material p.material-l { margin-top: var(--s1); font-size: 14.5px; line-height: 1.5; color: var(--noite-70); min-height: 3em; }
+.case-texto .material .btn { margin-top: var(--s3); }
+.evento { margin-top: var(--s4); }
+.evento h3 { margin-top: var(--s1); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); letter-spacing: -.02em; line-height: 1.2; }
+.evento .lead { margin-top: var(--s2); }
+
+/* Palco dos mockups */
+.palco { position: relative; aspect-ratio: 4 / 3; display: grid; place-items: center; overflow: hidden; border-radius: var(--r); background: radial-gradient(90% 80% at 50% 100%, rgb(255 181 71 / .22), rgb(255 122 26 / .1) 30%, transparent 60%), linear-gradient(180deg, #e6e1d8, #ddd7cc); perspective: 1600px; }
+.escuro .palco { background: radial-gradient(90% 80% at 50% 105%, rgb(255 122 26 / .3), rgb(106 76 156 / .18) 35%, transparent 62%), var(--concreto); }
+/* documento A4 */
+.mk-doc { position: relative; height: 80%; aspect-ratio: 1300 / 1838; transform: rotateY(-16deg) rotateX(5deg) rotateZ(1deg); transform-style: preserve-3d; }
+.mk-doc img, .mk-doc .folha { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 2px; }
+.mk-doc img { object-fit: cover; box-shadow: 0 1px 0 rgb(0 0 0 / .05), 30px 40px 60px -20px rgb(14 12 19 / .45); }
+.mk-doc .folha { background: #fbfaf7; box-shadow: 0 0 0 1px rgb(14 12 19 / .06); }
+.mk-doc .folha:nth-child(1) { transform: translate(14px, 10px); }
+.mk-doc .folha:nth-child(2) { transform: translate(7px, 5px); }
+/* notebook */
+.mk-laptop { position: relative; width: 84%; }
+.mk-tela { position: relative; padding: 2.2% 2.2% 3%; border-radius: 14px 14px 4px 4px; background: #17151c; box-shadow: inset 0 0 0 1px #34313b, 0 40px 70px -30px rgb(14 12 19 / .55); }
+.mk-tela::before { content: ""; position: absolute; left: 50%; top: 1%; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: #2c2933; }
+.mk-tela img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 2px; }
+.mk-base { height: 12px; margin: 0 -7%; border-radius: 0 0 14px 14px; background: linear-gradient(#c9c4cc, #8d8893); box-shadow: 0 18px 30px -12px rgb(14 12 19 / .5); position: relative; }
+.mk-base::before { content: ""; position: absolute; left: 50%; top: 0; width: 16%; height: 5px; transform: translateX(-50%); border-radius: 0 0 8px 8px; background: #a39fa8; }
+/* livro (e-book) */
+.mk-livro { position: relative; height: 72%; width: auto; max-width: 60%; aspect-ratio: 1300 / 1840; transform: rotateY(-14deg) rotateX(3deg); transform-style: preserve-3d; }
+.mk-livro img { position: absolute; inset: 0; }
+.mk-livro img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px 6px 6px 2px; box-shadow: 30px 40px 60px -20px rgb(14 12 19 / .5); }
+.mk-livro::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6%; z-index: 2; background: linear-gradient(90deg, rgb(0 0 0 / .35), rgb(255 255 255 / .18) 45%, rgb(0 0 0 / .12)); border-radius: 2px 0 0 2px; }
+.mk-livro::after { content: ""; position: absolute; top: 1.2%; bottom: 1.2%; right: -12px; width: 12px; background: repeating-linear-gradient(90deg, #f3f0ea 0 1px, #dcd7ce 1px 2px); transform: rotateY(90deg); transform-origin: left; }
+/* impresso horizontal (planner, certificado) */
+.mk-print { position: relative; width: 80%; transform: rotate(-2deg); }
+.mk-print img { width: 100%; border-radius: 3px; box-shadow: 0 1px 0 rgb(0 0 0 / .06), 0 36px 60px -24px rgb(14 12 19 / .55); }
+.mk-print::before { content: ""; position: absolute; inset: 0; transform: rotate(3deg) translate(10px, 8px); background: #fbfaf7; border-radius: 3px; box-shadow: 0 20px 40px -24px rgb(14 12 19 / .4); z-index: -1; }
+
+
+/* Gaveta "Entender o plano" */
+dialog { color: var(--nevoa); }
+.drawer { width: min(860px, calc(100vw - 32px)); max-height: calc(100svh - 48px); margin: auto; padding: 0; border: 1px solid var(--nevoa-12); border-radius: 20px; background: rgb(23 20 30 / .94); overflow: hidden; }
+.drawer::backdrop { background: rgb(14 12 19 / .7); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.drawer-scroll { max-height: calc(100svh - 48px); overflow-y: auto; overscroll-behavior: contain; padding: clamp(24px, 4vw, 48px); }
+.drawer-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.drawer .fechar, .video-dlg .fechar { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--nevoa-30); position: relative; }
+.drawer .fechar i { position: absolute; left: 13px; top: 21px; width: 16px; height: 1px; background: var(--nevoa); transform: rotate(45deg); }
+.drawer .fechar i + i { transform: rotate(-45deg); }
+.drawer .lead { margin-top: 14px; }
+.passos { margin-top: 28px; display: grid; gap: 12px; }
+.passo { padding: 20px 22px; display: grid; grid-template-columns: 40px 1fr; gap: 4px 16px; }
+.passo .n { grid-row: span 2; font-family: var(--font-titulo); font-weight: 600; font-size: 14px; color: var(--ambar); padding-top: 2px; }
+.passo h3 { font-family: var(--font-titulo); font-weight: 500; font-size: 16.5px; letter-spacing: -.02em; }
+.passo p, .passo ul { font-size: 15px; line-height: 1.55; color: var(--nevoa-70); }
+.passo ul { display: grid; gap: 6px; margin-top: 4px; }
+.passo li { padding-left: 16px; position: relative; }
+.passo li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--brasa); }
+.passo strong { color: var(--nevoa); font-weight: 600; }
+.mat-blocos { margin-top: 28px; display: grid; gap: 12px; }
+.mat-blocos .passo { grid-template-columns: 70px 1fr; }
+.mat-blocos .passo .n { font-size: 12.5px; letter-spacing: .02em; }
+.passo .mat-sub { margin-top: 16px; margin-bottom: 8px; font-size: 11px; color: var(--nevoa-50, rgb(242 238 232 / .5)); }
+.passo ul.chips { display: flex; gap: 6px; margin-top: 0; }
+.passo .chips li { padding: 6px 12px 6px 12px; font-size: 12.5px; }
+.passo .chips li[data-tool] { padding-left: 9px; }
+.passo .chips li::before { content: none; }
+@media (max-width: 720px) { .mat-blocos .passo { grid-template-columns: 1fr; } .mat-blocos .passo .n { grid-row: auto; } }
+
+/* ───────── 6 · Carrosséis: anel de pastas de vidro ───────── */
+.carr { overflow: hidden; isolation: isolate; }
+.carr-luz { position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 55% at 50% 62%, rgb(255 122 26 / .32), rgb(217 71 43 / .16) 30%, rgb(106 76 156 / .16) 50%, transparent 72%); }
+.anel-ctrl { display: flex; justify-content: center; align-items: center; gap: var(--s3); margin-top: var(--s2); }
+.anel-ctrl .rotulo { min-width: 90px; text-align: center; }
+.visor { margin-top: var(--head); display: grid; grid-template-columns: var(--cols); gap: var(--gap); align-items: start; }
+.visor .slider-view { aspect-ratio: 4 / 5; background: var(--concreto); box-shadow: 0 40px 80px -40px rgb(0 0 0 / .8); }
+.visor .slide img { width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.visor .slide { aspect-ratio: 4 / 5; }
+.visor-info h3 { margin-top: var(--s2); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(24px, 2.6vw, 38px); letter-spacing: -.03em; line-height: 1.08; }
+.visor-info p { margin-top: var(--s2); max-width: 30em; }
+/* todas as lâminas do carrossel aberto, para pular direto para uma delas */
+.visor-mini { margin-top: var(--s5); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
+.visor-mini button { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: var(--concreto); outline-offset: 2px; }
+.visor-mini img { width: 100%; height: 100%; object-fit: cover; opacity: .55; transition: opacity .25s var(--ease); }
+.visor-mini button::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--nevoa-12); transition: box-shadow .25s var(--ease); }
+.visor-mini button:hover img, .visor-mini button[aria-current="true"] img { opacity: 1; }
+.visor-mini button[aria-current="true"]::after { box-shadow: inset 0 0 0 2px var(--brasa); }
+
+/* ───────── 7 · Como eu trabalho ───────── */
+.metodo-grid { margin-top: var(--head); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+.etapa { padding: var(--s4); }
+.selo { width: 72px; height: 72px; border-radius: 50%; border: 1px solid var(--nevoa-30); display: grid; place-items: center; align-content: center; text-align: center; }
+.selo b { font-family: var(--font-titulo); font-weight: 600; font-size: 22px; letter-spacing: -.04em; line-height: 1; }
+.selo em { font-family: var(--font-acento); font-size: 14px; color: var(--ambar); line-height: 1.1; }
+.etapa p { margin-top: var(--s3); color: var(--nevoa-70); }
+.auto { margin-top: var(--s2); padding: clamp(24px, 3.4vw, 48px); display: grid; grid-template-columns: var(--cols); gap: var(--gap); }
+.auto h3 { margin-top: var(--s2); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.03em; line-height: 1.12; }
+.auto ul.lista { display: grid; gap: var(--s2); }
+.auto ul.lista li { position: relative; padding-left: 26px; color: var(--nevoa-70); }
+.auto ul.lista li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--brasa); }
+.tool .ico { vertical-align: -.15em; }
+.grupos { margin-top: var(--s2); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
+.grupo { padding: var(--s3); }
+.grupo .chips { margin-top: var(--s2); }
+.grupo .chips li { color: var(--nevoa); }
+
+/* ───────── 8 · Formação ───────── */
+.form-grid { margin-top: var(--head); display: grid; grid-template-columns: var(--cols); gap: var(--gap); align-items: start; }
+.formacao { display: grid; gap: 0; }
+.formacao li { padding: var(--s2) 0; border-top: 1px solid var(--nevoa-12); display: grid; gap: 4px; }
+.formacao li:last-child { border-bottom: 1px solid var(--nevoa-12); }
+.formacao b { font-family: var(--font-titulo); font-weight: 500; font-size: 17px; letter-spacing: -.02em; }
+.formacao span { font-size: 14px; color: var(--nevoa-50); }
+.bloco-t { margin-top: var(--s5); }
+.certs-lista { margin-top: var(--s2); display: grid; gap: var(--s1); }
+.certs-lista li { display: flex; gap: 10px; font-size: 14.5px; }
+.certs-lista li::before { content: ""; flex: none; margin-top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--brasa); }
+.certs-lista span { color: var(--nevoa-50); }
+
+/* ───────── 9 · Contato ───────── */
+.contato { padding: var(--s2); background: radial-gradient(120% 95% at 62% 118%, var(--ambar) 0%, var(--brasa) 15%, var(--rubro) 28%, rgb(106 76 156 / .9) 41%, var(--hora-azul) 54%, var(--noite) 78%); }
+.contato-painel { position: relative; border-radius: var(--r); background: var(--noite); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: calc(100svh - 32px); }
+.contato-esq { display: flex; flex-direction: column; justify-content: space-between; gap: var(--s5); padding: clamp(24px, 4.4vw, 64px); }
+.contato-logo { width: 150px; height: auto; }
+.contato h2 { font-size: clamp(40px, 5vw, 84px); max-width: 9em; }
+.contato .lead { max-width: 30em; margin-top: var(--s3); }
+.contato-acoes { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.contato-redes { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s4); font-family: var(--font-titulo); font-size: 12.5px; }
+.contato-redes .ico { width: 16px; height: 16px; }
+.contato-foto { position: relative; overflow: hidden; min-height: 520px; }
+.contato-foto-move { position: absolute; inset: -60px 0 0 0; transform: translate3d(0, 0, 0); }
+.contato-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 30%; }
+.contato-foto::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 60% at 108% 80%, rgb(255 181 71 / .62), rgb(255 122 26 / .3) 30%, transparent 60%), linear-gradient(to top, rgb(14 12 19 / .7), transparent 38%); pointer-events: none; }
+.contato-foto blockquote { position: absolute; z-index: 2; left: clamp(24px, 3.4vw, 48px); right: clamp(24px, 3.4vw, 48px); bottom: clamp(24px, 3.4vw, 48px); font-family: var(--font-acento); font-style: italic; font-size: clamp(26px, 2.6vw, 42px); line-height: 1.1; }
+
+/* O anel de pastas de vidro (Glass Folder portada) */
+.anel { position: relative; height: 410px; margin-top: var(--s3); touch-action: pan-y; user-select: none; }
+.anel-item { position: absolute; left: 50%; top: 70px; }
+.anel .gf-title { font-family: var(--font-titulo); font-size: 16px; letter-spacing: -.02em; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.15; }
+.anel .gf-meta { font-family: var(--font-texto); font-size: 12px; }
+.anel .gf-sheet-name { font-family: var(--font-texto); font-weight: 600; }
+
+.video-dlg { width: min(1100px, calc(100vw - 32px)); padding: 0; border: 0; border-radius: 16px; overflow: hidden; background: #000; }
+
+/* ───────── Responsivo ───────── */
+@media (max-width: 1100px) {
+  .mast nav { display: none; }
+  .mast-cv { display: none; }
+  .burger { display: block; }
+}
+@media (max-width: 1023px), (max-height: 700px) {
+  .layer { position: relative; }
+}
+@media (min-width: 1024px) {
+  .case-media, .form-grid > .slider { position: sticky; top: var(--s7); }
+  .case .palco { aspect-ratio: 1 / 1; }
+}
+@media (max-width: 1023px) {
+  .sobre-grid, .case, .case.inverso, .auto, .form-grid, .visor, .work-grid { grid-template-columns: 1fr; }
+  .sobre-foto { max-width: 420px; }
+  .case.inverso .case-media { order: 0; }
+  .metodo-grid, .grupos { grid-template-columns: 1fr 1fr; }
+  .faz-stops { display: none; }
+  .faz-inner { justify-content: flex-start; }
+  .plate { align-self: stretch; width: auto; margin-top: auto; }
+  .contato-painel { grid-template-columns: 1fr; }
+  .contato-foto { min-height: 0; aspect-ratio: 4 / 5; order: -1; }
+  .contato-painel { min-height: 0; }
+  .contato-esq { justify-content: flex-start; }
+  .visor { justify-items: start; }
+  .visor .slider { width: min(440px, 100%); }
+  .visor-info { width: 100%; }
+}
+@media (max-width: 720px) {
+  .tl-rail { left: 6px; transform: none; }
+  .tl-item { grid-template-columns: 1fr; padding: var(--s2) 0; }
+  .tl-item + .tl-item { margin-top: 0; }
+  .tl-head, .tl-item:nth-child(even of .tl-item) .tl-head { grid-column: 1; justify-self: stretch; text-align: left; padding: 4px 0 4px 40px; max-width: none; cursor: pointer; }
+  .tl-item:nth-child(odd of .tl-item) .tl-dot, .tl-item:nth-child(even of .tl-item) .tl-dot { left: 12px; right: auto; margin-left: -5.5px; }
+  .tl-texto { display: block; max-height: 0; overflow: hidden; transition: max-height .5s var(--ease); font-size: 14.5px; color: var(--nevoa-70); }
+  .tl-item.open .tl-texto { max-height: 400px; }
+  .tl-texto p { padding-top: 10px; }
+  .tl-float { display: none; }
+  .fatos { grid-template-columns: 1fr; }
+  .case-nums { grid-auto-flow: row; grid-template-columns: 1fr; }
+  .fatos div + div, .case-nums div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--nevoa-12); padding-top: 16px; margin-top: 16px; }
+  .case-nums div + div { border-top-color: var(--noite-12); }
+  .metodo-grid, .grupos { grid-template-columns: 1fr; }
+  .etapa { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--s2); align-items: center; padding: var(--s3); }
+  .etapa p { margin-top: 0; }
+  .hero-pe { flex-direction: column; align-items: flex-start; }
+  .anel { height: 330px; }
+  .anel-item { top: 56px; }
+  .contato { padding: var(--s1); }
+  .visor-mini { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s1); margin-top: var(--s4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rolar i::after { animation: none; }
+  .btn::before, .tl-dot { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="veil" aria-hidden="true"><i></i></div>
+
+<div class="sheet" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="sheet-top">
+    <a href="#inicio" data-fecha aria-label="Início"><img src="assets/marca/simbolo_cor_negativo.svg" alt=""></a>
+    <button class="sheet-close" aria-label="Fechar menu"><i></i><i></i></button>
+  </div>
+  <nav aria-label="Menu"><ul>
+    <li><a href="#sobre" data-fecha>Sobre</a></li>
+    <li><a href="#trajetoria" data-fecha>Trajetória</a></li>
+    <li><a href="#o-que-faco" data-fecha>O que eu faço</a></li>
+    <li><a href="#cases" data-fecha>Cases</a></li>
+    <li><a href="#carrosseis" data-fecha>Carrosséis</a></li>
+    <li><a href="#contato" data-fecha>Contato</a></li>
+  </ul></nav>
+</div>
+
+<main>
+<div class="stack">
+  <!-- 1 · Hero: a assinatura animada toca uma vez; depois, só os gradientes se movem -->
+  <div class="layer"><div class="layer-inner">
+    <section id="inicio" class="hero" aria-label="Vinicius Teixeira, estrategista digital">
+      <div class="hero-media" aria-hidden="true">
+        <video class="hero-video" muted playsinline preload="auto" src="assets/video/assinatura.mp4"></video>
+        <img class="hero-logo" src="assets/marca/completa_cor_negativo.svg" alt="">
+        <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+        <div class="hero-grain"></div>
+      </div>
+      <h1 class="sr">Vinicius Teixeira, estrategista digital</h1>
+      <header class="mast" data-fade data-group="hero" data-delay="300">
+        <a class="mast-sim" href="#inicio" aria-label="Início"><img src="assets/marca/simbolo_cor_negativo.svg" alt=""></a>
+        <div class="mast-dir">
+          <nav aria-label="Principal"><ul>
+            <li><a class="link" href="#sobre">Sobre</a></li>
+            <li><a class="link" href="#trajetoria">Trajetória</a></li>
+            <li><a class="link" href="#o-que-faco">O que eu faço</a></li>
+            <li><a class="link" href="#cases">Cases</a></li>
+            <li><a class="link" href="#carrosseis">Carrosséis</a></li>
+            <li><a class="link" href="#contato">Contato</a></li>
+          </ul></nav>
+          <a class="mast-cv link" href="#contato" data-k="cv" download>Currículo ↓</a>
+          <button class="burger" aria-label="Abrir menu"><i></i><i></i></button>
+        </div>
+      </header>
+      <div class="hero-pe" data-rise data-group="hero-fim" data-delay="0">
+        <p><img class="hero-assinatura" src="assets/marca/profissional_cor_negativo.svg" alt="Vinicius Teixeira"><span>Conteúdo • Mídias Sociais • Mídia Paga • SEO • Automação de Marketing</span></p>
+        <a class="rolar" href="#sobre"><i aria-hidden="true"></i>Conheça o portfólio</a>
+      </div>
+    </section>
+  </div><div class="shade"></div></div>
+
+  <div class="layer-last">
+  <!-- 2 · Sobre -->
+  <section id="sobre" class="sec sobre" aria-labelledby="sobre-t">
+    <div class="wrap sobre-grid">
+      <figure class="sobre-foto" data-rise data-delay="100"><img loading="lazy" decoding="async" src="assets/fotos/retrato-cor.webp" alt="Retrato de Vinicius Teixeira"></figure>
+      <div>
+        <p class="rotulo" data-fade>Sobre mim</p>
+        <h2 id="sobre-t" class="titulo" data-split="words" data-stagger="70">Marketing digital com visão de funil e <span class="acento">decisão</span> baseada em dados</h2>
+        <div class="sobre-textos" data-rise data-delay="250">
+          <p class="lead">Sou Vinicius Teixeira. Atualmente, Supervisor de Comunicação Digital no Cineteatro São Luiz, em Fortaleza, onde faço a gestão do ecossistema de canais e estratégias digitais.</p>
+          <p class="lead">Comecei na moda, produzindo cena, foto e conteúdo. Fui para o digital pelo caminho da performance: social media, e-commerce, inbound, CRO e mídia paga, sempre olhando o funil inteiro.</p>
+          <p class="lead">Gosto de organizar times e processos. Trabalho com hipótese, teste e leitura, e uso automação para tirar o trabalho repetitivo do caminho da equipe.</p>
+        </div>
+        <dl class="fatos" data-rise data-delay="350">
+          <div><dt>6 anos</dt><dd>em marketing digital</dd></div>
+          <div><dt>23</dt><dd>certificações em marketing e comunicação</dd></div>
+          <div><dt>Unifor</dt><dd>Marketing</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Trajetória -->
+  <section id="trajetoria" class="sec traj" aria-labelledby="traj-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="rotulo" data-fade>Trajetória</p>
+        <h2 id="traj-t" class="titulo h2" data-split="words" data-stagger="80">Da produção de conteúdo ao growth</h2>
+        <p class="lead" data-fade data-delay="200">Passe o mouse (ou toque, no celular) em cada etapa para ler o que fiz nela.</p>
+      </div>
+      <ol class="tl">
+        <li class="tl-rail" aria-hidden="true"><svg preserveAspectRatio="none"></svg></li>
+      </ol>
+    </div>
+    <div class="tl-float glass" aria-hidden="true"><span class="rotulo"></span><p></p></div>
+  </section>
+  </div>
+</div>
+
+<!-- 4 · O que eu faço -->
+<section id="o-que-faco" class="faz" aria-labelledby="faz-t">
+  <canvas class="faz-canvas" aria-hidden="true"></canvas>
+  <div class="faz-stops"></div>
+  <div class="faz-inner">
+    <div class="faz-copy">
+      <p class="rotulo" data-fade>O que eu faço</p>
+      <h2 id="faz-t" class="titulo h2" data-split="words" data-stagger="80">Três frentes, um resultado em cada</h2>
+      <p class="lead" data-fade data-delay="250">Planejamento, conversão e captação. Para cada frente, o resultado e o que eu fiz para chegar lá.</p>
+    </div>
+    <aside class="plate glass" data-rise data-delay="200" aria-label="Frente selecionada">
+      <div class="plate-head"><p class="rotulo">Frentes de trabalho</p><div class="tabs" role="tablist" aria-label="Frentes"></div></div>
+      <div class="plate-body" role="tabpanel" aria-live="polite"></div>
+    </aside>
+  </div>
+</section>
+
+<!-- 5 · Cases -->
+<section id="cases" class="sec cases claro" aria-labelledby="cases-t">
+  <canvas class="seam" data-seam="#0E0C13" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="rotulo" data-fade>Cases</p>
+      <h2 id="cases-t" class="titulo h2" data-split="words" data-stagger="80">Projetos em destaque</h2>
+    </div>
+
+    <article class="case" aria-labelledby="csl-t">
+      <div class="case-media slider" data-slider data-case="csl" data-rise data-delay="100">
+        <div class="slider-view"><div class="slider-track">
+          <div class="slide"><div class="palco"><div class="mk-doc"><span class="folha"></span><span class="folha"></span><img loading="lazy" decoding="async" src="assets/capas/plano-doc.webp" alt="Capa do Plano de Comunicação Digital 2027–2030 do Cineteatro São Luiz" data-leg="Plano de Comunicação Digital 2027–2030 · documento"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/plano-apresentacao.webp" alt="Capa da apresentação do plano" loading="lazy" data-leg="Plano de Comunicação Digital · apresentação"></div><div class="mk-base"></div></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/linha-editorial.webp" alt="Capa da Linha Editorial para os canais digitais" loading="lazy" data-leg="Linha Editorial para os canais digitais"></div><div class="mk-base"></div></div></div></div>
+        </div></div>
+        <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
+      </div>
+      <div class="case-texto" data-rise data-delay="200">
+        <p class="rotulo">Cineteatro São Luiz · ago/2025 – hoje</p>
+        <h3 id="csl-t">Plano de Comunicação Digital 2027–2030</h3>
+        <p class="lead">Escrevi o plano que orienta a comunicação digital do São Luiz pelos próximos quatro anos. A comunicação passa a formar repertório além de divulgar a agenda, e os dados dos canais passam a apoiar a curadoria.</p>
+        <div class="material" data-material-box="csl" aria-live="polite">
+          <p class="rotulo"><span class="material-n">01 / 03</span> · Material em destaque</p>
+          <h4 class="material-t"></h4>
+          <p class="material-l"></p>
+          <button class="btn btn--escuro" data-material="csl"><span class="material-b">Entender o plano</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
+        </div>
+        <dl class="case-nums">
+          <div><dt>+230,6%</dt><dd>em cliques, 1º → 2º sem. de 2025</dd></div>
+          <div><dt>+189,3%</dt><dd>em awareness, 1º → 2º sem. de 2025</dd></div>
+          <div><dt>17</dt><dd>resultados-chave em 6 objetivos até 2030</dd></div>
+        </dl>
+        <ul class="entregas">
+          <li><span><b>Dashboard de KPIs</b> dos canais digitais em Google Sheets, com os OKRs e marcos anuais</span></li>
+          <li><span><b>Curva ABC de bilheteria e dashboard</b> em Looker Studio, adotados para apoiar o processo curatorial</span></li>
+          <li><span><b>Linha editorial e calendário</b> com novas editorias de repertório</span></li>
+          <li><span><b>Automações</b> com Claude e Zapier ligadas ao ClickUp da equipe</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="case inverso" aria-labelledby="ea-t">
+      <div class="case-media slider" data-slider data-case="ea" data-rise data-delay="100">
+        <div class="slider-view"><div class="slider-track">
+          <div class="slide"><div class="palco"><div class="mk-livro"><img loading="lazy" decoding="async" src="assets/capas/ebook-cinema.webp" alt="Capa do e-book Estudos sobre Cinema" data-leg="E-book Estudos sobre Cinema · isca digital"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-livro"><img decoding="async" src="assets/capas/ebook-moda.webp" alt="Capa do e-book sobre História da Moda" loading="lazy" data-leg="E-book História da Moda · isca digital"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/planner-redacao.webp" alt="Capa do Planner 30 dias de Redação" loading="lazy" data-leg="Planner 30 dias de Redação · isca digital"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/relatorio-2025.webp" alt="Capa do relatório anual de desempenho das redes sociais" loading="lazy" data-leg="Relatório anual de desempenho das redes"></div><div class="mk-base"></div></div></div></div>
+        </div></div>
+        <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
+      </div>
+      <div class="case-texto" data-rise data-delay="200">
+        <p class="rotulo">Enem Action · YDUQS · jan/2023 – jul/2025</p>
+        <h3 id="ea-t">Inbound e captação de leads para o Enem Action</h3>
+        <p class="lead">Na agência Desenrolado, cuidei de conteúdo, inbound, CRO e mídia paga do Enem Action. Criei iscas digitais como os e-books de Cinema e de Moda e o planner de redação, com nutrição por e-mail e <span class="tool" data-tool="whatsapp">WhatsApp</span>, para manter a base ativa até a prova.</p>
+        <div class="material" data-material-box="ea" aria-live="polite">
+          <p class="rotulo"><span class="material-n">01 / 04</span> · Material em destaque</p>
+          <h4 class="material-t"></h4>
+          <p class="material-l"></p>
+          <button class="btn btn--escuro" data-material="ea"><span class="material-b">Entender o material</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
+        </div>
+        <dl class="case-nums">
+          <div><dt>49%</dt><dd>de todas as matrículas do grupo em 2024, somando Enem Action e Simuladão</dd></div>
+          <div><dt>+28%</dt><dd>na taxa de inscritos que finalizaram a prova (25% → 32%, ciclo 2025.1 → 2025.3)</dd></div>
+        </dl>
+        <ul class="chips"><li data-tool="meta">Meta Ads</li><li data-tool="googleads">Google Ads</li><li data-tool="rdstation">RD Station</li><li data-tool="googleanalytics">Google Analytics 4</li><li data-tool="capcut">CapCut</li><li data-tool="trello">Trello</li></ul>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- 6 · Carrosséis -->
+<section id="carrosseis" class="sec carr" aria-labelledby="carr-t">
+  <canvas class="seam" data-seam="#F2EEE8" aria-hidden="true"></canvas>
+  <div class="carr-luz" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative;z-index:31">
+    <div class="sec-head">
+      <p class="rotulo" data-fade>Conteúdo · Cineteatro São Luiz</p>
+      <h2 id="carr-t" class="titulo h2" data-split="words" data-stagger="80">Carrosséis educativos</h2>
+      <p class="lead" data-fade data-delay="200">Série criada para a editoria educativa do São Luiz, no <span class="tool" data-tool="instagram">Instagram</span>: contexto sobre cinema, música e artes cênicas antes da sessão. Gire as pastas, clique na da frente para abrir e escolha uma lâmina.</p>
+    </div>
+    <div class="anel" aria-label="Carrosséis"></div>
+    <div class="anel-ctrl">
+      <button class="seta prev" data-anel="-1" aria-label="Girar para a pasta anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
+      <span class="rotulo anel-n">01 / 07</span>
+      <button class="seta next" data-anel="1" aria-label="Girar para a próxima pasta"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
+    </div>
+    <div class="visor" role="tabpanel">
+      <div class="slider" data-slider="carrossel">
+        <div class="slider-view"><div class="slider-track"></div></div>
+        <div class="slider-ctrl"><div class="dots"></div><div class="botoes"><button class="seta prev" aria-label="Lâmina anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próxima lâmina"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
+      </div>
+      <div class="visor-info">
+        <p class="rotulo visor-n"></p>
+        <h3></h3>
+        <p class="lead visor-linha"></p>
+        <div class="visor-mini" role="group" aria-label="Lâminas do carrossel"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Como eu trabalho -->
+<section id="metodo" class="sec" aria-labelledby="met-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="rotulo" data-fade>Como eu trabalho</p>
+      <h2 id="met-t" class="titulo h2" data-split="words" data-stagger="80">Hipótese, teste e leitura</h2>
+    </div>
+    <ol class="metodo-grid">
+      <li class="etapa glass" data-rise data-delay="100"><span class="selo"><b>01</b><em>hipótese</em></span><p>Toda ação começa com uma aposta escrita: o que deve mudar, em qual número e por quê.</p></li>
+      <li class="etapa glass" data-rise data-delay="200"><span class="selo"><b>02</b><em>teste</em></span><p>Criativo, formato e público entram em teste com prazo e orçamento definidos antes.</p></li>
+      <li class="etapa glass" data-rise data-delay="300"><span class="selo"><b>03</b><em>leitura</em></span><p>O resultado volta como decisão: o que escala, o que sai e qual é a próxima hipótese.</p></li>
+    </ol>
+    <div class="auto glass" data-rise data-delay="150">
+      <div>
+        <p class="rotulo">Gestão e automação</p>
+        <h3>A equipe do São Luiz trabalha no <span class="tool" data-tool="clickup">ClickUp</span>. O <span class="tool" data-tool="claude">Claude</span> e o <span class="tool" data-tool="zapier">Zapier</span> cuidam do repetitivo.</h3>
+      </div>
+      <ul class="lista">
+        <li>O calendário editorial que os gestores acompanham se atualiza sozinho a cada mudança nas tasks do <span class="tool" data-tool="clickup">ClickUp</span>.</li>
+        <li>Auditorias periódicas das redes sociais e do site.</li>
+        <li>Notificações automáticas para o time.</li>
+        <li>Disparo de posts em massa nas redes sociais.</li>
+      </ul>
+    </div>
+    <div class="grupos">
+      <div class="grupo glass" data-rise data-delay="100"><p class="rotulo">Gestão de projetos</p><ul class="chips"><li data-tool="clickup">ClickUp</li><li data-tool="trello">Trello</li><li data-tool="asana">Asana</li><li data-tool="notion">Notion</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="160"><p class="rotulo">Dados</p><ul class="chips"><li data-tool="googleanalytics">Google Analytics 4</li><li data-tool="googlesearchconsole">Search Console</li><li data-tool="looker">Looker Studio</li><li data-tool="googlesheets">Google Sheets</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="220"><p class="rotulo">Mídia paga</p><ul class="chips"><li data-tool="meta">Meta Ads</li><li data-tool="googleads">Google Ads</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="280"><p class="rotulo">Relacionamento</p><ul class="chips"><li data-tool="rdstation">RD Station</li><li data-tool="manychat">Manychat</li><li data-tool="whatsapp">WhatsApp</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="340"><p class="rotulo">Automação e IA</p><ul class="chips"><li data-tool="claude">Claude</li><li data-tool="zapier">Zapier</li><li data-tool="openai">ChatGPT</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="400"><p class="rotulo">Criação</p><ul class="chips"><li data-tool="adobephotoshop">Photoshop</li><li data-tool="capcut">CapCut</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · Formação e certificações -->
+<section id="formacao" class="sec escuro" aria-labelledby="form-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="rotulo" data-fade>Formação</p>
+      <h2 id="form-t" class="titulo h2" data-split="words" data-stagger="80">Formação e certificações</h2>
+    </div>
+    <div class="form-grid">
+      <div data-rise data-delay="100">
+        <ul class="formacao">
+          <li><b>Marketing</b><span>Universidade de Fortaleza (Unifor) · 2026 – 2028, em andamento</span></li>
+          <li><b>Comunicação, Imagem e Styling</b><span>EEEP Leonel de Moura Brizola · 2017 – 2019</span></li>
+        </ul>
+        <p class="rotulo bloco-t">Certificados</p>
+        <ul class="certs-lista">
+          <li>Analista de Growth Marketing <span>· Escola DNC · 246 h · 2026</span></li>
+          <li>Analista de Social Media <span>· Escola DNC · 164 h · 2026</span></li>
+          <li>Gestor de Tráfego <span>· Escola DNC · 134 h · 2026</span></li>
+          <li>Analista de Marketing <span>· Escola DNC · 120 h · 2026</span></li>
+          <li>Analista de CRM <span>· Escola DNC · 114 h · 2026</span></li>
+          <li>Subido de Tráfego: <span class="tool" data-tool="googleads">Google Ads</span> <span>· Pedro Sobral · 2026</span></li>
+          <li>Subido de Tráfego: <span class="tool" data-tool="meta">Meta Ads</span> <span>· Pedro Sobral · 2026</span></li>
+        </ul>
+        <p class="rotulo bloco-t">Outros cursos</p>
+        <ul class="certs-lista">
+          <li><span class="tool" data-tool="googleanalytics">Google Analytics 4</span> + <span class="tool" data-tool="looker">Looker Studio</span> <span>· Escola DNC · 2026</span></li>
+          <li>Análise de Dados + Estatística para Growth <span>· Escola DNC · 2026</span></li>
+          <li>Conteúdo e SEO <span>· Escola DNC · 2026</span></li>
+          <li>Growth Marketing <span>· Coderhouse · 2025</span></li>
+        </ul>
+      </div>
+      <div class="slider" data-slider data-rise data-delay="200">
+        <div class="slider-view"><div class="slider-track">
+          <div class="slide"><div class="palco"><div class="mk-print"><img loading="lazy" decoding="async" src="assets/capas/cert-dnc-1.webp" alt="Certificado de Analista de Growth Marketing, Escola DNC" data-leg="Analista de Growth Marketing · Escola DNC · 246 h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-4.webp" alt="Certificado de Analista de Social Media, Escola DNC" loading="lazy" data-leg="Analista de Social Media · Escola DNC · 164 h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-2.webp" alt="Certificado de Gestor de Tráfego, Escola DNC" loading="lazy" data-leg="Gestor de Tráfego · Escola DNC · 134 h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-5.webp" alt="Certificado de Analista de Marketing, Escola DNC" loading="lazy" data-leg="Analista de Marketing · Escola DNC · 120 h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-dnc-3.webp" alt="Certificado de Analista de CRM, Escola DNC" loading="lazy" data-leg="Analista de CRM · Escola DNC · 114 h"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-google-ads.webp" alt="Certificado Subido de Tráfego, Google Ads" loading="lazy" data-leg="Subido de Tráfego · Google Ads · Pedro Sobral"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/cert-meta-ads.webp" alt="Certificado Subido de Tráfego, Meta Ads" loading="lazy" data-leg="Subido de Tráfego · Meta Ads · Pedro Sobral"></div></div></div>
+        </div></div>
+        <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Certificado anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo certificado"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · Workshops e rodas de conversa -->
+<section id="workshop" class="sec workshop" aria-labelledby="work-t">
+  <div class="wrap work-grid">
+    <div class="slider work-media" data-slider data-case="eventos" data-rise data-delay="100">
+      <div class="slider-view"><div class="slider-track">
+        <figure class="slide work-foto"><img loading="lazy" decoding="async" src="assets/fotos/roda-conversa.webp" alt="Vinicius com estudantes do Colégio César Cals depois da roda de conversa" style="object-position:50% 45%" data-leg="Feira das Profissões · Colégio César Cals · set 2026"></figure>
+        <figure class="slide work-foto"><img decoding="async" src="assets/fotos/workshop.webp" alt="Vinicius conduzindo o workshop Estratégias Digitais, apontando para um quadro de segmentação e proposta de valor" loading="lazy" data-leg="Workshop Estratégias Digitais · UFC · 13 nov 2025"></figure>
+      </div></div>
+      <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Evento anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo evento"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
+    </div>
+    <div class="work-texto">
+      <p class="rotulo" data-fade>Workshops e rodas de conversa</p>
+      <h2 id="work-t" class="titulo h2" data-split="words" data-stagger="80">Levando a prática para a sala de aula</h2>
+      <div class="evento" data-material-box="eventos" aria-live="polite">
+        <p class="rotulo evento-d"></p>
+        <h3 class="material-t"></h3>
+        <p class="lead material-l"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · Contato -->
+<section id="contato" class="contato" aria-labelledby="cont-t">
+  <div class="contato-painel">
+    <div class="contato-esq">
+      <img src="assets/marca/assinatura_cor_negativo.svg" alt="Vinni" class="contato-logo" data-fade data-delay="100">
+      <div>
+        <h2 id="cont-t" class="titulo" data-split="words" data-stagger="90">Vamos <span class="acento">conversar?</span></h2>
+        <p class="lead" data-fade data-delay="250">Estou aberto a novos projetos e oportunidades em comunicação digital, growth e projetos de marketing.</p>
+      </div>
+      <div class="contato-acoes" data-rise data-delay="300">
+        <a class="btn" href="#contato" data-k="mail"><span data-t="email">Enviar e-mail</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></a>
+        <a class="btn" href="#contato" data-k="cv" download>Baixar currículo <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></a>
+      </div>
+      <ul class="contato-redes" data-fade data-delay="400">
+        <li><a class="link tool" data-tool="linkedin" href="#contato" data-k="in" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a class="link tool" data-tool="whatsapp" href="#contato" data-k="wa" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+        <li><a class="link tool" data-tool="instagram" href="#contato" data-k="ig" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+      </ul>
+    </div>
+    <figure class="contato-foto">
+      <div class="contato-foto-move"><img decoding="async" src="assets/fotos/perfil-pb.webp" alt="Vinicius de perfil" loading="lazy"></div>
+      <blockquote>“Dado bom é dado que vira decisão.”</blockquote>
+    </figure>
+  </div>
+</section>
+</main>
+
+<!-- Rodapé em pontos (Halftone Wordmark Footer, portado para JavaScript puro) -->
+<footer class="hwf-root" style="--hwf-bg:#0E0C13;--hwf-ink:#F2EEE8;--hwf-mono:'Unbounded',system-ui,sans-serif">
+  <canvas aria-hidden="true"></canvas>
+  <span class="hwf-sr">vinni</span>
+  <div class="hwf-top">
+    <div class="hwf-brand"><strong>Vinicius Teixeira</strong><span>©2026 · Fortaleza, CE</span></div>
+    <nav class="hwf-col" aria-label="Portfólio"><h3>Portfólio</h3><ul>
+      <li><a class="hwf-link" href="#sobre">Sobre</a></li><li><a class="hwf-link" href="#cases">Cases</a></li><li><a class="hwf-link" href="#carrosseis">Carrosséis</a></li></ul></nav>
+    <nav class="hwf-col" aria-label="Contato"><h3>Contato</h3><ul>
+      <li><a class="hwf-link hwf-link--mail" href="#contato" data-k="mail"><span data-t="email">E-mail</span></a></li><li><a class="hwf-link" href="#contato" data-k="tel"><span data-t="fone">Telefone</span></a></li></ul></nav>
+    <nav class="hwf-col" aria-label="Redes"><h3>Redes</h3><ul>
+      <li><a class="hwf-link tool" data-tool="linkedin" href="#contato" data-k="in" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a class="hwf-link tool" data-tool="instagram" href="#contato" data-k="ig" target="_blank" rel="noopener noreferrer">Instagram</a></li></ul></nav>
+  </div>
+  <div class="hwf-rule"><span class="hwf-credito">Desenvolvido por Vinicius Teixeira com o Claude Code</span><button type="button" class="hwf-up">Voltar ao topo ↑</button></div>
+</footer>
+<style>
+.hwf-root { position: relative; width: 100%; overflow: hidden; isolation: isolate; container-type: inline-size; background: var(--hwf-bg); color: var(--hwf-ink); -webkit-font-smoothing: antialiased; height: max(380px, calc(18vw + 300px)); }
+.hwf-root canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; max-width: none; }
+.hwf-top { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 1fr)); gap: 24px; padding: clamp(22px, 3.4cqw, 40px) clamp(20px, 3.4cqw, 44px) 0; font-family: var(--hwf-mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; line-height: 1.75; }
+.hwf-brand strong { display: block; font-weight: 500; }
+.hwf-brand span { opacity: .45; }
+.hwf-col h3 { margin: 0; font: inherit; opacity: .4; font-weight: 500; }
+.hwf-col ul { list-style: none; margin: 0; padding: 0; }
+.hwf-link, .hwf-up { color: inherit; text-decoration: none; opacity: .78; background: none; border: 0; padding: 0; font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; overflow-wrap: anywhere; background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-repeat: no-repeat; background-position: 0 100%; transition: opacity .25s ease, background-size .35s cubic-bezier(.2,.7,.1,1); }
+a.hwf-link:hover, .hwf-up:hover { opacity: 1; background-size: 100% 1px; }
+a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; opacity: 1; }
+.hwf-link--mail { text-transform: none; letter-spacing: .06em; }
+.hwf-rule { position: relative; z-index: 1; display: flex; justify-content: flex-end; align-items: center; gap: 16px; margin: clamp(18px, 2.6cqw, 30px) clamp(20px, 3.4cqw, 44px) 0; padding-top: 12px; border-top: 0.5px solid color-mix(in srgb, var(--hwf-ink) 16%, transparent); font-family: var(--hwf-mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; }
+.hwf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.hwf-rule { flex-wrap: wrap; }
+.hwf-credito { margin-right: auto; opacity: .55; letter-spacing: .12em; }
+@container (max-width: 720px) { .hwf-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 18px; } .hwf-brand { grid-column: 1 / -1; } }
+@media (prefers-reduced-motion: reduce) { .hwf-link, .hwf-up { transition: none; } }
+</style>
+
+<dialog class="drawer" id="material" aria-labelledby="material-titulo">
+  <div class="drawer-scroll">
+    <div class="drawer-head">
+      <div>
+        <p class="rotulo mat-rotulo"></p>
+        <h2 id="material-titulo" class="titulo" style="margin-top:12px;font-size:clamp(24px,2.6vw,36px)"></h2>
+      </div>
+      <button class="fechar" aria-label="Fechar"><i></i><i></i></button>
+    </div>
+    <p class="lead mat-lead"></p>
+    <div class="mat-blocos">
+      <section class="passo glass"><span class="n">O quê</span><h3>O que foi feito</h3><ul class="mat-oque"></ul></section>
+      <section class="passo glass"><span class="n">Por quê</span><h3>Por que foi feito</h3><p class="mat-porque"></p></section>
+      <section class="passo glass"><span class="n">Como</span><h3>Como foi feito</h3><div><p class="mat-como"></p><p class="rotulo mat-sub">Habilidades</p><ul class="chips mat-hab"></ul><p class="rotulo mat-sub mat-ferr-t">Ferramentas e plataformas</p><ul class="chips mat-ferr"></ul></div></section>
+    </div>
+  </div>
+</dialog>
+
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>
