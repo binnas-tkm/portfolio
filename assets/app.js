@@ -239,13 +239,14 @@ const initHero = () => {
 // ───────── Carrossel simples (Sobre, cases, certificados, lâminas) ─────────
 const makeSlider = (root) => {
   const view = $(".slider-view", root), track = $(".slider-track", root);
-  const leg = $(".slide-leg", root), dotsBox = $(".dots", root);
+  const leg = $(".slide-leg", root), dotsBox = $(".dots", root), cont = $(".slide-n", root);
   let n = 0, idx = 0, drag = null;
   const pos = new Spring(0, { tension: 190, friction: 28 }, (v) => (track.style.transform = `translate3d(${-v * 100}%, 0, 0)`));
   const update = () => {
     const slides = $$(".slide", track); n = slides.length;
     if (dotsBox) dotsBox.innerHTML = slides.map((_, i) => `<button aria-label="Ir para ${i + 1}" ${i === idx ? 'aria-current="true"' : ""}></button>`).join("");
     if (leg) { const img = $("img", slides[idx]); leg.textContent = img?.dataset.leg || ""; }
+    if (cont) cont.textContent = `${pad(idx + 1)} / ${pad(n)}`;
     slides.forEach((s, i) => s.setAttribute("aria-hidden", i !== idx));
   };
   const go = (k) => { idx = (k + n) % n; pos.to(idx); update(); root.dispatchEvent(new CustomEvent("slide", { detail: idx })); };
@@ -589,7 +590,23 @@ const ISCA_OQUE = ["Pesquisa de pautas e temas sociais em alta entre os estudant
 const ISCA_COMO = "Defini o tema a partir da pesquisa de pauta, escrevi o briefing, orientei a redação e a direção de arte e acompanhei os leads gerados pela landing page e pelas campanhas.";
 const ISCA_HAB = ["Inbound marketing", "Pesquisa de pauta", "Briefing", "Nutrição de leads"];
 const ISCA_FERR = ["RD Station", "Meta Ads", "Google Analytics 4", "WhatsApp"];
+const FAZSOL = { r: "Fargo · campanha de verão", b: "Entender a campanha",
+  oque: ["Concepção conceitual: o verão como estado de espírito da persona da marca, com a luz do sol que faz dentro dela", "Planejamento de cenários para uma diária inteira: piquenique, casa com piscina, grutas e praia", "Produção executiva do ensaio, da equipe às locações", "Casting e styling dos looks com as bolsas e os sapatos da coleção", "Pós-produção e tratamento das imagens no Photoshop"],
+  porque: "A coleção de verão pedia uma narrativa maior que o produto: o amor pelo verão, a leveza e a doçura da persona da marca na estação mais colorida da Fargo.",
+  como: "A produção levou o dia inteiro e rodou por diferentes cenários. Dividi o styling e a produção com Lívia Costa, e a pós-produção exigiu trabalho no Photoshop.",
+  hab: ["Concepção criativa", "Planejamento de cenário", "Produção executiva", "Casting", "Styling"], ferr: ["Photoshop"] };
+const OASIS = { r: "Vila Sol · moda praia", b: "Entender a campanha",
+  oque: ["Concepção criativa a partir de uma pergunta: qual a sensação de um dia no paraíso?", "Planejamento e composição de cenário entre grutas, rochas, coqueiros e praia", "Produção do ensaio e styling dos looks da coleção", "Direção de acting das modelos durante as fotos", "Pós-produção das imagens no Photoshop"],
+  porque: "A coleção precisava vender uma sensação, a de passar um dia no paraíso, para a cliente se imaginar ali com as peças.",
+  como: "Atuei na concepção criativa, na produção e no styling, ajudando no acting das modelos e na composição de cenário, em dupla com Marianny Silva. Na pós-produção, também usei o Photoshop.",
+  hab: ["Concepção criativa", "Produção", "Styling", "Direção de modelos", "Composição de cenário"], ferr: ["Photoshop"] };
 const MATERIAIS = {
+  moda: [
+    { ...FAZSOL, t: "Campanha Faz Sol Dentro de Mim", l: "Narra o amor pelo verão e a leveza e a doçura da persona da Fargo, com a luz do sol que faz dentro dela." },
+    { ...FAZSOL, t: "Faz Sol Dentro de Mim · ensaio", l: "Uma diária inteira entre piquenique, casa com piscina, grutas e praia, com as bolsas e os sapatos da coleção." },
+    { ...OASIS, t: "Campanha Oásis", l: "Qual a sensação de um dia no paraíso? Essa era a pergunta da campanha da coleção Oásis, da Vila Sol." },
+    { ...OASIS, t: "Oásis · ensaio", l: "Concepção, produção e styling, com direção de acting das modelos e composição de cenário entre rochas e praia." },
+  ],
   csl: [
     { t: "Plano de Comunicação Digital\u00a0· documento", l: "A versão completa do plano: do diagnóstico à execução, com cada estratégia apoiada em dados.", b: "Entender o plano",
       ctx: "Quando cheguei, quase toda a aquisição e o relacionamento passavam pelo Instagram, e o conteúdo se resumia a cards de agenda. Os dados estavam nos painéis, mas não circulavam como rotina de decisão, e a página de vendas, onde a compra acontece, recebia pouca atenção.",
@@ -659,7 +676,7 @@ const initMateriais = () => {
   });
   $$("[data-material]").forEach((btn) => btn.addEventListener("click", () => {
     const caso = btn.dataset.material, m = MATERIAIS[caso][atual[caso] || 0];
-    $(".mat-rotulo", dlg).textContent = caso === "csl" ? "Cineteatro São Luiz" : "Enem Action\u00a0· YDUQS";
+    $(".mat-rotulo", dlg).textContent = m.r || (caso === "csl" ? "Cineteatro São Luiz" : "Enem Action\u00a0· YDUQS");
     $("#material-titulo").textContent = m.t;
     $(".mat-lead", dlg).textContent = m.l;
     $(".mat-ctx", dlg).textContent = m.ctx || ""; $(".mat-ctx", dlg).hidden = !m.ctx;
@@ -698,7 +715,6 @@ const CONTATOS = {
   tel: "MjI5MjIyNTg5NTg1NSs6bGV0",
   fone: "MjI5Mi0yMjU4OSApNTgo",
   wa: "MjI5MjIyNTg5NTg1NS9lbS5hdy8vOnNwdHRo",
-  ig: "YXJpZXhpZXQuaW5uaXYvbW9jLm1hcmdhdHNuaS53d3cvLzpzcHR0aA==",
   in: "dGttLXN1aWNpbml2L25pL21vYy5uaWRla25pbC53d3cvLzpzcHR0aA==",
   cv: "ZmRwLmFyaWV4aWV0LXN1aWNpbml2LW9sdWNpcnJ1Yy9zdGVzc2E=",
 };

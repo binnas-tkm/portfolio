@@ -20,7 +20,7 @@
 <link rel="icon" href="assets/marca/simbolo_cor_negativo.svg">
 <link rel="preload" href="assets/fonts/Unbounded.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Manrope.woff" as="font" type="font/woff" crossorigin>
-<link rel="modulepreload" href="assets/app.js?v=25">
+<link rel="modulepreload" href="assets/app.js?v=26">
 <link rel="modulepreload" href="assets/icones.js">
 <link rel="modulepreload" href="assets/glass-folder.js">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -295,10 +295,19 @@ p, li, dd, .lead { text-wrap: pretty; }
 .evento h3 { margin-top: var(--s1); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); letter-spacing: -.02em; line-height: 1.2; }
 .evento .lead { margin-top: var(--s2); }
 
-/* Moda: bloco compacto, origem da trajetória */
-.case-mini { margin-top: var(--s7); padding-top: var(--s4); border-top: 1px solid var(--noite-12); display: grid; grid-template-columns: var(--cols); gap: var(--gap); align-items: start; position: relative; z-index: 31; }
-.case-mini h3 { margin-top: var(--s2); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); letter-spacing: -.02em; line-height: 1.2; }
-.case-mini .lead { font-size: 16px; }
+/* Moda: as lâminas da campanha como prova impressa */
+.mk-foto { position: relative; width: 88%; }
+.mk-foto img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; box-shadow: 0 1px 0 rgb(0 0 0 / .06), 0 36px 60px -24px rgb(14 12 19 / .55); }
+/* Stories: celular com as telas deslizando por dentro */
+.stories { margin-top: var(--s7); padding-top: var(--s5); border-top: 1px solid var(--noite-12); display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); position: relative; z-index: 31; }
+.story { display: grid; grid-template-columns: minmax(200px, 250px) minmax(0, 1fr); gap: var(--s4); align-items: start; }
+.story h3 { margin-top: var(--s2); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); letter-spacing: -.02em; line-height: 1.2; text-wrap: balance; }
+.story .lead { margin-top: var(--s2); font-size: 16px; }
+.fone-corpo { padding: 8px; border-radius: 34px; background: #17151c; box-shadow: inset 0 0 0 1px #34313b, 0 40px 70px -30px rgb(14 12 19 / .55); }
+.fone .slider-view { aspect-ratio: 9 / 16; border-radius: 27px; background: var(--concreto); }
+.fone .slide img { width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.fone .slider-ctrl { align-items: flex-start; }
+.fone .slide-leg { margin-top: 4px; font-size: 13px; line-height: 1.4; color: var(--noite-70); min-height: 2.8em; }
 /* Telas dos dashboards: mostram o topo da página */
 .mk-tela img.tela-topo { object-position: top; }
 
@@ -525,7 +534,7 @@ dialog { color: var(--nevoa); }
   .sobre-foto { max-width: 420px; }
   .case.inverso .case-media { order: 0; }
   .metodo-grid, .grupos { grid-template-columns: 1fr 1fr; }
-  .case-mini { grid-template-columns: 1fr; gap: var(--s2); }
+  .stories { grid-template-columns: 1fr; row-gap: var(--s6); }
   .faz-stops { display: none; }
   .faz-inner { justify-content: flex-start; }
   .plate { align-self: stretch; width: auto; margin-top: auto; }
@@ -558,8 +567,11 @@ dialog { color: var(--nevoa); }
   .anel { height: 330px; }
   .anel-item { top: 56px; }
   .contato { padding: var(--s1); }
-  .carr-fatos, .case-mini { grid-template-columns: 1fr; }
-  .case-mini { gap: var(--s2); margin-top: var(--s6); }
+  .carr-fatos { grid-template-columns: 1fr; }
+  .stories { margin-top: var(--s6); padding-top: var(--s4); }
+  .story { grid-template-columns: 1fr; gap: var(--s3); }
+  .story .fone { width: min(240px, 66vw); margin-inline: auto; }
+  .story-texto { order: -1; }
   .carr-fatos div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--nevoa-12); margin-top: var(--s3); }
   .auto-fatos { grid-template-columns: 1fr; }
   .fluxo { grid-template-columns: 1fr; row-gap: var(--s4); padding: var(--s3); }
@@ -768,13 +780,82 @@ dialog { color: var(--nevoa); }
       </div>
     </article>
 
-    <article class="case-mini" aria-labelledby="moda-t" data-rise>
-      <div>
-        <p class="rotulo">Fargo, Areiô e AGP Marketing&nbsp;· 2020&nbsp;–&nbsp;2021</p>
-        <h3 id="moda-t">Onde comecei: moda, ensaio e e&#8288;-&#8288;commerce</h3>
+    <article class="case" aria-labelledby="moda-t">
+      <div class="case-media slider" data-slider data-case="moda" data-rise data-delay="100">
+        <div class="slider-view"><div class="slider-track">
+          <div class="slide"><div class="palco"><div class="mk-foto"><img loading="lazy" decoding="async" src="assets/moda/fargo-faz-sol-1.webp" alt="Abertura da campanha Faz Sol Dentro de Mim, da Fargo: modelo na praia segurando uma bolsa de crochê" data-leg="Faz Sol Dentro de Mim&nbsp;· Fargo"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-foto"><img loading="lazy" decoding="async" src="assets/moda/fargo-faz-sol-2.webp" alt="Fotos da campanha Faz Sol Dentro de Mim em piquenique, casa com piscina e jardim" data-leg="Faz Sol Dentro de Mim&nbsp;· ensaio"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-foto"><img loading="lazy" decoding="async" src="assets/moda/vila-sol-oasis-1.webp" alt="Abertura da campanha Oásis, da Vila Sol: duas modelos de moda praia numa gruta" data-leg="Oásis&nbsp;· Vila Sol"></div></div></div>
+          <div class="slide"><div class="palco"><div class="mk-foto"><img loading="lazy" decoding="async" src="assets/moda/vila-sol-oasis-2.webp" alt="Fotos da campanha Oásis entre rochas, coqueiros e praia" data-leg="Oásis&nbsp;· ensaio"></div></div></div>
+        </div></div>
+        <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
+        <div class="material" data-material-box="moda" aria-live="polite">
+          <p class="rotulo"><span class="material-n">01 / 04</span>&nbsp;· Campanha em destaque</p>
+          <h4 class="material-t"></h4>
+          <p class="material-l"></p>
+          <button class="btn btn--escuro" data-material="moda"><span class="material-b">Entender a campanha</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
+        </div>
       </div>
-      <p class="lead">Meu primeiro trabalho no digital foi produzir conteúdo para marcas de moda infantil, casual, praia e acessórios. Na Fargo, cuidei de campanhas de social media e e&#8288;-&#8288;commerce com foco em conversão: copy, peças e vídeos, ações com influenciadores e lançamento de coleção com catálogos temáticos.</p>
+      <div class="case-texto" data-rise data-delay="200">
+        <p class="rotulo">Fargo e Vila Sol&nbsp;· moda</p>
+        <h3 id="moda-t">Campanhas de moda</h3>
+        <p class="lead">Desenvolvi campanhas de moda do conceito à imagem final. Foi na moda que comecei no digital, produzindo conteúdo para marcas de moda infantil, casual, praia e acessórios, e na Fargo cuidei também das campanhas de social media e e&#8288;-&#8288;commerce.</p>
+        <ul class="entregas">
+          <li><span><b>Concepção conceitual</b> da narrativa de cada coleção</span></li>
+          <li><span><b>Planejamento de cenário</b> e do roteiro da diária</span></li>
+          <li><span><b>Produção executiva</b> do ensaio, da equipe às locações</span></li>
+          <li><span><b>Casting e styling</b>, com direção de acting das modelos</span></li>
+        </ul>
+        <ul class="chips"><li data-tool="adobephotoshop">Photoshop</li></ul>
+      </div>
     </article>
+
+    <div class="stories">
+      <article class="story" aria-labelledby="st-fargo-t">
+      <div class="fone slider" data-slider data-rise data-delay="100">
+        <div class="fone-corpo"><div class="slider-view"><div class="slider-track">
+          <div class="slide"><img decoding="async" src="assets/stories/fargo-01.webp" alt="Story da Fargo: Faz sol dentro de mim · verão 2021" data-leg="Faz sol dentro de mim&nbsp;· verão 2021"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-02.webp" alt="Story da Fargo: Campanha de verão" data-leg="Campanha de verão"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-03.webp" alt="Story da Fargo: Collab Fargo + Linus" data-leg="Collab Fargo + Linus"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-04.webp" alt="Story da Fargo: As mais amadas da coleção" data-leg="As mais amadas da coleção"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-05.webp" alt="Story da Fargo: Vitrine: sapatilhas" data-leg="Vitrine: sapatilhas"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-06.webp" alt="Story da Fargo: Verão que vem de dentro · verão 2022" data-leg="Verão que vem de dentro&nbsp;· verão 2022"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-07.webp" alt="Story da Fargo: Vitrine: rasteira" data-leg="Vitrine: rasteira"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-08.webp" alt="Story da Fargo: Novidade: rasteiras" data-leg="Novidade: rasteiras"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-09.webp" alt="Story da Fargo: Paleta suave" data-leg="Paleta suave"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-10.webp" alt="Story da Fargo: O que o verde simboliza" data-leg="O que o verde simboliza"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-11.webp" alt="Story da Fargo: Quiz: tudo sobre o tênis iate" data-leg="Quiz: tudo sobre o tênis iate"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-12.webp" alt="Story da Fargo: Quiz: o cabedal em malha knit" data-leg="Quiz: o cabedal em malha knit"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-13.webp" alt="Story da Fargo: Solado sustentável" data-leg="Solado sustentável"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-14.webp" alt="Story da Fargo: Conforto com impacto positivo" data-leg="Conforto com impacto positivo"></div>
+        </div></div></div>
+        <div class="slider-ctrl"><div><span class="rotulo slide-n"></span><p class="slide-leg"></p></div><div class="botoes"><button class="seta prev" aria-label="Story anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo story"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
+      </div>
+        <div class="story-texto" data-rise data-delay="200">
+          <p class="rotulo">Fargo&nbsp;· stories</p>
+          <h3 id="st-fargo-t">Conteúdo e design para stories</h3>
+          <p class="lead">Criei os stories da Fargo do roteiro ao design. Buscava sair do óbvio, explorando outros formatos e outras visualidades da identidade da marca para despertar o desejo do público: lançamentos, vitrines, quizzes e paletas da coleção.</p>
+        </div>
+      </article>
+      <article class="story" aria-labelledby="st-enem-t">
+      <div class="fone slider" data-slider data-rise data-delay="100">
+        <div class="fone-corpo"><div class="slider-view"><div class="slider-track">
+          <div class="slide"><img decoding="async" src="assets/stories/enem-01.webp" alt="Story do Enem Action: Pauta quente: estreia de Divertida Mente 2" data-leg="Pauta quente: estreia de Divertida Mente&nbsp;2"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/enem-02.webp" alt="Story do Enem Action: CTA para o e - book de moda" data-leg="CTA para o e&#8288;-&#8288;book de moda"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/enem-03.webp" alt="Story do Enem Action: CTA para o planner de redação" data-leg="CTA para o planner de redação"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/enem-04.webp" alt="Story do Enem Action: #DicaBônus: e - book de cinema" data-leg="#DicaBônus: e&#8288;-&#8288;book de cinema"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/enem-05.webp" alt="Story do Enem Action: CTA para o e - book de cinema" data-leg="CTA para o e&#8288;-&#8288;book de cinema"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/enem-06.webp" alt="Story do Enem Action: Interativo: com quem você faria o Enem?" data-leg="Interativo: com quem você faria o Enem?"></div>
+        </div></div></div>
+        <div class="slider-ctrl"><div><span class="rotulo slide-n"></span><p class="slide-leg"></p></div><div class="botoes"><button class="seta prev" aria-label="Story anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo story"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
+      </div>
+        <div class="story-texto" data-rise data-delay="200">
+          <p class="rotulo">Enem Action&nbsp;· stories</p>
+          <h3 id="st-enem-t">Planejamento e redação de stories</h3>
+          <p class="lead">Planejei e escrevi os stories do Enem Action, variando editorias, temas, pautas frias e pautas quentes, com CTAs que levam às iscas digitais.</p>
+        </div>
+      </article>
+    </div>
 
   </div>
 </section>
@@ -959,7 +1040,6 @@ dialog { color: var(--nevoa); }
       <ul class="contato-redes" data-fade data-delay="400">
         <li><a class="link tool" data-tool="linkedin" href="#contato" data-k="in" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
         <li><a class="link tool" data-tool="whatsapp" href="#contato" data-k="wa" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
-        <li><a class="link tool" data-tool="instagram" href="#contato" data-k="ig" target="_blank" rel="noopener noreferrer">Instagram</a></li>
       </ul>
     </div>
     <figure class="contato-foto">
@@ -982,7 +1062,7 @@ dialog { color: var(--nevoa); }
       <li><a class="hwf-link hwf-link--mail" href="#contato" data-k="mail"><span data-t="email">E&#8288;-&#8288;mail</span></a></li><li><a class="hwf-link" href="#contato" data-k="tel"><span data-t="fone">Telefone</span></a></li></ul></nav>
     <nav class="hwf-col" aria-label="Redes"><h3>Redes</h3><ul>
       <!-- PENDENTE: link do Behance, se houver -->
-      <li><a class="hwf-link tool" data-tool="linkedin" href="#contato" data-k="in" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a class="hwf-link tool" data-tool="instagram" href="#contato" data-k="ig" target="_blank" rel="noopener noreferrer">Instagram</a></li></ul></nav>
+      <li><a class="hwf-link tool" data-tool="linkedin" href="#contato" data-k="in" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul></nav>
   </div>
   <div class="hwf-rule"><span class="hwf-credito">Desenvolvido por Vinicius Teixeira com o Claude&nbsp;Code</span><button type="button" class="hwf-up">Voltar ao topo ↑</button></div>
 </footer>
@@ -1028,6 +1108,6 @@ a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColo
   </div>
 </dialog>
 
-<script type="module" src="assets/app.js?v=25"></script>
+<script type="module" src="assets/app.js?v=26"></script>
 </body>
 </html>
