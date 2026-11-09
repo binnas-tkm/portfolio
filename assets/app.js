@@ -267,8 +267,9 @@ const TRAJ = [
   { ano: "2017\u00a0–\u00a02019", onde: "EEEP Leonel de Moura Brizola", papel: "Comunicação, Imagem e Styling", txt: "Onde comecei a produzir conteúdo: cena, luz, foto e narrativa. É a base visual que levo até hoje para campanhas." },
   { ano: "2020\u00a0–\u00a02021", onde: "AGP Marketing", papel: "Social media", txt: "Meu primeiro trabalho no digital: conteúdo para marcas de moda infantil, moda casual, moda praia e acessórios." },
   { ano: "2021", onde: "Fargo\u00a0· Bolsas e sapatos", papel: "Assistente de Marketing e E\u2060-\u2060commerce", txt: "Campanhas de social media e e\u2060-\u2060commerce com foco em conversão, copy, peças e vídeos, ações com influenciadores e lançamento de coleção com catálogos temáticos. Em paralelo, atendi como freelancer marcas como UAU Conceito, La Reine e Theresa Montenegro." },
-  { ano: "2023\u00a0–\u00a02025", onde: "Desenrolado\u00a0· Enem Action (YDUQS)", papel: "Analista de Marketing Digital", txt: "Inbound, CRO, conteúdo e mídia paga para o Enem Action. Em 2024, o Enem Action e o Simuladão responderam por 49% de todas as matrículas do grupo." },
-  { ano: "2025\u00a0–\u00a0hoje", onde: "Cineteatro São Luiz", papel: "Supervisor de Comunicação Digital", txt: "Supervisiono o time de conteúdo, redação e atendimento, gerencio as campanhas das páginas de venda dos eventos e escrevi o plano de comunicação digital 2027–2030. No 2º semestre de 2025, os cliques cresceram 230,6% e o awareness, 189,3%." },
+  { ano: "2022", onde: "Freelancer", papel: "Marketing digital", txt: "" }, // PENDENTE: descrição curta do que fiz nos freelas
+  { ano: "2023 – 2025", onde: "Desenrolado · Enem Action (YDUQS)", papel: "Analista de Marketing Digital", txt: "Inbound, CRO, conteúdo e monitoramento de patrocinados para o Enem Action. Em 2024, 44,5% dos leads Enem Action vieram das campanhas em que atuei, o maior percentual entre as marcas do grupo." },
+  { ano: "2025 – hoje", onde: "Cineteatro São Luiz", papel: "Supervisor de Comunicação Digital", txt: "Equipamento da Secult CE gerido pelo Instituto Dragão do Mar. Planejamento digital, linha editorial, dados para a curadoria e orientação da equipe de criação de conteúdo." },
   { ano: "Nov 2025", onde: "UFC", papel: "Workshop Estratégias Digitais", txt: "Conduzi o workshop Estratégias Digitais para alunos de Publicidade e Jornalismo da UFC." },
   { ano: "2026\u00a0–\u00a0hoje", onde: "Universidade de Fortaleza", papel: "Marketing", txt: "Graduação em Marketing na Unifor, em andamento." },
   { ano: "Set 2026", onde: "Colégio César Cals", papel: "Roda de conversa", txt: "Participei da roda de conversa O mercado e o profissional de comunicação, na Feira das Profissões do Colégio César Cals, em Fortaleza." },
@@ -301,6 +302,7 @@ const initTimeline = () => {
     return [x, y];
   };
   const show = (i) => {
+    if (!TRAJ[i].txt) return; // item ainda sem descrição: só período e título
     if (ativo !== i) { ativo = i; $(".rotulo", float).textContent = `${TRAJ[i].ano}\u00a0· ${TRAJ[i].onde}`; $("p", float).textContent = TRAJ[i].txt; }
     const [x, y] = alvo(i);
     if (fo.target < 1) { fx.v = fx.target = x; fy.v = fy.target = y; place(); }
@@ -314,8 +316,8 @@ const initTimeline = () => {
     head.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") hide(); });
     head.addEventListener("focus", () => show(i));
     head.addEventListener("blur", hide);
-    head.addEventListener("click", () => { if (innerWidth <= 720) it.classList.toggle("open"); });
-    head.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && innerWidth <= 720) { e.preventDefault(); it.classList.toggle("open"); } });
+    head.addEventListener("click", () => { if (innerWidth <= 720 && TRAJ[i].txt) it.classList.toggle("open"); });
+    head.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && innerWidth <= 720 && TRAJ[i].txt) { e.preventDefault(); it.classList.toggle("open"); } });
   });
   addEventListener("scroll", () => { if (fo.target > 0) hide(); }, { passive: true });
 
@@ -344,16 +346,15 @@ const initTimeline = () => {
 
 // ───────── 4 · O que eu faço: a volta com quatro paradas ─────────
 const FRENTES = [
-  { n: "01", frente: "Planejamento e operação de comunicação digital", onde: "Cineteatro São Luiz", num: "+230,6%", metrica: "em cliques", base: "1º semestre → 2º semestre de 2025",
-    marca: "+189,3% de awareness no mesmo período",
-    como: "Planejamento de comunicação, divisão de tarefas e orientação do time de conteúdo, redação e atendimento. Campanhas para as páginas de venda dos eventos, ajustadas por testes A/B, e automações com Claude e Zapier ligadas ao ClickUp.",
-    ferr: ["ClickUp", "Meta Ads", "Google Analytics 4", "Looker Studio", "Claude", "Zapier"] },
-  { n: "02", frente: "Inbound e conversão em matrícula", onde: "Enem Action\u00a0· YDUQS", num: "+28%", metrica: "na taxa de inscritos que finalizaram a prova", base: "ciclo 2025.1 (25%) → ciclo 2025.3 (32%)",
-    marca: "49% de todas as matrículas do grupo em 2024, somando Enem Action e Simuladão",
-    como: "Iscas digitais (e\u2060-\u2060books e planner), nutrição por e\u2060-\u2060mail e WhatsApp e testes A/B de criativos, formatos e abordagens para otimizar CPL, CTR e conversão.",
+  { n: "01", frente: "Planejamento e operação de comunicação digital", onde: "Cineteatro São Luiz", num: "4x", metrica: "mais engajamento no Instagram", base: "Em média, 36% das pessoas alcançadas interagem por mês desde ago/25. No ano anterior, eram 8% a 9%.",
+    marca: "+169% de interações no Instagram entre ago/25 e jun/26, em relação aos mesmos meses do ano anterior",
+    como: "Plano de comunicação digital 2027⁠–⁠2030, linha editorial com 40% da pauta em repertório, dados de canal e de bilheteria para a curadoria e orientação da equipe de criação de conteúdo, com automações em Claude e Zapier ligadas ao ClickUp.",
+    ferr: ["ClickUp", "Google Analytics 4", "Looker Studio", "Google Sheets", "Claude", "Zapier"] },
+  { n: "02", frente: "Inbound e conversão em matrícula", onde: "Enem Action · YDUQS", num: "44,5%", metrica: "dos leads Enem Action em 2024 vieram das campanhas em que atuei", base: "o maior percentual entre as marcas do grupo", marca: "",
+    como: "Iscas digitais (e⁠-⁠books e planner de redação), nutrição por e⁠-⁠mail e WhatsApp, aulões no YouTube para manter a base ativa e testes A/B de criativos, formatos e abordagens.",
     ferr: ["Meta Ads", "Google Ads", "RD Station", "Google Analytics 4", "CapCut", "Trello"] },
-  { n: "03", frente: "Campanhas de captação", onde: "Simuladão do Enem", num: "412", metrica: "matrículas geradas pela campanha", base: "edição de 2024", marca: "",
-    como: "Na segunda edição, os participantes de 2023 que entraram na faculdade viraram prova social para atrair os novos estudantes, em redes, site, newsletter e publi com a artista Maitê Padilha.",
+  { n: "03", frente: "Campanhas de captação", onde: "Simuladão do Enem", num: "+12,9%", metrica: "de aumento relativo na taxa de conversão", base: "de 2023 para 2024", marca: "",
+    como: "Convidei participantes de 2023 que entraram na faculdade para contar a experiência, e essas histórias viraram a prova social da campanha, em redes, site, newsletter e publi com a artista Maitê Padilha.",
     ferr: ["Meta Ads", "Google Ads", "RD Station", "Google Analytics 4"] },
 ];
 const PATH = [[0.60, 0.88], [0.46, 0.82], [0.38, 0.60], [0.43, 0.36], [0.57, 0.19], [0.73, 0.14], [0.87, 0.21], [0.94, 0.36], [0.90, 0.54], [0.76, 0.58], [0.68, 0.70], [0.72, 0.86]];
@@ -591,7 +592,8 @@ const ISCA_FERR = ["RD Station", "Meta Ads", "Google Analytics 4", "WhatsApp"];
 const MATERIAIS = {
   csl: [
     { t: "Plano de Comunicação Digital\u00a0· documento", l: "A versão completa do plano: do diagnóstico à execução, com cada estratégia apoiada em dados.", b: "Entender o plano",
-      oque: ["Pesquisa e análise do ambiente de marketing, externo e interno", "Escuta do público e da equipe: pesquisa de satisfação, questionário antes das sessões e entrevistas", "Definição do objetivo do ciclo, dos resultados\u2060-\u2060chave e das metas até 2030", "Estratégias de canais e de conteúdos construídas a partir dos dados", "Plano de mensuração, recursos, fluxo de trabalho e cronograma"],
+      ctx: "Quando cheguei, quase toda a aquisição e o relacionamento passavam pelo Instagram, e o conteúdo se resumia a cards de agenda. Os dados estavam nos painéis, mas não circulavam como rotina de decisão, e a página de vendas, onde a compra acontece, recebia pouca atenção.",
+      oque: ["Diagnóstico com dados dos canais (GA4, Search Console e redes), entrevistas com a equipe e escuta com espectadores antes das sessões", "Três gargalos: dependência de um único canal, perda de público entre o interesse e a compra e nenhuma trilha de retorno para quem já foi", "6 objetivos e 17 resultados-chave em quatro anos, do alcance à conversão na Sympla, com canais próprios (WhatsApp, e-mail e site) e busca orgânica", "16 sprints trimestrais, cada um fechando com a revisão do que entrou, do que os números mostram e do que muda. O plano foi aprovado pela gestão"],
       porque: "A comunicação digital precisava de uma direção para quatro anos que reduzisse a dependência de um único canal e desse à curadoria dados para decidir.",
       como: "Cruzei dados dos canais, do site e da bilheteria com pesquisas de mercado e com a escuta do público, e transformei o diagnóstico em objetivos mensuráveis.",
       hab: ["Pesquisa de mercado", "Análise de dados", "Planejamento estratégico", "OKRs", "Escrita estratégica"], ferr: ["Google Analytics 4", "Search Console", "Looker Studio", "Google Sheets"] },
@@ -600,10 +602,20 @@ const MATERIAIS = {
       porque: "O documento é a referência completa, mas os gestores precisavam ver a tese, os dados e as decisões em poucos minutos para aprovar o plano. A apresentação foi aprovada pela diretoria.",
       como: "Condensei os 14 capítulos do documento numa narrativa visual, priorizando os dados que justificam cada decisão.",
       hab: ["Storytelling com dados", "Comunicação executiva", "Síntese", "Visualização de dados"], ferr: ["Canva"] },
-    { t: "Linha Editorial para os canais digitais", l: "O guia do que publicar, em que proporção e com que frequência nos canais do São Luiz.", b: "Entender o documento",
-      oque: ["Estudo do histórico e dos resultados dos conteúdos anteriores", "Estudo do comportamento, dos desejos e das dúvidas da audiência", "Editorias definidas a partir da categorização dos conteúdos por objetivo e por resultado", "Calibragem do peso de cada editoria na pauta", "Frequência de publicações ao longo do mês"],
+    { t: "Dashboard · Curva ABC de bilheteria", l: "Classifica os eventos por arrecadação e por público e acompanha o funil de cada um. Os números estão borrados por confidencialidade.", b: "Entender o dashboard",
+      oque: ["Classificação dos eventos em classes A, B e C, por arrecadação e por público", "Funil de cada evento: views da campanha, cliques, sessões na página de venda, ingressos e comparecimento", "Diagnóstico automático que aponta onde a venda travou (alcance, conversão ou comparecimento) e sugere onde agir"],
+      porque: "Para colocar dados de canal e de bilheteria na mesma mesa nas reuniões de resultado. Essa leitura já apoiou decisões de programação.",
+      como: "Montei a curva ABC e o dashboard em Looker Studio a partir dos dados de bilheteria e dos canais, adotados para apoiar o processo curatorial.",
+      hab: ["Análise de dados", "Curva ABC", "Funil de conversão", "Visualização de dados"], ferr: ["Looker Studio", "Google Sheets"] },
+    { t: "Dashboard · OKRs 2027⁠–⁠2030", l: "Acompanha os 17 resultados-chave do plano contra os marcos de cada ano. Os números estão borrados por confidencialidade.", b: "Entender o dashboard",
+      oque: ["Visão geral dos 6 objetivos e dos 17 resultados-chave", "Atingimento de cada resultado-chave em relação ao marco do ano, com três níveis de meta: regular, boa e ótima", "Uma página por objetivo, com linha de base, realizado e o que falta para o marco"],
+      porque: "Para o plano virar rotina de decisão: cada sprint trimestral fecha com uma revisão do que entrou, do que os números mostram e do que muda.",
+      como: "O dashboard parte do dashboard de KPIs dos canais, que reúne Instagram, YouTube, TikTok, LinkedIn, site e base própria numa série mensal desde 2024, com dicionário de métricas, validação dos dados e um registro do que explica cada pico.",
+      hab: ["OKRs", "Análise de dados", "Visualização de dados"], ferr: ["Google Sheets"] },
+    { t: "Linha Editorial para os canais digitais", l: "O guia do que publicar, em que proporção e com que frequência. 40% da pauta passou a ser conteúdo de repertório.", b: "Entender o documento",
+      oque: ["Estudo do histórico e dos resultados dos conteúdos anteriores", "Estudo do comportamento, dos desejos e das dúvidas da audiência", "Seis editorias, por objetivo e por resultado: Programação, Educativo, Curatorial, Interativo, Institucional e Informativo", "Calibragem do peso de cada editoria na pauta", "Frequência de publicações ao longo do mês"],
       porque: "Para a pauta deixar de depender só da agenda e cada publicação ter um objetivo e um sinal de sucesso claro, como salvamentos, compartilhamentos ou cliques até a página de venda.",
-      como: "Categorizei o histórico de publicações, comparei o desempenho de cada tipo de conteúdo e cruzei com o que a audiência pergunta e procura.",
+      como: "Categorizei o histórico de publicações, comparei o desempenho de cada tipo de conteúdo e cruzei com o que a audiência pergunta e procura. Escrevo parte das publicações e faço o briefing das demais.",
       hab: ["Planejamento editorial", "Análise de conteúdo", "Pesquisa de audiência"], ferr: ["Instagram", "Google Sheets", "ClickUp"] },
   ],
   ea: [
@@ -650,6 +662,7 @@ const initMateriais = () => {
     $(".mat-rotulo", dlg).textContent = caso === "csl" ? "Cineteatro São Luiz" : "Enem Action\u00a0· YDUQS";
     $("#material-titulo").textContent = m.t;
     $(".mat-lead", dlg).textContent = m.l;
+    $(".mat-ctx", dlg).textContent = m.ctx || ""; $(".mat-ctx", dlg).hidden = !m.ctx;
     $(".mat-oque", dlg).innerHTML = m.oque.map((x) => `<li>${x}</li>`).join("");
     $(".mat-porque", dlg).textContent = m.porque;
     $(".mat-como", dlg).textContent = m.como;
@@ -657,16 +670,20 @@ const initMateriais = () => {
     $(".mat-ferr", dlg).innerHTML = m.ferr.map((x) => `<li data-tool="${TOOL_SLUG[x] || ""}">${x}</li>`).join("");
     $(".mat-ferr-t", dlg).hidden = !m.ferr.length;
     decorateTools(dlg);
-    aba(0);
+    // no desktop, cada coluna ganha largura proporcional ao texto que leva, para as alturas ficarem parecidas
+    const peso = partes.map((p) => Math.max(400, p.textContent.trim().length + $$(".chips li", p).length * 22));
+    $(".mat-blocos", dlg).style.setProperty("--colunas", peso.map((w) => `minmax(0, ${w}fr)`).join(" "));
+    abas[0].hidden = !m.ctx;
+    aba(m.ctx ? 0 : 1);
     dlg.showModal(); lenis?.stop();
   }));
   // no celular, as abas mostram uma parte por vez para o texto caber sem rolagem
   const abas = $$(".mat-abas button", dlg), partes = $$(".mat-blocos .passo", dlg);
-  // a quarta aba ("Recursos") mostra as habilidades e ferramentas da parte "Como"
+  // cada aba aponta para uma parte (data-parte) e para o trecho dela que aparece (data-sub): Contexto e O quê dividem a primeira, Como e Recursos a terceira
   const aba = (k) => {
     abas.forEach((b, i) => b.setAttribute("aria-selected", i === k));
-    partes.forEach((p, i) => p.classList.toggle("ativo", i === Math.min(k, 2)));
-    dlg.dataset.sub = k === 2 ? "como" : k === 3 ? "recursos" : "";
+    partes.forEach((p, i) => p.classList.toggle("ativo", i === +abas[k].dataset.parte));
+    dlg.dataset.sub = abas[k].dataset.sub;
   };
   abas.forEach((b, i) => b.addEventListener("click", () => aba(i)));
   $(".fechar", dlg).addEventListener("click", () => dlg.close());
@@ -692,6 +709,81 @@ const initLinks = () => {
     const arma = () => { if (!a.dataset.ok) { a.href = revela(a.dataset.k); a.dataset.ok = "1"; } };
     ["pointerenter", "focus", "touchstart", "click"].forEach((ev) => a.addEventListener(ev, arma, { passive: true }));
   });
+};
+
+// ───────── Esquema das automações: fios em SVG, pulsos que correm por eles e uma saída destacada por vez ─────────
+const initFluxo = () => {
+  const box = $(".fluxo");
+  if (!box) return;
+  const svg = $(".fluxo-svg", box), NS = "http://www.w3.org/2000/svg";
+  $$("[data-icos]", box).forEach((s) => { s.innerHTML = s.dataset.icos.split(" ").map((k) => icon(k)).join(""); });
+  const no = (k) => $(`[data-no="${k}"]`, box);
+  const saidas = [0, 1, 2, 3].map((i) => no(`s${i}`));
+  const ligacoes = [["origem", "hub"], ...saidas.map((_, i) => ["hub", `s${i}`])];
+  // fio entre dois blocos: na horizontal quando estão lado a lado, na vertical quando um está abaixo do outro
+  const fio = (a, b) => {
+    const base = box.getBoundingClientRect(), ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+    // celular: da central, um trilho desce pela esquerda e entra em cada saída
+    const estreito = getComputedStyle(box).gridTemplateColumns.trim().split(/\s+/).length === 1; // o CSS empilhou os blocos
+    if (estreito && b.closest(".fluxo-saidas")) {
+      const x = ra.left + 12 - base.left, y1 = ra.bottom - base.top, y2 = rb.top + rb.height / 2 - base.top, x2 = rb.left - base.left;
+      return `M${x},${y1} L${x},${y2 - 10} Q${x},${y2} ${x + 10},${y2} L${x2},${y2}`;
+    }
+    if (estreito) {
+      const x1 = ra.left + ra.width / 2 - base.left, y1 = ra.bottom - base.top, x2 = rb.left + rb.width / 2 - base.left, y2 = rb.top - base.top, m = (y2 - y1) / 2;
+      return `M${x1},${y1} C${x1},${y1 + m} ${x2},${y2 - m} ${x2},${y2}`;
+    }
+    const x1 = ra.right - base.left, y1 = ra.top + ra.height / 2 - base.top, x2 = rb.left - base.left, y2 = rb.top + rb.height / 2 - base.top, m = (x2 - x1) / 2;
+    return `M${x1},${y1} C${x1 + m},${y1} ${x2 - m},${y2} ${x2},${y2}`;
+  };
+  let paths = [], halo = null, ponto = null;
+  const desenha = () => {
+    svg.innerHTML = "";
+    paths = ligacoes.map(([a, b]) => {
+      const p = document.createElementNS(NS, "path");
+      p.setAttribute("d", fio(no(a), no(b))); p.setAttribute("class", "fio");
+      svg.appendChild(p);
+      return p;
+    });
+    if (reduced) return;
+    [halo, ponto] = [["pulso-halo", 7], ["pulso", 3]].map(([cls, r]) => {
+      const c = document.createElementNS(NS, "circle");
+      c.setAttribute("r", r); c.setAttribute("class", cls); c.style.opacity = "0";
+      svg.appendChild(c);
+      return c;
+    });
+  };
+  // um pulso sai do ClickUp, chega à central e segue por um dos quatro fios, um de cada vez;
+  // a saída que recebe o pulso acende junto com o fio, e ao passar o mouse a escolhida fica acesa
+  const PASSO = 1.2, CICLO = PASSO * (1 + saidas.length);
+  const ease = (u) => (u < .5 ? 2 * u * u : 1 - (-2 * u + 2) ** 2 / 2);
+  let fixo = -1, atual = -2, t0 = performance.now();
+  const acende = (k) => {
+    if (k === atual) return; atual = k;
+    saidas.forEach((s, i) => s.classList.toggle("ativo", i === k));
+    paths.forEach((p, i) => p.classList.toggle("ativo", i === 0 ? k >= 0 : i - 1 === k));
+  };
+  saidas.forEach((s, i) => {
+    s.addEventListener("pointerenter", () => { fixo = i; });
+    s.addEventListener("pointerleave", () => { fixo = -1; });
+  });
+  subscribe((now) => {
+    const r = box.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    if (reduced) return acende(fixo);
+    const t = ((now - t0) / 1000) % CICLO, seg = Math.floor(t / PASSO), u = (t - seg * PASSO) / PASSO;
+    const p = paths[seg];
+    if (p && ponto) {
+      const pt = p.getPointAtLength(ease(u) * p.getTotalLength());
+      const op = String(Math.min(1, u * 8, (1 - u) * 6));
+      for (const c of [halo, ponto]) { c.setAttribute("cx", pt.x); c.setAttribute("cy", pt.y); c.style.opacity = op; }
+    }
+    acende(fixo >= 0 ? fixo : seg === 0 ? (atual >= 0 ? atual : -1) : seg - 1);
+    const hub = no("hub"), ig = seg === 0 ? Math.max(0, (u - .7) / .3) : Math.max(0, 1 - u * 2.2);
+    hub.style.setProperty("--ig", ig.toFixed(3));
+  });
+  desenha();
+  new ResizeObserver(() => { desenha(); atual = -2; }).observe(box);
 };
 
 const initMisc = () => {
@@ -793,6 +885,7 @@ initCarousels();
 initFaz();
 initMateriais();
 initLinks();
+initFluxo();
 initMisc();
 initFooter();
 initHero();
