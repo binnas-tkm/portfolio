@@ -545,6 +545,12 @@ dialog { color: var(--nevoa); }
   .workshop .evento { margin-top: 0; }
   .sobre-foto { max-width: 420px; }
   .case.inverso .case-media { order: 0; }
+  .case { row-gap: var(--s4); }
+  .case-texto { display: contents; }
+  .case-head { order: 1; }
+  .case .case-media, .case.inverso .case-media { order: 2; }
+  .case-corpo { order: 3; }
+  .case-corpo > :first-child { margin-top: 0; }
   .metodo-grid, .grupos { grid-template-columns: 1fr 1fr; }
   .grupo, .grupo:nth-child(n+4) { grid-column: auto; }
   .grupo:last-child { grid-column: 1 / -1; }
@@ -746,21 +752,25 @@ dialog { color: var(--nevoa); }
         </div>
       </div>
       <div class="case-texto" data-rise data-delay="200">
-        <p class="rotulo">Cineteatro São Luiz&nbsp;· ago/2025&nbsp;–&nbsp;hoje</p>
-        <h3 id="csl-t">Comunicação digital do Cineteatro São Luiz</h3>
-        <p class="lead">Faço a gestão da comunicação digital do Cineteatro, equipamento da Secult CE gerido pelo Instituto Dragão do Mar. Planejo a pauta do mês a partir da programação da casa, oriento a equipe de design, texto e vídeo e levo os dados de canal e de bilheteria para as decisões da curadoria. Também escrevi o Plano de Comunicação Digital 2027&#8288;–&#8288;2030, aprovado pela gestão.</p>
-        <dl class="case-nums">
-          <div><dt>17&nbsp;KRs</dt><dd>em 6 objetivos, ligados aos objetivos da casa, com metas em três níveis</dd></div>
-          <div><dt>16 sprints</dt><dd>trimestrais, com revisão de resultados ao fim de cada um</dd></div>
-          <!-- PENDENTE: confirmar se fui eu quem ativou o LinkedIn institucional em jan/26. Se sim: +1.200% de seguidores no LinkedIn do Cineteatro entre jan/26 e out/26, o primeiro canal novo do ecossistema -->
-        </dl>
-        <ul class="entregas">
-          <li><span><b>Dashboard de KPIs</b> dos canais digitais, com os OKRs e marcos anuais</span></li>
-          <li><span><b>Curva ABC de bilheteria e dashboard</b>, adotados para apoiar o processo curatorial</span></li>
-          <li><span><b>Linha editorial</b> com seis editorias e 40% da pauta em conteúdo de repertório</span></li>
-          <li><span><b>Automações com IA</b> ligadas às tarefas da equipe</span></li>
-        </ul>
-        <p class="case-ferr"><span class="rotulo">Ferramentas</span>ClickUp&nbsp;· Google Sheets&nbsp;· Looker Studio&nbsp;· Google Analytics 4&nbsp;· Meta Business Suite&nbsp;· Manychat&nbsp;· Photoshop&nbsp;· Canva&nbsp;· CapCut&nbsp;· Claude&nbsp;· Zapier</p>
+        <div class="case-head">
+          <p class="rotulo">Cineteatro São Luiz&nbsp;· ago/2025&nbsp;–&nbsp;hoje</p>
+          <h3 id="csl-t">Comunicação digital do Cineteatro São Luiz</h3>
+          <p class="lead">Faço a gestão da comunicação digital do Cineteatro, equipamento da Secult CE gerido pelo Instituto Dragão do Mar. Planejo a pauta do mês a partir da programação da casa, oriento a equipe de design, texto e vídeo e levo os dados de canal e de bilheteria para as decisões da curadoria. Também escrevi o Plano de Comunicação Digital 2027&#8288;–&#8288;2030, aprovado pela gestão.</p>
+        </div>
+        <div class="case-corpo">
+          <dl class="case-nums">
+            <div><dt>17&nbsp;KRs</dt><dd>em 6 objetivos, ligados aos objetivos da casa, com metas em três níveis</dd></div>
+            <div><dt>16 sprints</dt><dd>trimestrais, com revisão de resultados ao fim de cada um</dd></div>
+            <!-- PENDENTE: confirmar se fui eu quem ativou o LinkedIn institucional em jan/26. Se sim: +1.200% de seguidores no LinkedIn do Cineteatro entre jan/26 e out/26, o primeiro canal novo do ecossistema -->
+          </dl>
+          <ul class="entregas">
+            <li><span><b>Dashboard de KPIs</b> dos canais digitais, com os OKRs e marcos anuais</span></li>
+            <li><span><b>Curva ABC de bilheteria e dashboard</b>, adotados para apoiar o processo curatorial</span></li>
+            <li><span><b>Linha editorial</b> com seis editorias e 40% da pauta em conteúdo de repertório</span></li>
+            <li><span><b>Automações com IA</b> ligadas às tarefas da equipe</span></li>
+          </ul>
+          <p class="case-ferr"><span class="rotulo">Ferramentas</span>ClickUp&nbsp;· Google Sheets&nbsp;· Looker Studio&nbsp;· Google Analytics 4&nbsp;· Meta Business Suite&nbsp;· Manychat&nbsp;· Photoshop&nbsp;· Canva&nbsp;· CapCut&nbsp;· Claude&nbsp;· Zapier</p>
+        </div>
       </div>
     </article>
 
@@ -781,22 +791,26 @@ dialog { color: var(--nevoa); }
         </div>
       </div>
       <div class="case-texto" data-rise data-delay="200">
-        <p class="rotulo">Enem Action&nbsp;· YDUQS&nbsp;· 2023&nbsp;–&nbsp;2025</p>
-        <h3 id="ea-t">Inbound e captação de estudantes</h3>
-        <p class="lead">Na agência Desenrolado, cuidei de inbound, CRO, conteúdo e monitoramento de patrocinados do Enem Action, da captação do lead à conversão em matrícula.</p>
-        <p class="nota">Os leads aquecidos na base do Enem Action seguem para o funil de outras marcas da YDUQS, como Estácio e Wyden.</p>
-        <dl class="case-nums">
-          <div><dt>+12,9%</dt><dd>de aumento relativo na taxa de conversão do Simuladão, de 2023 para 2024</dd></div>
-          <div><dt>44,5%</dt><dd>dos leads Enem Action em 2024 vieram das campanhas em que atuei, o maior percentual entre as marcas do grupo</dd></div>
-          <!-- PENDENTE: taxa de conversão da landing page das iscas digitais -->
-        </dl>
-        <ul class="entregas">
-          <li><span><b>Iscas digitais</b> escritas por mim, como e&#8288;-&#8288;books e planner de redação, com a direção de arte orientada</span></li>
-          <li><span><b>Nutrição da base</b> por e&#8288;-&#8288;mail e WhatsApp, com aulões no YouTube para manter os leads ativos</span></li>
-          <li><span><b>Prova social</b> com aprovados do Simuladão 2023, em redes, site, newsletter e publi com a artista Maitê Padilha</span></li>
-          <li><span><b>Testes A/B</b> de criativos, formatos e abordagens</span></li>
-        </ul>
-        <p class="case-ferr"><span class="rotulo">Ferramentas</span>Meta&nbsp;Ads&nbsp;· Google&nbsp;Ads&nbsp;· RD Station&nbsp;· Google Analytics 4&nbsp;· Google Sheets&nbsp;· CapCut&nbsp;· Trello&nbsp;· Notion</p>
+        <div class="case-head">
+          <p class="rotulo">Enem Action&nbsp;· YDUQS&nbsp;· 2023&nbsp;–&nbsp;2025</p>
+          <h3 id="ea-t">Inbound e captação de estudantes</h3>
+          <p class="lead">Na agência Desenrolado, cuidei de inbound, CRO, conteúdo e monitoramento de patrocinados do Enem Action, da captação do lead à conversão em matrícula.</p>
+          <p class="nota">Os leads aquecidos na base do Enem Action seguem para o funil de outras marcas da YDUQS, como Estácio e Wyden.</p>
+        </div>
+        <div class="case-corpo">
+          <dl class="case-nums">
+            <div><dt>+12,9%</dt><dd>de aumento relativo na taxa de conversão do Simuladão, de 2023 para 2024</dd></div>
+            <div><dt>44,5%</dt><dd>dos leads Enem Action em 2024 vieram das campanhas em que atuei, o maior percentual entre as marcas do grupo</dd></div>
+            <!-- PENDENTE: taxa de conversão da landing page das iscas digitais -->
+          </dl>
+          <ul class="entregas">
+            <li><span><b>Iscas digitais</b> escritas por mim, como e&#8288;-&#8288;books e planner de redação, com a direção de arte orientada</span></li>
+            <li><span><b>Nutrição da base</b> por e&#8288;-&#8288;mail e WhatsApp, com aulões no YouTube para manter os leads ativos</span></li>
+            <li><span><b>Prova social</b> com aprovados do Simuladão 2023, em redes, site, newsletter e publi com a artista Maitê Padilha</span></li>
+            <li><span><b>Testes A/B</b> de criativos, formatos e abordagens</span></li>
+          </ul>
+          <p class="case-ferr"><span class="rotulo">Ferramentas</span>Meta&nbsp;Ads&nbsp;· Google&nbsp;Ads&nbsp;· RD Station&nbsp;· Google Analytics 4&nbsp;· Google Sheets&nbsp;· CapCut&nbsp;· Trello&nbsp;· Notion</p>
+        </div>
       </div>
     </article>
 
@@ -817,16 +831,20 @@ dialog { color: var(--nevoa); }
         </div>
       </div>
       <div class="case-texto" data-rise data-delay="200">
-        <p class="rotulo">Fargo e Vila Sol&nbsp;· moda</p>
-        <h3 id="moda-t">Campanhas de moda</h3>
-        <p class="lead">Desenvolvi campanhas de moda do conceito à imagem final, para a Fargo e a Vila Sol. Cada campanha parte de uma narrativa e a leva para todas as escolhas do ensaio.</p>
-        <ul class="entregas">
-          <li><span><b>Concepção conceitual</b> da narrativa de cada coleção</span></li>
-          <li><span><b>Planejamento de cenário</b> e do roteiro da diária</span></li>
-          <li><span><b>Produção executiva</b> do ensaio, da equipe às locações</span></li>
-          <li><span><b>Casting e styling</b>, com direção de acting das modelos</span></li>
-        </ul>
-        <p class="case-ferr"><span class="rotulo">Ferramentas</span>Photoshop&nbsp;· Illustrator&nbsp;· Meta Business Suite&nbsp;· Loja Integrada</p>
+        <div class="case-head">
+          <p class="rotulo">Fargo e Vila Sol&nbsp;· moda</p>
+          <h3 id="moda-t">Campanhas de moda</h3>
+          <p class="lead">Desenvolvi campanhas de moda do conceito à imagem final, para a Fargo e a Vila Sol. Cada campanha parte de uma narrativa e a leva para todas as escolhas do ensaio.</p>
+        </div>
+        <div class="case-corpo">
+          <ul class="entregas">
+            <li><span><b>Concepção conceitual</b> da narrativa de cada coleção</span></li>
+            <li><span><b>Planejamento de cenário</b> e do roteiro da diária</span></li>
+            <li><span><b>Produção executiva</b> do ensaio, da equipe às locações</span></li>
+            <li><span><b>Casting e styling</b>, com direção de acting das modelos</span></li>
+          </ul>
+          <p class="case-ferr"><span class="rotulo">Ferramentas</span>Photoshop&nbsp;· Illustrator&nbsp;· Meta Business Suite&nbsp;· Loja Integrada</p>
+        </div>
       </div>
     </article>
 
