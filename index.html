@@ -22,8 +22,8 @@
 <link rel="icon" href="assets/marca/simbolo_cor_negativo.svg">
 <link rel="preload" href="assets/fonts/Unbounded.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Manrope.woff" as="font" type="font/woff" crossorigin>
-<link rel="modulepreload" href="assets/app.js?v=29">
-<link rel="modulepreload" href="assets/icones.js?v=2">
+<link rel="modulepreload" href="assets/app.js?v=30">
+<link rel="modulepreload" href="assets/icones.js?v=3">
 <link rel="modulepreload" href="assets/glass-folder.js">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script src="assets/boot.js"></script>
@@ -141,7 +141,7 @@ p, li, dd, .lead { text-wrap: pretty; }
 .glow.g1 { width: 70vmax; height: 70vmax; background: radial-gradient(circle, rgb(46 53 102 / .9), rgb(106 76 156 / .25) 45%, transparent 68%); }
 .glow.g2 { width: 80vmax; height: 80vmax; background: radial-gradient(circle, rgb(255 181 71 / .55), rgb(255 122 26 / .35) 28%, rgb(217 71 43 / .18) 46%, transparent 66%); }
 .glow.g3 { width: 50vmax; height: 50vmax; background: radial-gradient(circle, rgb(106 76 156 / .45), transparent 65%); }
-.hero-grain { position: absolute; inset: 0; background: url("assets/marca/grao_tile_256.png"); opacity: .14; mix-blend-mode: overlay; pointer-events: none; }
+.hero-grain { position: absolute; inset: 0; background: url("assets/marca/grao_tile_256.webp"); opacity: .14; mix-blend-mode: overlay; pointer-events: none; }
 .hero-logo { position: absolute; left: 50%; top: 50%; width: min(560px, 72vw); transform: translate(-50%, -50%); opacity: 0; pointer-events: none; }
 .hero.sem-video .hero-logo { opacity: 1; }
 .hero.sem-video .hero-video { display: none; }
@@ -438,6 +438,26 @@ dialog { color: var(--nevoa); }
 .visor-mini button:hover img, .visor-mini button[aria-current="true"] img { opacity: 1; }
 .visor-mini button[aria-current="true"]::after { box-shadow: inset 0 0 0 2px var(--brasa); }
 
+/* ───────── Depoimentos ───────── */
+.depo { padding-block: 0; }
+.depo-grid { margin-top: var(--head); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
+.depo-card { position: relative; overflow: hidden; padding: clamp(20px, 4vw, 44px); display: flex; flex-direction: column; gap: var(--s4); background: var(--concreto); border: 1px solid var(--nevoa-06); border-radius: var(--r); }
+.depo-card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: linear-gradient(90deg, var(--hora-azul), var(--crepusculo) 30%, var(--rubro) 60%, var(--brasa) 80%, var(--ambar)); }
+.depo-topo { display: flex; align-items: center; gap: var(--s2); }
+.depo-topo .selo { flex: none; width: 64px; height: 64px; }
+.depo-topo .selo b { font-size: 19px; }
+.depo-topo .selo em { font-size: 13px; }
+.depo-topo .rotulo { color: var(--nevoa-50); }
+.depo-card blockquote { max-width: 64ch; text-wrap: pretty; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; color: var(--nevoa-70); }
+.depo-card blockquote::before { content: "“"; margin-left: -.42em; }
+.depo-card blockquote::after { content: "”"; }
+.depo-card blockquote .acento { font-size: 1.2em; line-height: 1; color: var(--ambar); }
+.depo-card figcaption { margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--nevoa-12); display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; row-gap: 4px; align-items: center; }
+.depo-card figcaption { column-gap: var(--s2); }
+.depo-foto { grid-row: span 2; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--concreto), 0 0 0 3px var(--brasa); }
+.depo-card figcaption b { font-family: var(--font-titulo); font-weight: 500; font-size: 15px; letter-spacing: -.01em; color: var(--nevoa); }
+.depo-card figcaption span { font-size: 13px; line-height: 1.45; color: var(--nevoa-50); }
+
 /* ───────── 7 · Como eu trabalho ───────── */
 .metodo-grid { margin-top: var(--head); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s2); }
 .etapa { padding: var(--s4); }
@@ -455,7 +475,7 @@ dialog { color: var(--nevoa); }
    os blocos são vidro fosco sobre ele (p. 18). A central é o símbolo: quando a brasa chega, ele acende (p. 6 e p. 24) */
 .fluxo { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, .9fr) minmax(0, 1.5fr); column-gap: var(--s5); align-items: center; padding: var(--s4); border-radius: var(--r); border: 1px solid var(--nevoa-12); overflow: hidden;
   background: radial-gradient(85% 75% at 102% 112%, rgb(255 181 71 / .55), rgb(255 122 26 / .5) 16%, rgb(217 71 43 / .38) 28%, rgb(106 76 156 / .3) 42%, rgb(46 53 102 / .28) 56%, transparent 74%), var(--noite); }
-.fluxo::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("assets/marca/grao_tile_256.png"); opacity: .2; mix-blend-mode: overlay; pointer-events: none; }
+.fluxo::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("assets/marca/grao_tile_256.webp"); opacity: .2; mix-blend-mode: overlay; pointer-events: none; }
 .fluxo-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .fluxo .no { position: relative; z-index: 1; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--nevoa-12); background: rgb(14 12 19 / .55); -webkit-backdrop-filter: blur(12px) saturate(1.15); backdrop-filter: blur(12px) saturate(1.15); transition: border-color .35s var(--ease), background .35s var(--ease); }
 .fluxo .no b { display: flex; align-items: center; gap: 7px; font-family: var(--font-titulo); font-size: 13px; font-weight: 500; letter-spacing: -.01em; line-height: 1.25; color: var(--nevoa); }
@@ -552,6 +572,7 @@ dialog { color: var(--nevoa); }
   .case-corpo { order: 3; }
   .case-corpo > :first-child { margin-top: 0; }
   .metodo-grid, .grupos { grid-template-columns: 1fr 1fr; }
+  .depo-grid { grid-template-columns: 1fr; }
   .grupo, .grupo:nth-child(n+4) { grid-column: auto; }
   .grupo:last-child { grid-column: 1 / -1; }
   .stories { grid-template-columns: 1fr; row-gap: var(--s6); }
@@ -697,7 +718,7 @@ dialog { color: var(--nevoa); }
       <div class="sec-head">
         <p class="rotulo" data-fade>Trajetória</p>
         <h2 id="traj-t" class="titulo h2" data-split="words" data-stagger="80">Da produção de conteúdo ao growth</h2>
-        <p class="lead" data-fade data-delay="200">Comecei em 2020 como social media de marcas de moda. Passei por e&#8288;-&#8288;commerce, inbound, CRO e mídia paga, e hoje supervisiono a comunicação digital de um equipamento cultural público, do planejamento aos indicadores. Passe o mouse (ou toque, no celular) em cada etapa para ler mais.</p>
+        <p class="lead" data-fade data-delay="200">Comecei em 2020 como social media de marcas de moda. Passei por e&#8288;-&#8288;commerce, inbound, CRO e mídia paga, e hoje estou por trás da comunicação digital de um equipamento cultural público, do planejamento aos indicadores. Passe o mouse (ou toque, no celular) em cada etapa para ler mais.</p>
       </div>
       <ol class="tl">
         <li class="tl-rail" aria-hidden="true"><svg preserveAspectRatio="none"></svg></li>
@@ -934,6 +955,28 @@ dialog { color: var(--nevoa); }
   </div>
 </section>
 
+<!-- Depoimentos -->
+<section id="depoimentos" class="sec depo" aria-labelledby="depo-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="rotulo" data-fade>Depoimentos</p>
+      <h2 id="depo-t" class="titulo h2" data-split="words" data-stagger="80">Quem trabalhou comigo</h2>
+    </div>
+    <div class="depo-grid">
+      <figure class="depo-card" data-rise data-delay="100">
+        <div class="depo-topo"><span class="selo"><b>01</b><em>conteúdo</em></span><p class="rotulo">Secult&nbsp;CE&nbsp;· RECE</p></div>
+        <blockquote>Quando Vinicius assumiu os canais digitais, percebi um aumento considerável da <span class="acento">qualidade e da periodicidade</span> nos conteúdos do Cineteatro São Luiz: publicações que saíam do óbvio e conectavam assuntos de interesse do público, sem perder o cineteatro de vista. Além disso, é um ótimo comunicador, tanto nos vídeos quanto como ponto focal para auxiliar em demandas de gestão de comunicação.</blockquote>
+        <figcaption><img class="depo-foto" src="assets/depo/maira.webp" alt="Foto de Maíra Suspiro" width="96" height="96" loading="lazy" decoding="async"><b>Maíra Suspiro</b><span>Coordenadora de Comunicação Estratégica e Integrada da Secult&nbsp;CE e RECE até julho de&nbsp;2026</span></figcaption>
+      </figure>
+      <figure class="depo-card" data-rise data-delay="200">
+        <div class="depo-topo"><span class="selo"><b>02</b><em>estratégia</em></span><p class="rotulo">Cineteatro São Luiz</p></div>
+        <blockquote>Um dos principais pontos fortes do Vinicius é a criatividade e a atenção às tendências e às oportunidades de melhoria na comunicação digital do Cineteatro São Luiz. Além de apresentar ideias inovadoras, acompanha os resultados de cada campanha e ação, avaliando o que funciona e o que pode ser aprimorado. Destaco também sua <span class="acento">visão estratégica</span> e sua disposição para propor soluções.</blockquote>
+        <figcaption><img class="depo-foto" src="assets/depo/sara.webp" alt="Foto de Sara Nogueira" width="96" height="96" loading="lazy" decoding="async"><b>Sara Nogueira</b><span>Coordenadora Administrativo-Financeiro do Cineteatro São Luiz (IDM&nbsp;/ Secult&nbsp;CE)</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- 7 · Como eu trabalho -->
 <section id="metodo" class="sec" aria-labelledby="met-t">
   <div class="wrap">
@@ -1143,6 +1186,6 @@ a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColo
   </div>
 </dialog>
 
-<script type="module" src="assets/app.js?v=29"></script>
+<script type="module" src="assets/app.js?v=30"></script>
 </body>
 </html>
