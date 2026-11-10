@@ -270,7 +270,7 @@ const TRAJ = [
   { ano: "2021", onde: "Fargo\u00a0· Bolsas e sapatos", papel: "Assistente de Marketing e E\u2060-\u2060commerce", txt: "Campanhas de social media e e\u2060-\u2060commerce com foco em conversão, copy, peças e vídeos, ações com influenciadores e lançamento de coleção com catálogos temáticos. Em paralelo, atendi como freelancer marcas como UAU Conceito, La Reine e Theresa Montenegro." },
   { ano: "2022", onde: "Freelancer", papel: "Marketing digital", txt: "" }, // PENDENTE: descrição curta do que fiz nos freelas
   { ano: "2023 – 2025", onde: "Desenrolado · Enem Action (YDUQS)", papel: "Analista de Marketing Digital", txt: "Inbound, CRO, conteúdo e monitoramento de patrocinados para o Enem Action." },
-  { ano: "2025 – hoje", onde: "Cineteatro São Luiz", papel: "Supervisor de Comunicação Digital", txt: "Equipamento da Secult CE gerido pelo Instituto Dragão do Mar. Planejamento digital, linha editorial, dados para a curadoria e orientação da equipe de criação de conteúdo." },
+  { ano: "2025 – hoje", onde: "Cineteatro São Luiz", papel: "Gestão de Comunicação Digital", txt: "Equipamento da Secult CE gerido pelo Instituto Dragão do Mar. Planejamento digital, linha editorial, dados para a curadoria e orientação da equipe de criação de conteúdo." },
 ];
 const initTimeline = () => {
   const list = $(".tl"), section = $("#trajetoria"), float = $(".tl-float");
