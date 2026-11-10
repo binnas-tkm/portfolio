@@ -1,9 +1,9 @@
-import ICONS from "./icones.js";
+import ICONS from "./icones.js?v=2";
 import { createGlassFolder } from "./glass-folder.js";
 document.documentElement.classList.add("js");
 
 // ───────── Símbolos das ferramentas e plataformas ─────────
-const TOOL_SLUG = { "ClickUp": "clickup", "Trello": "trello", "Asana": "asana", "Notion": "notion", "Google Analytics 4": "googleanalytics", "Search Console": "googlesearchconsole", "Looker Studio": "looker", "Google Sheets": "googlesheets", "Meta Ads": "meta", "Google Ads": "googleads", "RD Station": "rdstation", "Manychat": "manychat", "WhatsApp": "whatsapp", "Claude": "claude", "Zapier": "zapier", "ChatGPT": "openai", "Photoshop": "adobephotoshop", "CapCut": "capcut", "Instagram": "instagram", "LinkedIn": "linkedin", "YouTube": "youtube", "TikTok": "tiktok", "Canva": "canva" };
+const TOOL_SLUG = { "ClickUp": "clickup", "Trello": "trello", "Asana": "asana", "Notion": "notion", "Google Analytics 4": "googleanalytics", "Search Console": "googlesearchconsole", "Looker Studio": "looker", "Google Sheets": "googlesheets", "Meta Ads": "meta", "Google Ads": "googleads", "RD Station": "rdstation", "Manychat": "manychat", "WhatsApp": "whatsapp", "Claude": "claude", "Zapier": "zapier", "ChatGPT": "openai", "Photoshop": "adobephotoshop", "CapCut": "capcut", "Instagram": "instagram", "LinkedIn": "linkedin", "YouTube": "youtube", "TikTok": "tiktok", "Canva": "canva", "Illustrator": "adobeillustrator", "Loja Integrada": "lojaintegrada", "Meta Business Suite": "meta" };
 const lum = (hex) => { const n = parseInt(hex.slice(1), 16); return (0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; };
 const icon = (slug, light) => {
   const i = ICONS[slug];
@@ -269,11 +269,8 @@ const TRAJ = [
   { ano: "2020\u00a0–\u00a02021", onde: "AGP Marketing", papel: "Social media", txt: "Meu primeiro trabalho no digital: conteúdo para marcas de moda infantil, moda casual, moda praia e acessórios." },
   { ano: "2021", onde: "Fargo\u00a0· Bolsas e sapatos", papel: "Assistente de Marketing e E\u2060-\u2060commerce", txt: "Campanhas de social media e e\u2060-\u2060commerce com foco em conversão, copy, peças e vídeos, ações com influenciadores e lançamento de coleção com catálogos temáticos. Em paralelo, atendi como freelancer marcas como UAU Conceito, La Reine e Theresa Montenegro." },
   { ano: "2022", onde: "Freelancer", papel: "Marketing digital", txt: "" }, // PENDENTE: descrição curta do que fiz nos freelas
-  { ano: "2023 – 2025", onde: "Desenrolado · Enem Action (YDUQS)", papel: "Analista de Marketing Digital", txt: "Inbound, CRO, conteúdo e monitoramento de patrocinados para o Enem Action. Em 2024, 44,5% dos leads Enem Action vieram das campanhas em que atuei, o maior percentual entre as marcas do grupo." },
+  { ano: "2023 – 2025", onde: "Desenrolado · Enem Action (YDUQS)", papel: "Analista de Marketing Digital", txt: "Inbound, CRO, conteúdo e monitoramento de patrocinados para o Enem Action." },
   { ano: "2025 – hoje", onde: "Cineteatro São Luiz", papel: "Supervisor de Comunicação Digital", txt: "Equipamento da Secult CE gerido pelo Instituto Dragão do Mar. Planejamento digital, linha editorial, dados para a curadoria e orientação da equipe de criação de conteúdo." },
-  { ano: "Nov 2025", onde: "UFC", papel: "Workshop Estratégias Digitais", txt: "Conduzi o workshop Estratégias Digitais para alunos de Publicidade e Jornalismo da UFC." },
-  { ano: "2026\u00a0–\u00a0hoje", onde: "Universidade de Fortaleza", papel: "Marketing", txt: "Graduação em Marketing na Unifor, em andamento." },
-  { ano: "Set 2026", onde: "Colégio César Cals", papel: "Roda de conversa", txt: "Participei da roda de conversa O mercado e o profissional de comunicação, na Feira das Profissões do Colégio César Cals, em Fortaleza." },
 ];
 const initTimeline = () => {
   const list = $(".tl"), section = $("#trajetoria"), float = $(".tl-float");
@@ -347,16 +344,9 @@ const initTimeline = () => {
 
 // ───────── 4 · O que eu faço: a volta com quatro paradas ─────────
 const FRENTES = [
-  { n: "01", frente: "Planejamento e operação de comunicação digital", onde: "Cineteatro São Luiz", num: "4x", metrica: "mais engajamento no Instagram", base: "Em média, 36% das pessoas alcançadas interagem por mês desde ago/25. No ano anterior, eram 8% a 9%.",
-    marca: "+169% de interações no Instagram entre ago/25 e jun/26, em relação aos mesmos meses do ano anterior",
-    como: "Plano de comunicação digital 2027⁠–⁠2030, linha editorial com 40% da pauta em repertório, dados de canal e de bilheteria para a curadoria e orientação da equipe de criação de conteúdo, com automações em Claude e Zapier ligadas ao ClickUp.",
-    ferr: ["ClickUp", "Google Analytics 4", "Looker Studio", "Google Sheets", "Claude", "Zapier"] },
-  { n: "02", frente: "Inbound e conversão em matrícula", onde: "Enem Action · YDUQS", num: "44,5%", metrica: "dos leads Enem Action em 2024 vieram das campanhas em que atuei", base: "o maior percentual entre as marcas do grupo", marca: "",
-    como: "Iscas digitais (e⁠-⁠books e planner de redação), nutrição por e⁠-⁠mail e WhatsApp, aulões no YouTube para manter a base ativa e testes A/B de criativos, formatos e abordagens.",
-    ferr: ["Meta Ads", "Google Ads", "RD Station", "Google Analytics 4", "CapCut", "Trello"] },
-  { n: "03", frente: "Campanhas de captação", onde: "Simuladão do Enem", num: "+12,9%", metrica: "de aumento relativo na taxa de conversão", base: "de 2023 para 2024", marca: "",
-    como: "Convidei participantes de 2023 que entraram na faculdade para contar a experiência, e essas histórias viraram a prova social da campanha, em redes, site, newsletter e publi com a artista Maitê Padilha.",
-    ferr: ["Meta Ads", "Google Ads", "RD Station", "Google Analytics 4"] },
+  { n: "01", frente: "Planejamento e operação de comunicação digital", onde: "Cineteatro São Luiz", num: "4x", metrica: "mais engajamento no Instagram", base: "Em média, 36% das pessoas alcançadas interagem por mês desde ago/25. No ano anterior, eram 8% a 9%.", caso: "case-csl" },
+  { n: "02", frente: "Inbound e conversão em matrícula", onde: "Enem Action · YDUQS", num: "44,5%", metrica: "dos leads Enem Action em 2024 vieram das campanhas em que atuei", base: "o maior percentual entre as marcas do grupo", caso: "case-ea" },
+  { n: "03", frente: "Campanhas de captação", onde: "Simuladão do Enem", num: "+12,9%", metrica: "de aumento relativo na taxa de conversão", base: "de 2023 para 2024", caso: "case-ea" },
 ];
 const PATH = [[0.60, 0.88], [0.46, 0.82], [0.38, 0.60], [0.43, 0.36], [0.57, 0.19], [0.73, 0.14], [0.87, 0.21], [0.94, 0.36], [0.90, 0.54], [0.76, 0.58], [0.68, 0.70], [0.72, 0.86]];
 const STOP_IDX = [2, 4, 7];
@@ -368,9 +358,7 @@ const initFaz = () => {
     const r = FRENTES[i];
     body.innerHTML = `<p class="plate-frente">${r.frente}</p><p class="plate-onde">${r.onde}</p>
       <div class="plate-num"><b>${r.num}</b><span>${r.metrica}</span></div><p class="plate-base">${r.base}</p>
-      ${r.marca ? `<p class="plate-marca"><span class="rotulo">maior marca</span>${r.marca}</p>` : ""}
-      <p class="plate-como">${r.como}</p><ul class="chips" aria-label="Ferramentas">${r.ferr.map((f) => `<li data-tool="${TOOL_SLUG[f] || ""}">${f}</li>`).join("")}</ul>`;
-    decorateTools(body);
+      <a class="plate-link" href="#${r.caso}">Ver o case <span aria-hidden="true">→</span></a>`;
     if (anim) { body.classList.remove("troca"); void body.offsetWidth; body.classList.add("troca"); }
     $$("button", tabs).forEach((b, k) => b.setAttribute("aria-selected", k === i));
     $$(".stop", stopsBox).forEach((b, k) => b.classList.toggle("ativo", k === i));

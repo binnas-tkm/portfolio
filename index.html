@@ -22,8 +22,8 @@
 <link rel="icon" href="assets/marca/simbolo_cor_negativo.svg">
 <link rel="preload" href="assets/fonts/Unbounded.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Manrope.woff" as="font" type="font/woff" crossorigin>
-<link rel="modulepreload" href="assets/app.js?v=26">
-<link rel="modulepreload" href="assets/icones.js">
+<link rel="modulepreload" href="assets/app.js?v=28">
+<link rel="modulepreload" href="assets/icones.js?v=2">
 <link rel="modulepreload" href="assets/glass-folder.js">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script src="assets/boot.js"></script>
@@ -179,7 +179,12 @@ p, li, dd, .lead { text-wrap: pretty; }
 .sobre-grid { display: grid; grid-template-columns: var(--cols); gap: var(--gap); align-items: center; }
 .sobre-foto { aspect-ratio: 4 / 5; border-radius: var(--r); overflow: hidden; }
 .sobre-foto img { width: 100%; height: 100%; object-fit: cover; }
-.work-grid { display: grid; grid-template-columns: var(--cols-r); gap: var(--gap); align-items: center; }
+/* título à direita da foto no computador; no celular e no tablet, o título vem antes das fotos e o texto do evento depois */
+.work-grid { display: grid; grid-template-columns: var(--cols-r); grid-template-rows: 1fr 1fr; grid-template-areas: "media head" "media evento"; column-gap: var(--gap); row-gap: 0; align-items: center; }
+.work-media { grid-area: media; }
+.work-texto { display: contents; }
+.work-head { grid-area: head; align-self: end; }
+.workshop .evento { grid-area: evento; align-self: start; }
 .work-foto { aspect-ratio: 16 / 10; border-radius: var(--r); overflow: hidden; }
 .work-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 45%; }
 .work-texto h2 { margin-top: var(--s2); }
@@ -187,7 +192,7 @@ p, li, dd, .lead { text-wrap: pretty; }
 .sobre h2 { font-size: clamp(30px, 3.2vw, 50px); margin-top: var(--s2); }
 .sobre .lead + .lead { margin-top: 16px; }
 .sobre-textos { margin-top: var(--s3); }
-.fatos { margin-top: var(--s4); display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--nevoa-12); }
+.fatos { margin-top: var(--s4); display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid var(--nevoa-12); }
 .fatos div { padding: var(--s3) var(--s3) 0 0; }
 .fatos div + div { padding-left: var(--s3); border-left: 1px solid var(--nevoa-12); }
 .fatos dt { font-family: var(--font-titulo); font-weight: 500; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.04em; line-height: 1; }
@@ -256,6 +261,8 @@ p, li, dd, .lead { text-wrap: pretty; }
 .plate-base { margin-top: 6px; font-size: 12.5px; color: var(--nevoa-50); }
 .plate-marca { margin-top: 14px; padding: 11px 14px; border-radius: 10px; background: var(--nevoa-06); font-size: 14px; line-height: 1.4; }
 .plate-marca .rotulo { display: block; color: var(--ambar); font-size: 10px; margin-bottom: 2px; }
+.plate-link { display: inline-flex; gap: 6px; margin-top: 14px; font-size: 13.5px; font-weight: 600; color: var(--brasa); text-decoration: none; }
+.plate-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .plate-como { margin-top: 12px; font-size: 13.5px; line-height: 1.55; color: var(--nevoa-70); }
 .plate .chips { margin-top: 12px; }
 .plate-body.troca { animation: troca .45s var(--ease); }
@@ -286,7 +293,8 @@ p, li, dd, .lead { text-wrap: pretty; }
 .entregas li::before { content: ""; margin-top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--brasa); }
 .entregas b { font-weight: 700; }
 .claro .chips li { border-color: var(--noite-12); color: var(--noite-70); }
-.case-texto .chips { margin-top: var(--s4); }
+.case-ferr { margin-top: var(--s3); padding-top: var(--s2); border-top: 1px solid var(--noite-12); font-size: 13px; line-height: 1.5; color: var(--noite-70); }
+.case-ferr .rotulo { display: block; margin-bottom: 4px; font-size: 10px; color: var(--noite-50); }
 /* Material em destaque: acompanha a imagem do carrossel */
 .case-media .material { margin-top: var(--s3); }
 .material { padding: var(--s3); border-radius: var(--r); background: rgb(14 12 19 / .045); border: 1px solid var(--noite-12); }
@@ -422,7 +430,7 @@ dialog { color: var(--nevoa); }
 .visor-mini img { width: 100%; height: 100%; object-fit: cover; opacity: .55; transition: opacity .25s var(--ease); }
 .visor-mini button::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--nevoa-12); transition: box-shadow .25s var(--ease); }
 .credito { margin-top: var(--s3); font-size: 12px; color: var(--nevoa-50); }
-.carr-fatos { margin-top: var(--head); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--nevoa-12); }
+.carr-fatos { margin-top: var(--head); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--nevoa-12); }
 .carr-fatos div { padding: var(--s3) var(--s3) 0 0; }
 .carr-fatos div + div { padding-left: var(--s3); border-left: 1px solid var(--nevoa-12); }
 .carr-fatos dt, .auto-fatos dt { font-family: var(--font-titulo); font-weight: 500; font-size: clamp(24px, 2.4vw, 36px); letter-spacing: -.04em; line-height: 1; }
@@ -472,7 +480,9 @@ dialog { color: var(--nevoa); }
 .auto ul.lista li { position: relative; padding-left: 26px; color: var(--nevoa-70); }
 .auto ul.lista li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--brasa); }
 .tool .ico { vertical-align: -.15em; margin-right: .32em; }
-.grupos { margin-top: var(--s2); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
+.grupos { margin-top: var(--s2); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s2); }
+.grupo { grid-column: span 2; }
+.grupo:nth-child(n+4) { grid-column: span 3; }
 .grupo { padding: var(--s3); }
 .grupo .chips { margin-top: var(--s2); }
 .grupo .chips li { color: var(--nevoa); }
@@ -532,9 +542,13 @@ dialog { color: var(--nevoa); }
 }
 @media (max-width: 1023px) {
   .sobre-grid, .case, .case.inverso, .auto, .form-grid, .visor, .work-grid { grid-template-columns: 1fr; }
+  .work-grid { grid-template-rows: auto; grid-template-areas: "head" "media" "evento"; row-gap: var(--s4); }
+  .workshop .evento { margin-top: 0; }
   .sobre-foto { max-width: 420px; }
   .case.inverso .case-media { order: 0; }
   .metodo-grid, .grupos { grid-template-columns: 1fr 1fr; }
+  .grupo, .grupo:nth-child(n+4) { grid-column: auto; }
+  .grupo:last-child { grid-column: 1 / -1; }
   .stories { grid-template-columns: 1fr; row-gap: var(--s6); }
   .faz-stops { display: none; }
   .faz-inner { justify-content: flex-start; }
@@ -658,16 +672,15 @@ dialog { color: var(--nevoa); }
       <figure class="sobre-foto" data-rise data-delay="100"><img loading="lazy" decoding="async" src="assets/fotos/retrato-cor.webp" alt="Retrato de Vinicius Teixeira"></figure>
       <div>
         <p class="rotulo" data-fade>Sobre mim</p>
-        <h2 id="sobre-t" class="titulo" data-split="words" data-stagger="70">Marketing digital com visão de funil e <span class="acento">decisão</span> baseada em dados</h2>
+        <h2 id="sobre-t" class="titulo" data-split="words" data-stagger="70">Marketing digital com <span class="acento">visão de funil</span> e decisão baseada em dados</h2>
         <div class="sobre-textos" data-rise data-delay="250">
           <p class="lead">Sou Vinicius Teixeira. Atualmente, Supervisor de Comunicação Digital no Cineteatro São Luiz, em Fortaleza, onde faço a gestão do ecossistema de canais e estratégias digitais.</p>
-          <p class="lead">Comecei na moda, produzindo cena, foto e conteúdo. Fui para o digital pelo caminho da performance: social media, e&#8288;-&#8288;commerce, inbound, CRO e mídia paga, sempre olhando o funil inteiro.</p>
-          <p class="lead">Gosto de organizar times e processos. Trabalho com hipótese, teste e leitura, e uso automação para tirar o trabalho repetitivo do caminho da equipe.</p>
+          <p class="lead">Comecei na moda e fui para o digital pelo caminho da performance, sempre olhando o funil inteiro.</p>
+          <p class="lead">Gosto de organizar times e processos. Trabalho com hipótese, teste e leitura, e uso automação para poupar a equipe do trabalho repetitivo.</p>
         </div>
         <dl class="fatos" data-rise data-delay="350">
           <div><dt>6 anos</dt><dd>em marketing digital</dd></div>
-          <div><dt>23</dt><dd>certificações em marketing e comunicação</dd></div>
-          <div><dt>Unifor</dt><dd>Marketing</dd></div>
+          <div><dt>11</dt><dd>certificações em marketing e comunicação</dd></div>
         </dl>
       </div>
     </div>
@@ -716,7 +729,7 @@ dialog { color: var(--nevoa); }
       <h2 id="cases-t" class="titulo h2" data-split="words" data-stagger="80">Projetos em destaque</h2>
     </div>
 
-    <article class="case" aria-labelledby="csl-t">
+    <article class="case" id="case-csl" aria-labelledby="csl-t">
       <div class="case-media slider" data-slider data-case="csl" data-rise data-delay="100">
         <div class="slider-view"><div class="slider-track">
           <div class="slide"><div class="palco"><div class="mk-doc"><span class="folha"></span><span class="folha"></span><img loading="lazy" decoding="async" src="assets/capas/plano-doc.webp" alt="Capa do Plano de Comunicação Digital 2027&#8288;–&#8288;2030 do Cineteatro São Luiz" data-leg="Plano de Comunicação Digital 2027&#8288;–&#8288;2030&nbsp;· documento"></div></div></div>
@@ -743,15 +756,16 @@ dialog { color: var(--nevoa); }
           <!-- PENDENTE: confirmar se fui eu quem ativou o LinkedIn institucional em jan/26. Se sim: +1.200% de seguidores no LinkedIn do Cineteatro entre jan/26 e out/26, o primeiro canal novo do ecossistema -->
         </dl>
         <ul class="entregas">
-          <li><span><b>Dashboard de KPIs</b> dos canais digitais em Google Sheets, com os OKRs e marcos anuais</span></li>
-          <li><span><b>Curva ABC de bilheteria e dashboard</b> em Looker Studio, adotados para apoiar o processo curatorial</span></li>
+          <li><span><b>Dashboard de KPIs</b> dos canais digitais, com os OKRs e marcos anuais</span></li>
+          <li><span><b>Curva ABC de bilheteria e dashboard</b>, adotados para apoiar o processo curatorial</span></li>
           <li><span><b>Linha editorial</b> com seis editorias e 40% da pauta em conteúdo de repertório</span></li>
-          <li><span><b>Automações</b> com Claude e Zapier ligadas ao ClickUp da equipe</span></li>
+          <li><span><b>Automações com IA</b> ligadas às tarefas da equipe</span></li>
         </ul>
+        <p class="case-ferr"><span class="rotulo">Ferramentas</span>ClickUp&nbsp;· Google Sheets&nbsp;· Looker Studio&nbsp;· Google Analytics 4&nbsp;· Meta Business Suite&nbsp;· Manychat&nbsp;· Photoshop&nbsp;· Canva&nbsp;· CapCut&nbsp;· Claude&nbsp;· Zapier</p>
       </div>
     </article>
 
-    <article class="case inverso" aria-labelledby="ea-t">
+    <article class="case inverso" id="case-ea" aria-labelledby="ea-t">
       <div class="case-media slider" data-slider data-case="ea" data-rise data-delay="100">
         <div class="slider-view"><div class="slider-track">
           <div class="slide"><div class="palco"><div class="mk-livro"><img loading="lazy" decoding="async" src="assets/capas/ebook-cinema.webp" alt="Capa do e-book Estudos sobre Cinema" data-leg="E&#8288;-&#8288;book Estudos sobre Cinema&nbsp;· isca digital"></div></div></div>
@@ -770,14 +784,20 @@ dialog { color: var(--nevoa); }
       <div class="case-texto" data-rise data-delay="200">
         <p class="rotulo">Enem Action&nbsp;· YDUQS&nbsp;· 2023&nbsp;–&nbsp;2025</p>
         <h3 id="ea-t">Inbound e captação de estudantes</h3>
-        <p class="lead">Na agência Desenrolado, cuidei de inbound, CRO, conteúdo e monitoramento de patrocinados do Enem Action. Escrevi as iscas digitais, orientei a direção de arte, criei aulões no <span class="tool" data-tool="youtube">YouTube</span> para manter a base ativa e transformei aprovados do Simuladão em prova social para a campanha seguinte.</p>
+        <p class="lead">Na agência Desenrolado, cuidei de inbound, CRO, conteúdo e monitoramento de patrocinados do Enem Action, da captação do lead à conversão em matrícula.</p>
         <p class="nota">Os leads aquecidos na base do Enem Action seguem para o funil de outras marcas da YDUQS, como Estácio e Wyden.</p>
         <dl class="case-nums">
           <div><dt>+12,9%</dt><dd>de aumento relativo na taxa de conversão do Simuladão, de 2023 para 2024</dd></div>
           <div><dt>44,5%</dt><dd>dos leads Enem Action em 2024 vieram das campanhas em que atuei, o maior percentual entre as marcas do grupo</dd></div>
           <!-- PENDENTE: taxa de conversão da landing page das iscas digitais -->
         </dl>
-        <ul class="chips"><li data-tool="meta">Meta&nbsp;Ads</li><li data-tool="googleads">Google&nbsp;Ads</li><li data-tool="rdstation">RD Station</li><li data-tool="googleanalytics">Google Analytics 4</li><li data-tool="capcut">CapCut</li><li data-tool="trello">Trello</li></ul>
+        <ul class="entregas">
+          <li><span><b>Iscas digitais</b> escritas por mim, como e&#8288;-&#8288;books e planner de redação, com a direção de arte orientada</span></li>
+          <li><span><b>Nutrição da base</b> por e&#8288;-&#8288;mail e WhatsApp, com aulões no YouTube para manter os leads ativos</span></li>
+          <li><span><b>Prova social</b> com aprovados do Simuladão 2023, em redes, site, newsletter e publi com a artista Maitê Padilha</span></li>
+          <li><span><b>Testes A/B</b> de criativos, formatos e abordagens</span></li>
+        </ul>
+        <p class="case-ferr"><span class="rotulo">Ferramentas</span>Meta&nbsp;Ads&nbsp;· Google&nbsp;Ads&nbsp;· RD Station&nbsp;· Google Analytics 4&nbsp;· Google Sheets&nbsp;· CapCut&nbsp;· Trello&nbsp;· Notion</p>
       </div>
     </article>
 
@@ -800,14 +820,14 @@ dialog { color: var(--nevoa); }
       <div class="case-texto" data-rise data-delay="200">
         <p class="rotulo">Fargo e Vila Sol&nbsp;· moda</p>
         <h3 id="moda-t">Campanhas de moda</h3>
-        <p class="lead">Desenvolvi campanhas de moda do conceito à imagem final. Foi na moda que comecei no digital, produzindo conteúdo para marcas de moda infantil, casual, praia e acessórios, e na Fargo cuidei também das campanhas de social media e e&#8288;-&#8288;commerce.</p>
+        <p class="lead">Desenvolvi campanhas de moda do conceito à imagem final, para a Fargo e a Vila Sol. Cada campanha parte de uma narrativa e a leva para todas as escolhas do ensaio.</p>
         <ul class="entregas">
           <li><span><b>Concepção conceitual</b> da narrativa de cada coleção</span></li>
           <li><span><b>Planejamento de cenário</b> e do roteiro da diária</span></li>
           <li><span><b>Produção executiva</b> do ensaio, da equipe às locações</span></li>
           <li><span><b>Casting e styling</b>, com direção de acting das modelos</span></li>
         </ul>
-        <ul class="chips"><li data-tool="adobephotoshop">Photoshop</li></ul>
+        <p class="case-ferr"><span class="rotulo">Ferramentas</span>Photoshop&nbsp;· Illustrator&nbsp;· Meta Business Suite&nbsp;· Loja Integrada</p>
       </div>
     </article>
 
@@ -891,7 +911,6 @@ dialog { color: var(--nevoa); }
       </div>
     </div>
     <dl class="carr-fatos" data-rise>
-      <div><dt>4x</dt><dd>mais engajamento no <span class="tool" data-tool="instagram">Instagram</span>: em média, 36% das pessoas alcançadas interagem por mês desde ago/25, contra 8% a 9% no ano anterior</dd></div>
       <div><dt>+169%</dt><dd>de interações no Instagram entre ago/25 e jun/26, em relação aos mesmos meses do ano anterior</dd></div>
       <div><dt>+10,8%</dt><dd>de seguidores no Instagram entre ago/25 e out/26, mesmo com três meses de defeso eleitoral</dd></div>
     </dl>
@@ -915,9 +934,6 @@ dialog { color: var(--nevoa); }
         <p class="rotulo">Equipe e automações com IA</p>
         <h3>Rotina de equipe e automações com IA</h3>
         <p class="auto-txt">Pauto, faço o briefing e oriento uma equipe de três pessoas, em design, texto e vídeo. Faço o planejamento editorial do mês, a partir da programação que a gestão e a curadoria definem para o Cineteatro, e todo mês apresento à gestão o relatório de resultados. Também participei da seleção de três estagiários e acompanho o desenvolvimento deles no dia a dia.</p>
-        <dl class="auto-fatos">
-          <div><dt>Todo mês</dt><dd>planejamento editorial feito por mim e relatório de resultados apresentado à gestão</dd></div>
-        </dl>
       </div>
       <div>
       <p class="auto-txt auto-intro">As tarefas rodam no ClickUp, e uso automações com Claude e Zapier para tirar trabalho manual do caminho:</p>
@@ -948,10 +964,11 @@ dialog { color: var(--nevoa); }
       </div>
     </div>
     <div class="grupos">
-      <div class="grupo glass" data-rise data-delay="100"><p class="rotulo">Gestão</p><ul class="chips"><li data-tool="clickup">ClickUp</li><li data-tool="trello">Trello</li><li data-tool="asana">Asana</li><li data-tool="notion">Notion</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="100"><p class="rotulo">Gestão de tarefas</p><ul class="chips"><li data-tool="clickup">ClickUp</li><li data-tool="trello">Trello</li><li data-tool="asana">Asana</li><li data-tool="notion">Notion</li></ul></div>
       <div class="grupo glass" data-rise data-delay="160"><p class="rotulo">Dados e pesquisa</p><ul class="chips"><li data-tool="googleanalytics">GA4</li><li data-tool="googlesearchconsole">Search Console</li><li data-tool="looker">Looker Studio</li><li data-tool="googlesheets">Google Sheets</li><li>Entrevistas com público</li></ul></div>
-      <div class="grupo glass" data-rise data-delay="220"><p class="rotulo">Mídia</p><ul class="chips"><li data-tool="meta">Meta&nbsp;Ads</li><li data-tool="googleads">Google&nbsp;Ads</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="220"><p class="rotulo">Mídia e canais digitais</p><ul class="chips"><li data-tool="meta">Meta&nbsp;Ads</li><li data-tool="googleads">Google&nbsp;Ads</li><li data-tool="meta">Meta Business Suite</li><li data-tool="instagram">Instagram</li><li data-tool="tiktok">TikTok</li><li data-tool="linkedin">LinkedIn</li><li data-tool="youtube">YouTube</li><li data-tool="whatsapp">WhatsApp Business</li><li data-tool="lojaintegrada">Loja Integrada</li></ul></div>
       <div class="grupo glass" data-rise data-delay="280"><p class="rotulo">CRM, automação e IA</p><ul class="chips"><li data-tool="rdstation">RD Station</li><li data-tool="manychat">Manychat</li><li data-tool="zapier">Zapier</li><li data-tool="claude">Claude</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="340"><p class="rotulo">Criação</p><ul class="chips"><li data-tool="adobephotoshop">Photoshop</li><li data-tool="adobeillustrator">Illustrator</li><li data-tool="canva">Canva</li><li data-tool="capcut">CapCut</li></ul></div>
     </div>
   </div>
 </section>
@@ -1014,8 +1031,10 @@ dialog { color: var(--nevoa); }
       <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Evento anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo evento"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
     </div>
     <div class="work-texto">
-      <p class="rotulo" data-fade>Workshops e rodas de conversa</p>
-      <h2 id="work-t" class="titulo h2" data-split="words" data-stagger="80">Levando a prática para a sala de aula</h2>
+      <div class="work-head">
+        <p class="rotulo" data-fade>Workshops e rodas de conversa</p>
+        <h2 id="work-t" class="titulo h2" data-split="words" data-stagger="80">Levando a prática para a sala de aula</h2>
+      </div>
       <div class="evento" data-material-box="eventos" aria-live="polite">
         <p class="rotulo evento-d"></p>
         <h3 class="material-t"></h3>
@@ -1031,7 +1050,7 @@ dialog { color: var(--nevoa); }
     <div class="contato-esq">
       <img src="assets/marca/assinatura_cor_negativo.svg" alt="Vinni" class="contato-logo" data-fade data-delay="100">
       <div>
-        <h2 id="cont-t" class="titulo" data-split="words" data-stagger="90">Vamos <span class="acento">conversar?</span></h2>
+        <h2 id="cont-t" class="titulo" data-split="words" data-stagger="90">Vamos conversar?</h2>
         <p class="lead" data-fade data-delay="250">Estou aberto a vagas em estratégia digital, growth, conteúdo e mídias sociais.</p>
       </div>
       <div class="contato-acoes" data-rise data-delay="300">
@@ -1108,6 +1127,6 @@ a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColo
   </div>
 </dialog>
 
-<script type="module" src="assets/app.js?v=26"></script>
+<script type="module" src="assets/app.js?v=28"></script>
 </body>
 </html>
