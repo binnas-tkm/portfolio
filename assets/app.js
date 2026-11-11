@@ -175,7 +175,7 @@ const initSeams = () => {
 const initHero = () => {
   const hero = $("#inicio"), video = $(".hero-video", hero), veil = $(".veil"), meter = $(".veil i");
   const glows = $$(".glow", hero), logo = $(".hero-logo", hero);
-  let started = false, ended = false, glowAt = 0, t0 = performance.now();
+  let started = false, ended = false, glowAt = 0, t0 = performance.now(); let glowSprings = [];
   const progress = new Spring(0, { tension: 10, friction: 30 }, (v) => (meter.style.transform = `scaleX(${v})`));
   progress.to(0.7);
 
@@ -197,14 +197,28 @@ const initHero = () => {
     setTimeout(() => veil.remove(), 1600);
     groups.hero.forEach(play);
     if (reduced) { showEnd(true); return; }
-    video.play().catch(() => showEnd(true));
+    video.play().catch(() => { showEnd(true); retryOnTouch(); });
+  };
+  // Alguns celulares (iPhone em economia de energia, por exemplo) barram o vídeo automático.
+  // Nesse caso a marca fica parada e o vídeo toca no primeiro toque ou clique na página.
+  const retryOnTouch = () => {
+    const evs = ["touchstart", "pointerdown", "keydown"];
+    const go = () => {
+      evs.forEach((e) => removeEventListener(e, go, true));
+      video.currentTime = 0;
+      video.play().then(() => {
+        ended = false; hero.classList.remove("sem-video");
+        glowSprings.forEach((s) => s && s.to(0)); glowSprings = [];
+      }).catch(() => {});
+    };
+    evs.forEach((e) => addEventListener(e, go, { capture: true, passive: true }));
   };
   // Fim do vídeo: o último quadro fica; por cima, luzes do gradiente passam a se mover devagar.
   const showEnd = (semVideo) => {
     if (ended) return; ended = true; glowAt = performance.now();
     if (semVideo) hero.classList.add("sem-video");
     groups["hero-fim"].forEach(play);
-    glows.forEach((g, i) => new Spring(0, { tension: 20, friction: 20 }, (v) => (g.style.opacity = v * (semVideo ? 1 : 0.75))).to(1, i * 250));
+    glowSprings.forEach((s) => s.to(0)); glowSprings = glows.map((g, i) => new Spring(0, { tension: 20, friction: 20 }, (v) => (g.style.opacity = v * (semVideo ? 1 : 0.75))).to(1, i * 250) || null);
   };
   video.addEventListener("ended", () => showEnd(false));
   video.addEventListener("timeupdate", () => { if (video.duration && video.currentTime > video.duration - 1.6) groups["hero-fim"].forEach(play); });
