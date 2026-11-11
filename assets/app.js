@@ -149,7 +149,7 @@ const initSeams = () => {
     const size = () => { ratio = Math.min(devicePixelRatio || 1, 2); w = canvas.clientWidth; h = canvas.clientHeight; canvas.width = Math.round(w * ratio); canvas.height = Math.round(h * ratio); last = -1; };
     const render = (progress) => {
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0); ctx.clearRect(0, 0, w, h);
-      const C = w < 700 ? 12 : CELL, cols = Math.ceil(w / C), rows = Math.ceil(h / C), lift = progress * LIFT;
+      const cols = Math.ceil(w / CELL), rows = Math.ceil(h / CELL), lift = progress * LIFT;
       for (let y = 0; y < rows; y++) {
         const depth = y / Math.max(1, rows - 1) + lift; if (depth > 1) break;
         const solid = depth <= SOLID_UNTIL, fade = clamp01(1 - (depth - SOLID_UNTIL) / (1 - SOLID_UNTIL));
@@ -157,15 +157,19 @@ const initSeams = () => {
         for (let x = 0; x < cols; x++) {
           if (!solid) { if ((x + y) % 2 !== 0) continue; if (noise(x, y) > fade) continue; }
           ctx.fillStyle = !solid && noise(x + 101, y + 57) < ACCENT ? "#FF7A1A" : surface;
-          ctx.fillRect(x * C, y * C, C, C);
+          ctx.fillRect(x * CELL, y * CELL, CELL, CELL);
         }
       }
     };
-    // A costura é fixa: ocupa só o respiro do topo da seção, então não cobre texto e não precisa
-    // se desfazer com a rolagem (o que fazia os pixels piscarem e deixava um corte seco no lugar).
-    size(); render(0);
-    // No celular, a barra do navegador dispara "resize" ao rolar; só redesenha se o tamanho mudou de fato.
-    addEventListener("resize", () => { if (canvas.clientWidth === w && canvas.clientHeight === h) return; size(); render(0); });
+    // No celular, a barra do navegador dispara "resize" ao rolar; só redimensiona se o tamanho mudou de fato
+    // (redimensionar apaga o canvas, e era isso que fazia a costura piscar).
+    size(); addEventListener("resize", () => { if (canvas.clientWidth === w && canvas.clientHeight === h) return; size(); });
+    subscribe(() => {
+      const r = canvas.getBoundingClientRect();
+      if (r.bottom < -50 || r.top > innerHeight + 50) return;
+      const k = reduced ? 1 : Math.round(clamp01(1 - r.top / innerHeight) * 200) / 200;
+      if (k !== last) { last = k; render(k); }
+    }, () => 10);
   });
 };
 
