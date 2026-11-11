@@ -814,7 +814,7 @@ const initFooter = () => {
   let w = 0, h = 0, dpr = 1, px = -1e5, py = -1e5, raf = 0, visible = true, awake = true;
   let ring = { x: 0, y: 0, t: -1 }, dots = new Float32Array(0), count = 0, grainTile = null, logoBox = null;
   const logo = new Image(), grainImg = new Image();
-  grainImg.src = "assets/marca/grao_tile_256.webp"; grainImg.onload = () => { grainTile = grainImg; wake(); };
+  grainImg.src = "assets/marca/grao_tile_256.png"; grainImg.onload = () => { grainTile = grainImg; wake(); };
   const measureLogo = () => {
     const c = document.createElement("canvas"); c.width = 1124; c.height = Math.round(1124 * logo.naturalHeight / logo.naturalWidth);
     const g = c.getContext("2d", { willReadFrequently: true }); g.drawImage(logo, 0, 0, c.width, c.height);
