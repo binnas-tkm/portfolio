@@ -465,6 +465,7 @@ dialog { color: var(--nevoa); }
 .selo b { font-family: var(--font-titulo); font-weight: 600; font-size: 22px; letter-spacing: -.04em; line-height: 1; }
 .selo em { font-family: var(--font-acento); font-size: 14px; color: var(--ambar); line-height: 1.1; }
 .etapa p { margin-top: var(--s3); color: var(--nevoa-70); }
+.sec-head + .auto { margin-top: var(--head); }
 .auto { margin-top: var(--s2); padding: clamp(24px, 3.4vw, 48px); display: grid; grid-template-columns: var(--cols); gap: var(--gap); }
 .auto h3 { margin-top: var(--s2); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.03em; line-height: 1.12; }
 .auto ul.lista { display: grid; gap: var(--s2); }
@@ -982,13 +983,8 @@ dialog { color: var(--nevoa); }
   <div class="wrap">
     <div class="sec-head">
       <p class="rotulo" data-fade>Como eu trabalho</p>
-      <h2 id="met-t" class="titulo h2" data-split="words" data-stagger="80">Hipótese, teste e leitura</h2>
+      <h2 id="met-t" class="titulo h2" data-split="words" data-stagger="80">Processos, automação e ferramentas</h2>
     </div>
-    <ol class="metodo-grid">
-      <li class="etapa glass" data-rise data-delay="100"><span class="selo"><b>01</b><em>hipótese</em></span><p>Toda ação começa com uma aposta escrita: o que deve mudar, em qual número e por quê.</p></li>
-      <li class="etapa glass" data-rise data-delay="200"><span class="selo"><b>02</b><em>teste</em></span><p>Criativo, formato e público entram em teste com prazo e orçamento definidos antes.</p></li>
-      <li class="etapa glass" data-rise data-delay="300"><span class="selo"><b>03</b><em>leitura</em></span><p>O resultado volta como decisão: o que escala, o que sai e qual é a próxima hipótese.</p></li>
-    </ol>
     <div class="auto glass" data-rise data-delay="150">
       <div>
         <p class="rotulo">Equipe e automações com IA</p>
