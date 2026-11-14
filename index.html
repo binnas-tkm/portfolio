@@ -208,6 +208,9 @@ p, li, dd, .lead { text-wrap: pretty; }
 .slider-ctrl .botoes { display: flex; gap: 10px; }
 .slide-leg { font-size: 13px; color: var(--nevoa-50); min-height: 1.4em; }
 .claro .slide-leg { color: var(--noite-50); }
+/* Nos cases e nos workshops, o nome de cada imagem já aparece no quadro logo abaixo: a legenda sai e as setas ficam à direita */
+.case .slider-ctrl > .slide-leg, .workshop .slider-ctrl > .slide-leg { display: none; }
+.case .slider-ctrl, .workshop .slider-ctrl { justify-content: flex-end; }
 .foto { aspect-ratio: 4 / 5; }
 .foto img { width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
 
@@ -718,8 +721,7 @@ dialog { color: var(--nevoa); }
     <div class="wrap">
       <div class="sec-head">
         <p class="rotulo" data-fade>Trajetória</p>
-        <h2 id="traj-t" class="titulo h2" data-split="words" data-stagger="80">Da produção de conteúdo ao growth</h2>
-        <p class="lead" data-fade data-delay="200">Comecei em 2020 como social media de marcas de moda. Passei por e&#8288;-&#8288;commerce, inbound, CRO e mídia paga, e hoje estou por trás da comunicação digital de um equipamento cultural público, do planejamento aos indicadores. Passe o mouse (ou toque, no celular) em cada etapa para ler mais.</p>
+        <h2 id="traj-t" class="titulo h2" data-split="words" data-stagger="80">Da produção de conteúdo à estratégia digital</h2>
       </div>
       <ol class="tl">
         <li class="tl-rail" aria-hidden="true"><svg preserveAspectRatio="none"></svg></li>
@@ -737,7 +739,7 @@ dialog { color: var(--nevoa); }
   <div class="faz-inner">
     <div class="faz-copy">
       <p class="rotulo" data-fade>O que eu faço</p>
-      <h2 id="faz-t" class="titulo h2" data-split="words" data-stagger="80">Três frentes, um resultado em cada</h2>
+      <h2 id="faz-t" class="titulo h2" data-split="words" data-stagger="80">Principais resultados que entreguei</h2>
       <p class="lead" data-fade data-delay="250">Planejamento, conversão e captação. Para cada frente, o resultado e o que eu fiz para chegar lá.</p>
     </div>
     <aside class="plate glass" data-rise data-delay="200" aria-label="Frente selecionada">
@@ -777,7 +779,7 @@ dialog { color: var(--nevoa); }
         <div class="case-head">
           <p class="rotulo">Cineteatro São Luiz&nbsp;· ago/2025&nbsp;–&nbsp;hoje</p>
           <h3 id="csl-t">Comunicação digital do Cineteatro São Luiz</h3>
-          <p class="lead">Faço a gestão da comunicação digital do Cineteatro, equipamento da Secult CE gerido pelo Instituto Dragão do Mar. Planejo e opero, ao mesmo tempo, a comunicação de programações de teatro, cinema, música, dança, podcasts, cidadania cultural e outras, com alto volume de demandas e prioridades concorrentes. Oriento a equipe de design, texto e vídeo e levo os dados de canal e de bilheteria para as decisões da curadoria. Também escrevi o Plano de Comunicação Digital 2027&#8288;–&#8288;2030, aprovado pela gestão.</p>
+          <p class="lead">Faço a gestão da comunicação digital do Cineteatro, equipamento da Secult CE. Planejo e opero, ao mesmo tempo, programações de teatro, cinema, música, dança e outras, com alto volume de demandas. Oriento a equipe de criação e levo os dados de canal e de bilheteria para a curadoria.</p>
         </div>
         <div class="case-corpo">
           <dl class="case-nums">
