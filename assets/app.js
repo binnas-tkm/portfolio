@@ -3,7 +3,7 @@ import { createGlassFolder } from "./glass-folder.js";
 document.documentElement.classList.add("js");
 
 // ───────── Símbolos das ferramentas e plataformas ─────────
-const TOOL_SLUG = { "ClickUp": "clickup", "Trello": "trello", "Asana": "asana", "Notion": "notion", "Google Analytics 4": "googleanalytics", "Search Console": "googlesearchconsole", "Looker Studio": "looker", "Google Sheets": "googlesheets", "Meta Ads": "meta", "Google Ads": "googleads", "RD Station": "rdstation", "Manychat": "manychat", "WhatsApp": "whatsapp", "Claude": "claude", "Zapier": "zapier", "ChatGPT": "openai", "Photoshop": "adobephotoshop", "CapCut": "capcut", "Instagram": "instagram", "LinkedIn": "linkedin", "YouTube": "youtube", "TikTok": "tiktok", "Canva": "canva", "Illustrator": "adobeillustrator", "Loja Integrada": "lojaintegrada", "Meta Business Suite": "meta" };
+const TOOL_SLUG = { "ClickUp": "clickup", "Trello": "trello", "Asana": "asana", "Notion": "notion", "Google Analytics 4": "googleanalytics", "Search Console": "googlesearchconsole", "Looker Studio": "looker", "Google Sheets": "googlesheets", "Meta Ads": "meta", "Google Ads": "googleads", "RD Station": "rdstation", "Manychat": "manychat", "WhatsApp": "whatsapp", "Claude": "claude", "Claude Code": "claude", "Zapier": "zapier", "ChatGPT": "openai", "Photoshop": "adobephotoshop", "CapCut": "capcut", "Instagram": "instagram", "LinkedIn": "linkedin", "YouTube": "youtube", "TikTok": "tiktok", "Canva": "canva", "Illustrator": "adobeillustrator", "Loja Integrada": "lojaintegrada", "Meta Business Suite": "meta" };
 const lum = (hex) => { const n = parseInt(hex.slice(1), 16); return (0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; };
 const icon = (slug, light) => {
   const i = ICONS[slug];
@@ -623,16 +623,16 @@ const MATERIAIS = {
       porque: "O documento é a referência completa, mas os gestores precisavam ver a tese, os dados e as decisões em poucos minutos para aprovar o plano. A apresentação foi aprovada pela diretoria.",
       como: "Condensei os 14 capítulos do documento numa narrativa visual, priorizando os dados que justificam cada decisão.",
       hab: ["Storytelling com dados", "Comunicação executiva", "Síntese", "Visualização de dados"], ferr: ["Canva"] },
-    { t: "Dashboard · Curva ABC de bilheteria", l: "Classifica os eventos por arrecadação e por público e acompanha o funil de cada um. Os números estão borrados por confidencialidade.", b: "Entender o dashboard",
+    { t: "Dashboard · Curva ABC de bilheteria", l: "Idealizei e construí este dashboard de forma autônoma. Ele classifica os eventos por arrecadação e por público e acompanha o funil de cada um. Os números estão borrados por confidencialidade.", b: "Entender o dashboard",
       oque: ["Classificação dos eventos em classes A, B e C, por arrecadação e por público", "Funil de cada evento: views da campanha, cliques, sessões na página de venda, ingressos e comparecimento", "Diagnóstico automático que aponta onde a venda travou (alcance, conversão ou comparecimento) e sugere onde agir"],
-      porque: "Para colocar dados de canal e de bilheteria na mesma mesa nas reuniões de resultado. Essa leitura já apoiou decisões de programação.",
-      como: "Montei a curva ABC e o dashboard em Looker Studio a partir dos dados de bilheteria e dos canais, adotados para apoiar o processo curatorial.",
-      hab: ["Análise de dados", "Curva ABC", "Funil de conversão", "Visualização de dados"], ferr: ["Looker Studio", "Google Sheets"] },
-    { t: "Dashboard · OKRs 2027⁠–⁠2030", l: "Acompanha os 17 resultados-chave do plano contra os marcos de cada ano. Os números estão borrados por confidencialidade.", b: "Entender o dashboard",
+      porque: "Para subsidiar decisões de curadoria e gestão do equipamento. A leitura desse material já apoiou decisões dos gestores.",
+      como: "Montei a base de dados de bilheteria e dos canais no Google Sheets e construí o dashboard final, com a curva ABC, usando o Claude Code. O material foi adotado para apoiar o processo curatorial.",
+      hab: ["Análise de dados", "Curva ABC", "Funil de conversão", "Visualização de dados"], ferr: ["Google Sheets", "Claude Code"] },
+    { t: "Dashboard · OKRs 2027⁠–⁠2030", l: "Defini os OKRs de comunicação digital a partir das metas do contrato de gestão entre Secult CE, IDM e Cineteatro, dos objetivos de bilheteria e do histórico de performance do equipamento. O dashboard acompanha os 17 resultados-chave contra os marcos de cada ano. Os números estão borrados por confidencialidade.", b: "Entender o dashboard",
       oque: ["Visão geral dos 6 objetivos e dos 17 resultados-chave", "Atingimento de cada resultado-chave em relação ao marco do ano, com três níveis de meta: regular, boa e ótima", "Uma página por objetivo, com linha de base, realizado e o que falta para o marco"],
       porque: "Para o plano virar rotina de decisão: cada sprint trimestral fecha com uma revisão do que entrou, do que os números mostram e do que muda.",
-      como: "O dashboard parte do dashboard de KPIs dos canais, que reúne Instagram, YouTube, TikTok, LinkedIn, site e base própria numa série mensal desde 2024, com dicionário de métricas, validação dos dados e um registro do que explica cada pico.",
-      hab: ["OKRs", "Análise de dados", "Visualização de dados"], ferr: ["Google Sheets"] },
+      como: "Reuni os dados de Instagram, YouTube, TikTok, LinkedIn, site e base própria num Google Sheets, numa série mensal desde 2024, com dicionário de métricas, validação dos dados e um registro do que explica cada pico. A partir dessa base, usei o Claude Code para criar o dashboard.",
+      hab: ["OKRs", "Análise de dados", "Visualização de dados"], ferr: ["Google Sheets", "Claude Code"] },
     { t: "Linha Editorial para os canais digitais", l: "O guia do que publicar, em que proporção e com que frequência. 40% da pauta passou a ser conteúdo de repertório.", b: "Entender o documento",
       oque: ["Estudo do histórico e dos resultados dos conteúdos anteriores", "Estudo do comportamento, dos desejos e das dúvidas da audiência", "Seis editorias, por objetivo e por resultado: Programação, Educativo, Curatorial, Interativo, Institucional e Informativo", "Calibragem do peso de cada editoria na pauta", "Frequência de publicações ao longo do mês"],
       porque: "Para a pauta deixar de depender só da agenda e cada publicação ter um objetivo e um sinal de sucesso claro, como salvamentos, compartilhamentos ou cliques até a página de venda.",
