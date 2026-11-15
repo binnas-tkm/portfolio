@@ -389,6 +389,7 @@ const abrirVisor = () => {
   visor.querySelector(".cases-visor-imagens").innerHTML = [p.thumb, p.thumb2].filter(Boolean)
     .map((src, i) => `<img src="${src}" alt="${esc(p.titulo)}${i ? " · ensaio" : ""}" decoding="async">`).join("");
   esconderLupa(); visor.showModal();
+  const cx = visor.querySelector(".cases-visor-imagens"); cx.scrollTop = 0; cx.scrollLeft = 0;
 };
 visor.querySelector(".cases-visor-fechar").addEventListener("click", () => visor.close());
 // Ampliar/reduzir: a imagem cresce 2,2× a partir do tamanho ajustado e a rolagem leva o ponto clicado ao centro
