@@ -17,7 +17,7 @@
   --p: var(--s3);                  /* respiro interno dos painéis */
   position: relative; isolation: isolate; overflow: hidden;
   height: max(100vh, 780px);
-  background: var(--noite); color: var(--texto);
+  background: var(--noite) linear-gradient(var(--noite), var(--noite)); color: var(--texto);
   font-family: var(--font-texto); font-size: 16px; line-height: 1.5;
 }
 #cases, #cases * { box-sizing: border-box; }
