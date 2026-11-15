@@ -22,11 +22,11 @@
 <link rel="icon" href="assets/marca/simbolo_cor_negativo.svg">
 <link rel="preload" href="assets/fonts/Unbounded.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Manrope.woff" as="font" type="font/woff" crossorigin>
-<link rel="modulepreload" href="assets/app.js?v=43">
+<link rel="modulepreload" href="assets/app.js?v=46">
 <link rel="modulepreload" href="assets/icones.js?v=3">
-<link rel="modulepreload" href="assets/cases.js?v=14">
-<link rel="modulepreload" href="assets/cases-data.js?v=5">
-<link rel="stylesheet" href="assets/cases.css?v=21">
+<link rel="modulepreload" href="assets/cases.js?v=23">
+<link rel="modulepreload" href="assets/cases-data.js?v=7">
+<link rel="stylesheet" href="assets/cases.css?v=26">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js" defer></script>
 <link rel="modulepreload" href="assets/glass-folder.js">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -103,10 +103,21 @@ p, li, dd, .lead { text-wrap: pretty; }
 .js [data-rise], .js [data-fade] { opacity: 0; }
 
 /* Botões */
-.btn { position: relative; display: inline-flex; align-items: center; gap: 16px; overflow: hidden; isolation: isolate; height: 52px; padding: 0 22px; border-radius: 12px; border: 1px solid var(--brasa); color: var(--brasa); font-family: var(--font-titulo); font-size: 12.5px; font-weight: 500; letter-spacing: .03em; transition: color .25s var(--ease-plate); white-space: nowrap; }
-.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--brasa); transform: scaleX(0); transform-origin: left; transition: transform .25s var(--ease-plate); }
-.btn:hover, .btn:focus-visible { color: var(--noite); }
+/* Botões: mesmo anel de metal líquido das setas (definido em .seta) e, no hover, preenchimento no gradiente da marca */
+.btn { position: relative; display: inline-flex; align-items: center; gap: 16px; overflow: hidden; isolation: isolate; height: 52px; padding: 0 22px; border-radius: 12px; border: 0; color: var(--nevoa); font-family: var(--font-titulo); font-size: 12.5px; font-weight: 500; letter-spacing: .03em; white-space: nowrap;
+  background: radial-gradient(120% 140% at 50% 0%, rgb(242 238 232 / .06), transparent 70%); }
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(100deg, #6A4C9C 0%, #D9472B 55%, #FF7A1A 85%, #FFB547 115%); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease-plate); }
+.btn::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background:
+    conic-gradient(from var(--seta-a), transparent 0deg, rgb(106 76 156 / .9) 50deg, #FF7A1A 95deg, #FFB547 115deg, #FF7A1A 135deg, transparent 185deg 360deg),
+    conic-gradient(from calc(var(--seta-a) * -.6), #2B2830, #8E8A95 45deg, #3A3640 95deg, #D9D4DC 150deg, #2B2830 205deg, #75717C 270deg, #2B2830);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: seta-gira 9s linear infinite; transition: filter .25s; }
+.btn + .btn::after { animation-delay: -4.5s; }
 .btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
+.btn:hover::after, .btn:focus-visible::after { filter: brightness(1.3); }
+.btn:focus-visible { outline: 1px solid var(--ambar); outline-offset: 4px; }
 .btn svg { width: 14px; height: 11px; flex: none; transition: transform .15s var(--ease); }
 .btn:hover svg { transform: translateX(4px); }
 .btn--escuro { background: var(--noite); }
@@ -114,8 +125,32 @@ p, li, dd, .lead { text-wrap: pretty; }
 .link:hover { color: var(--ambar); }
 
 /* Setas e pontos dos carrosséis */
-.seta { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--nevoa-30); display: grid; place-items: center; transition: border-color .2s, background .2s; flex: none; }
-.seta:hover { border-color: var(--brasa); background: rgb(255 122 26 / .12); }
+/* Setas com anel de metal líquido: base metálica que gira devagar num sentido e um feixe de luz no gradiente
+   da marca (Crepúsculo → Brasa → Âmbar) circulando no outro. Tudo em CSS (conic-gradient + máscara de anel). */
+@property --seta-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.seta { position: relative; isolation: isolate; width: 46px; height: 46px; border-radius: 50%; border: 0; display: grid; place-items: center; flex: none;
+  background: radial-gradient(circle at 50% 28%, rgb(242 238 232 / .07), transparent 68%); transition: background .25s; }
+.seta::before, .seta::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; z-index: -1;
+  animation: seta-gira 7s linear infinite; }
+.seta::before { inset: 0; padding: 1.5px;
+  background:
+    conic-gradient(from var(--seta-a), transparent 0deg, rgb(106 76 156 / .9) 50deg, #FF7A1A 95deg, #FFB547 115deg, #FF7A1A 135deg, transparent 185deg 360deg),
+    conic-gradient(from calc(var(--seta-a) * -.6), #2B2830, #8E8A95 45deg, #3A3640 95deg, #D9D4DC 150deg, #2B2830 205deg, #75717C 270deg, #2B2830);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  transition: padding .25s, filter .25s; }
+/* brilho difuso que acompanha o feixe, bem discreto */
+.seta::after { inset: -3px; opacity: .28; filter: blur(5px);
+  background: conic-gradient(from var(--seta-a), transparent 0deg, #6A4C9C 50deg, #FF7A1A 100deg, #FFB547 118deg, transparent 180deg 360deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 72%, #000 86%, transparent 100%);
+  mask: radial-gradient(closest-side, transparent 72%, #000 86%, transparent 100%); transition: opacity .25s; }
+.seta.next::before, .seta.next::after { animation-delay: -3.5s; }
+@keyframes seta-gira { to { --seta-a: 360deg; } }
+.seta:hover { background: radial-gradient(circle at 50% 28%, rgb(255 122 26 / .16), transparent 70%); }
+.seta:hover::before { padding: 2px; filter: brightness(1.25); }
+.seta:hover::after { opacity: .55; }
+.seta:focus-visible { outline: 1px solid var(--ambar); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .seta::before, .seta::after { animation: none; --seta-a: 200deg; } }
 .seta svg { width: 14px; height: 11px; }
 .seta.prev svg { transform: scaleX(-1); }
 .dots { display: flex; gap: 8px; align-items: center; }
@@ -414,7 +449,7 @@ dialog { color: var(--nevoa); }
 .visor-mini button[aria-current="true"]::after { box-shadow: inset 0 0 0 2px var(--brasa); }
 
 /* ───────── Depoimentos ───────── */
-.depo { padding-block: 0; }
+.depo { padding-block: var(--sec); }
 .depo-grid { margin-top: var(--head); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2); }
 .depo-card { position: relative; overflow: hidden; padding: clamp(20px, 4vw, 44px); display: flex; flex-direction: column; gap: var(--s4); background: var(--concreto); border: 1px solid var(--nevoa-06); border-radius: var(--r); }
 .depo-card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: linear-gradient(90deg, var(--hora-azul), var(--crepusculo) 30%, var(--rubro) 60%, var(--brasa) 80%, var(--ambar)); }
@@ -595,6 +630,7 @@ dialog { color: var(--nevoa); }
 @media (prefers-reduced-motion: reduce) {
   .rolar i::after { animation: none; }
   .btn::before, .tl-dot { transition: none; }
+  .btn::after { animation: none; --seta-a: 200deg; }
   .pulso, .pulso-halo { display: none; }
 }
 </style>
@@ -663,7 +699,7 @@ dialog { color: var(--nevoa); }
         <div class="sobre-textos" data-rise data-delay="250">
           <p class="lead">Sou Vinicius Teixeira. Hoje estou à frente da comunicação digital do Cineteatro São Luiz, em Fortaleza, onde faço a gestão do ecossistema de canais e estratégias digitais.</p>
           <p class="lead">Comecei na produção de conteúdo e fui para o inbound e performance nos canais digitais, sempre olhando o funil inteiro.</p>
-          <p class="lead">Gosto de organizar processos e trabalho de forma <i lang="en">data-driven</i>, com foco na leitura de dados e em testes de formatos, abordagens, criativos e estratégias. Também uso automações com IA para agilizar processos e executar tarefas com mais eficiência e impacto.</p>
+          <p class="lead">Organizo processos e trabalho de forma <i lang="en">data-driven</i>, lendo dados e testando formatos, criativos e estratégias. Uso automações com Inteligência Artificial para ganhar agilidade e eficiência.</p>
         </div>
         <dl class="fatos" data-rise data-delay="350">
           <div><dt>6 anos</dt><dd>em marketing digital</dd></div>
@@ -858,7 +894,7 @@ dialog { color: var(--nevoa); }
     <div class="sec-head">
       <p class="rotulo" data-fade>Linha editorial&nbsp;· Cineteatro São Luiz</p>
       <h2 id="carr-t" class="titulo h2" data-split="words" data-stagger="80">Carrosséis educativos</h2>
-      <p class="lead" data-fade data-delay="200">Criei as seis editorias que organizam a pauta do Cineteatro: Programação, Educativo, Curatorial, Interativo, Institucional e Informativo. Cada uma tem objetivo, KPIs próprios e um peso no calendário, e 40% da pauta passou a ser conteúdo de repertório. Os carrosséis educativos levam adiante a narrativa do Cineteatro como lugar de formação de público, além de palco: aprofundam o universo de cinema, teatro e música da programação e conversam com quem já é fiel à casa e busca mais do que a agenda. Escrevo parte das publicações e faço o briefing das demais. Gire as pastas, clique na da frente para abrir e escolha uma lâmina.</p>
+      <p class="lead" data-fade data-delay="200">Criei as seis editorias que organizam a pauta do Cineteatro, cada uma com objetivo e KPIs próprios, e 40% da pauta passou a ser repertório. Os carrosséis educativos reforçam a casa como lugar de formação de público: aprofundam cinema, teatro e música para quem busca mais do que a agenda. Escrevo parte deles e faço o briefing dos demais. Gire as pastas e clique na da frente para abrir.</p>
     </div>
     <div class="anel" aria-label="Carrosséis"></div>
     <div class="anel-ctrl">
@@ -917,9 +953,9 @@ dialog { color: var(--nevoa); }
     </div>
     <div class="auto glass" data-rise data-delay="150">
       <div>
-        <p class="rotulo">Equipe e automações com IA</p>
-        <h3>Rotina de equipe e automações com IA</h3>
-        <p class="auto-txt">Pauto, faço o briefing e oriento uma equipe de três pessoas, em design, texto e vídeo. Faço o planejamento editorial do mês, a partir da programação que a gestão e a curadoria definem para o Cineteatro, e todo mês apresento à gestão o relatório de resultados. Também participei da seleção de três estagiários e acompanho o desenvolvimento deles no dia a dia.</p>
+        <p class="rotulo">Equipe e automações com Inteligência Artificial</p>
+        <h3>Rotina de equipe e automações com Inteligência Artificial</h3>
+        <p class="auto-txt">Pauto, faço o briefing e oriento uma equipe de três pessoas, em design, texto e vídeo. Monto o planejamento editorial do mês a partir da programação definida pela gestão e pela curadoria do Cineteatro e apresento à gestão o relatório mensal de resultados. Também participei da seleção de três estagiários e acompanho o desenvolvimento deles.</p>
       </div>
       <div>
       <p class="auto-txt auto-intro">As tarefas rodam no ClickUp, e uso automações com Claude e Zapier para tirar trabalho manual do caminho:</p>
@@ -953,7 +989,7 @@ dialog { color: var(--nevoa); }
       <div class="grupo glass" data-rise data-delay="100"><p class="rotulo">Gestão de tarefas</p><ul class="chips"><li data-tool="clickup">ClickUp</li><li data-tool="trello">Trello</li><li data-tool="asana">Asana</li><li data-tool="notion">Notion</li></ul></div>
       <div class="grupo glass" data-rise data-delay="160"><p class="rotulo">Dados e pesquisa</p><ul class="chips"><li data-tool="googleanalytics">GA4</li><li data-tool="googlesearchconsole">Search Console</li><li data-tool="looker">Looker Studio</li><li data-tool="googlesheets">Google Sheets</li><li>Entrevistas com público</li></ul></div>
       <div class="grupo glass" data-rise data-delay="220"><p class="rotulo">Mídia e canais digitais</p><ul class="chips"><li data-tool="meta">Meta&nbsp;Ads</li><li data-tool="googleads">Google&nbsp;Ads</li><li data-tool="meta">Meta Business Suite</li><li data-tool="instagram">Instagram</li><li data-tool="tiktok">TikTok</li><li data-tool="linkedin">LinkedIn</li><li data-tool="youtube">YouTube</li><li data-tool="whatsapp">WhatsApp Business</li><li data-tool="lojaintegrada">Loja Integrada</li></ul></div>
-      <div class="grupo glass" data-rise data-delay="280"><p class="rotulo">CRM, automação e IA</p><ul class="chips"><li data-tool="rdstation">RD Station</li><li data-tool="manychat">Manychat</li><li data-tool="zapier">Zapier</li><li data-tool="claude">Claude</li></ul></div>
+      <div class="grupo glass" data-rise data-delay="280"><p class="rotulo">CRM, automação e Inteligência Artificial</p><ul class="chips"><li data-tool="rdstation">RD Station</li><li data-tool="manychat">Manychat</li><li data-tool="zapier">Zapier</li><li data-tool="claude">Claude</li></ul></div>
       <div class="grupo glass" data-rise data-delay="340"><p class="rotulo">Criação</p><ul class="chips"><li data-tool="adobephotoshop">Photoshop</li><li data-tool="adobeillustrator">Illustrator</li><li data-tool="canva">Canva</li><li data-tool="capcut">CapCut</li></ul></div>
     </div>
   </div>
@@ -1054,10 +1090,8 @@ dialog { color: var(--nevoa); }
 </section>
 </main>
 
-<!-- Rodapé em pontos (Halftone Wordmark Footer, portado para JavaScript puro) -->
+<!-- Rodapé -->
 <footer class="hwf-root" style="--hwf-bg:#0E0C13;--hwf-ink:#F2EEE8;--hwf-mono:'Unbounded',system-ui,sans-serif">
-  <canvas aria-hidden="true"></canvas>
-  <span class="hwf-sr">vinni</span>
   <div class="hwf-top">
     <div class="hwf-brand"><strong>Vinicius Teixeira</strong><span>Estratégia digital em Fortaleza, CE</span></div>
     <nav class="hwf-col" aria-label="Portfólio"><h3>Portfólio</h3><ul>
@@ -1071,8 +1105,7 @@ dialog { color: var(--nevoa); }
   <div class="hwf-rule"><span class="hwf-credito">Desenvolvido por Vinicius Teixeira com o Claude&nbsp;Code</span><button type="button" class="hwf-up">Voltar ao topo ↑</button></div>
 </footer>
 <style>
-.hwf-root { position: relative; width: 100%; overflow: hidden; isolation: isolate; container-type: inline-size; background: var(--hwf-bg); color: var(--hwf-ink); -webkit-font-smoothing: antialiased; height: max(380px, calc(18vw + 300px)); }
-.hwf-root canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; max-width: none; }
+.hwf-root { position: relative; width: 100%; overflow: hidden; isolation: isolate; container-type: inline-size; background: var(--hwf-bg); color: var(--hwf-ink); -webkit-font-smoothing: antialiased; padding-bottom: clamp(28px, 4cqw, 48px); }
 .hwf-top { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 1fr)); gap: 24px; padding: clamp(22px, 3.4cqw, 40px) clamp(20px, 3.4cqw, 44px) 0; font-family: var(--hwf-mono); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; line-height: 1.75; }
 .hwf-brand strong { display: block; font-weight: 500; }
 .hwf-brand span { opacity: .45; }
@@ -1087,7 +1120,6 @@ a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColo
 .hwf-rule { flex-wrap: wrap; }
 .hwf-credito { margin-right: auto; opacity: .55; letter-spacing: .12em; text-wrap: balance; }
 @container (max-width: 720px) { .hwf-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 24px; } .hwf-brand, .hwf-col[aria-label="Contato"] { grid-column: 1 / -1; } .hwf-col[aria-label="Contato"] { order: 3; } .hwf-link { overflow-wrap: normal; } }
-@media (max-width: 720px) { .hwf-root { height: 500px; } }
 @media (prefers-reduced-motion: reduce) { .hwf-link, .hwf-up { transition: none; } }
 </style>
 
@@ -1112,8 +1144,8 @@ a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColo
   </div>
 </dialog>
 
-<script type="module" src="assets/app.js?v=43"></script>
-<script type="module" src="assets/cases.js?v=14"></script>
+<script type="module" src="assets/app.js?v=46"></script>
+<script type="module" src="assets/cases.js?v=23"></script>
 <!-- O model-viewer é carregado pelo cases.js quando a seção de cases se aproxima -->
 </body>
 </html>

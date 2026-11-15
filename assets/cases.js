@@ -1,7 +1,7 @@
 // ───────── Cases · inventário: um RPG de equipamentos para os projetos ─────────
 // Depende de: window.gsap (carregado antes), <model-viewer> (módulo do CDN), window.VINNI (exposto por app.js:
 // MATERIAIS com os textos de cada material, TOOL_SLUG e abrirMaterial, que abre o pop-up de detalhes).
-import { PROJECTS as BASE, FILTROS } from "./cases-data.js?v=5";
+import { PROJECTS as BASE, FILTROS } from "./cases-data.js?v=7";
 import ICONS from "./icones.js?v=3";
 
 const section = document.querySelector("#cases");
@@ -61,7 +61,8 @@ function iniciar() {
       if (p) {
         el.type = "button"; el.dataset.index = i;
         el.setAttribute("role", "option"); el.setAttribute("aria-label", `${pad(i + 1)} · ${p.titulo}`);
-        const addImg = (src, cls) => { const img = document.createElement("img"); img.src = src; img.alt = ""; img.loading = "lazy"; img.decoding = "async"; if (cls) img.className = cls; el.appendChild(img); };
+        // miniatura leve (320 px) no slot; o arquivo grande só é usado na lupa e no visualizador. "loading" vem antes de "src" para valer.
+        const addImg = (src, cls) => { const img = document.createElement("img"); img.loading = "lazy"; img.decoding = "async"; img.alt = ""; img.src = src.replace(/\/(capas|moda)\//, "/$1/mini/"); if (cls) img.className = cls; el.appendChild(img); };
         if (p.thumb2) { el.classList.add("par"); addImg(p.thumb2, "ensaio"); addImg(p.thumb, "campanha"); } else addImg(p.thumb);
         el.addEventListener("click", () => selectCase(i));
       } else { el.setAttribute("aria-hidden", "true"); el.insertAdjacentHTML("beforeend", "—"); }
@@ -334,6 +335,72 @@ function iniciar() {
   const onResize = () => { cancelAnimationFrame(filaPalco); filaPalco = requestAnimationFrame(() => { posicionarPalco(); moverCursor(); raioAtual = raioPara(PROJECTS[current]); }); };
   const ro = new ResizeObserver(onResize); ro.observe(section); ro.observe(area);
   addEventListener("resize", onResize);
+
+/* ---------- Lupa (desktop) e imagem em tela cheia (toque) ---------- */
+// O model-viewer devolve o ponto exato da imagem (UV) sob o cursor e o material atingido; com isso a lupa mostra
+// o trecho certo do arquivo original mesmo com o card inclinado. Nas campanhas de moda, "ensaio" é a imagem de trás.
+const mouseFino = matchMedia("(hover: hover) and (pointer: fine)");
+const imagemDe = (p, material) => (material === "ensaio" && p.thumb2 ? p.thumb2 : p.thumb);
+const tamanhos = new Map();
+const medir = (src) => tamanhos.get(src) || (tamanhos.set(src, new Promise((res) => {
+  const im = new Image(); im.onload = () => res({ w: im.naturalWidth, h: im.naturalHeight }); im.onerror = () => res(null); im.src = src;
+})), tamanhos.get(src));
+const lupa = document.createElement("div"); lupa.className = "lupa"; lupa.setAttribute("aria-hidden", "true"); section.appendChild(lupa);
+const L = 240, ZOOM = 1.25; // lado da lupa e ampliação sobre o tamanho original do arquivo
+let lupaFila = 0, ultimoEvento = null;
+const esconderLupa = () => lupa.classList.remove("on");
+const atualizarLupa = async () => {
+  lupaFila = 0; const e = ultimoEvento;
+  if (!e || isSwitching || !mv() || !modelViewer.loaded) return esconderLupa();
+  const hit = modelViewer.positionAndNormalFromPoint(e.clientX, e.clientY);
+  const mat = hit && modelViewer.materialFromPoint(e.clientX, e.clientY);
+  if (!hit || !hit.uv || !mat || mat.name === "borda") return esconderLupa();
+  const src = imagemDe(PROJECTS[current], mat.name), dim = await medir(src);
+  if (!dim || e !== ultimoEvento) return;
+  const u = hit.uv.u ?? hit.uv.x, v = hit.uv.v ?? hit.uv.y, w = dim.w * ZOOM, h = dim.h * ZOOM;
+  lupa.style.backgroundImage = `url("${src}")`;
+  lupa.style.backgroundSize = `${w}px ${h}px`;
+  lupa.style.backgroundPosition = `${L / 2 - u * w}px ${L / 2 - v * h}px`;
+  // a lupa fica acima e à direita do cursor, sem sair da seção
+  const s = section.getBoundingClientRect();
+  let x = e.clientX - s.left + 28, y = e.clientY - s.top - L - 28;
+  if (x + L > s.width - 16) x = e.clientX - s.left - L - 28;
+  if (y < 16) y = e.clientY - s.top + 28;
+  lupa.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  lupa.classList.add("on");
+};
+area.addEventListener("pointermove", (e) => {
+  if (e.pointerType !== "mouse" || !mouseFino.matches) return;
+  ultimoEvento = e; if (!lupaFila) lupaFila = requestAnimationFrame(atualizarLupa);
+});
+area.addEventListener("pointerleave", () => { ultimoEvento = null; esconderLupa(); });
+
+// Visualizador: abre as imagens do item em tela cheia (no celular ao tocar; no desktop ao clicar)
+const visor = document.createElement("dialog");
+visor.className = "cases-visor"; visor.setAttribute("aria-label", "Imagem do projeto"); visor.setAttribute("data-lenis-prevent", "");
+visor.innerHTML = `<div class="cases-visor-topo"><p class="cases-visor-titulo"></p><button type="button" class="cases-visor-fechar" aria-label="Fechar">✕</button></div><div class="cases-visor-imagens"></div><p class="cases-visor-dica">${matchMedia("(hover: hover)").matches ? "Clique" : "Toque"} na imagem para ampliar ou reduzir.</p>`;
+document.body.appendChild(visor);
+const abrirVisor = () => {
+  const p = PROJECTS[current]; if (!p) return;
+  visor.querySelector(".cases-visor-titulo").textContent = p.titulo;
+  visor.querySelector(".cases-visor-imagens").innerHTML = [p.thumb, p.thumb2].filter(Boolean)
+    .map((src, i) => `<img src="${src}" alt="${esc(p.titulo)}${i ? " · ensaio" : ""}" decoding="async">`).join("");
+  esconderLupa(); visor.showModal();
+};
+visor.querySelector(".cases-visor-fechar").addEventListener("click", () => visor.close());
+// Ampliar/reduzir: a imagem cresce 2,2× a partir do tamanho ajustado e a rolagem leva o ponto clicado ao centro
+const caixaVisor = visor.querySelector(".cases-visor-imagens");
+caixaVisor.addEventListener("click", (e) => {
+  const img = e.target; if (img.tagName !== "IMG") return;
+  const r0 = img.getBoundingClientRect(), fx = (e.clientX - r0.left) / r0.width, fy = (e.clientY - r0.top) / r0.height;
+  if (img.classList.toggle("ampliada")) { img.style.width = `${r0.width * 2.2}px`; img.style.height = "auto"; }
+  else { img.style.width = ""; img.style.height = ""; }
+  const r = img.getBoundingClientRect(), b = caixaVisor.getBoundingClientRect();
+  caixaVisor.scrollLeft += r.left - b.left + fx * r.width - b.width / 2;
+  caixaVisor.scrollTop += r.top - b.top + fy * r.height - b.height / 2;
+});
+visor.addEventListener("click", (e) => { if (e.target === visor) visor.close(); });
+area.addEventListener("click", abrirVisor);
 
   /* ---------- Init ---------- */
   renderInventario();

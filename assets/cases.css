@@ -33,7 +33,7 @@
 /* ───────── Fundo (z 0–1): luz, vinheta, bokeh e o grão, que fica só aqui ───────── */
 #cases .luz-layer {
   position: absolute; inset: -8%; z-index: 0;
-  background: var(--noite) url("marca/gradiente_crepusculo_16x9.jpg") right bottom / cover no-repeat;
+  background: var(--noite) url("marca/gradiente_crepusculo_16x9.webp") right bottom / cover no-repeat;
   transform-origin: 100% 100%; will-change: transform, opacity;
 }
 #cases::before {
@@ -161,7 +161,14 @@
 
 /* Centro: área do palco em cima, ferramentas embaixo (nunca sobre o modelo) */
 #cases .cases-centro { display: flex; flex-direction: column; pointer-events: none; min-height: 0; }
-#cases .palco-area { flex: 1; min-height: 0; }
+#cases .palco-area { flex: 1; min-height: 0; pointer-events: auto; cursor: zoom-in; -webkit-tap-highlight-color: transparent; }
+
+/* Lupa: mostra o trecho do arquivo original sob o cursor */
+#cases .lupa { position: absolute; top: 0; left: 0; z-index: 15; width: 240px; height: 240px; pointer-events: none;
+  border-radius: var(--raio-g); border: 1px solid var(--linha-forte); background: var(--nevoa) no-repeat;
+  box-shadow: 0 24px 60px rgba(14, 12, 19, .55), 0 0 0 4px rgba(14, 12, 19, .35);
+  opacity: 0; transition: opacity .18s ease; will-change: transform, opacity; }
+#cases .lupa.on { opacity: 1; }
 #cases .ferramentas { pointer-events: auto; display: flex; flex-direction: column; align-items: center; gap: 12px; padding-top: var(--s2); }
 #cases .equip-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 #cases .equip { position: relative; width: 48px; height: 48px; display: grid; place-items: center; cursor: default;
@@ -291,3 +298,19 @@
 /* ───────── Stories: seção própria, escura, logo abaixo do inventário ───────── */
 #stories .stories { margin-top: var(--head); padding-top: 0; border-top: 0; }
 #stories .fone .slide-leg { color: var(--nevoa-70); }
+
+/* ───────── Visualizador de imagem (fora de #cases, na camada do topo) ───────── */
+.cases-visor { width: min(100vw - 24px, 1100px); max-height: calc(100dvh - 24px); padding: 0; border: 1px solid rgba(242, 238, 232, .14);
+  border-radius: 18px; background: #0E0C13; color: #F2EEE8; overflow: hidden; }
+.cases-visor::backdrop { background: rgba(14, 12, 19, .82); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.cases-visor[open] { display: flex; flex-direction: column; }
+.cases-visor-topo { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px 14px 20px; border-bottom: 1px solid rgba(242, 238, 232, .1); }
+.cases-visor-titulo { margin: 0; font: 500 15px/1.3 var(--font-titulo); letter-spacing: -.01em; }
+.cases-visor-fechar { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(242, 238, 232, .22); background: rgba(242, 238, 232, .05); color: inherit; font-size: 15px; cursor: pointer; }
+.cases-visor-imagens { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 12px; -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y pinch-zoom; }
+/* Cada imagem cabe inteira na tela; um clique amplia para a largura total (aí dá para rolar) e outro volta */
+.cases-visor-imagens img { display: block; width: auto; max-width: 100%; height: auto; max-height: calc(100dvh - 164px); margin: 0 auto; border-radius: 8px; cursor: zoom-in; }
+.cases-visor-imagens img { flex: none; }
+/* Ampliada: 2,2× o tamanho ajustado, com rolagem nos dois sentidos */
+.cases-visor-imagens img.ampliada { max-width: none; max-height: none; margin: 0; cursor: zoom-out; }
+.cases-visor-dica { margin: 0; padding: 0 20px 12px; font: 400 12px/1.4 var(--font-texto); color: rgba(242, 238, 232, .55); }

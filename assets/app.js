@@ -229,7 +229,8 @@ const initHero = () => {
     glowSprings.forEach((s) => s.to(0)); glowSprings = glows.map((g, i) => new Spring(0, { tension: 20, friction: 20 }, (v) => (g.style.opacity = v * (semVideo ? 1 : 0.75))).to(1, i * 250) || null);
   };
   video.addEventListener("ended", () => showEnd(false));
-  video.addEventListener("timeupdate", () => { if (video.duration && video.currentTime > video.duration - 1.6) groups["hero-fim"].forEach(play); });
+  // nome, especialidades e "Conheça o portfólio" entram 1,2 s depois que o vídeo começa, sem esperar o fim
+  video.addEventListener("timeupdate", () => { if (video.currentTime > 1.2) groups["hero-fim"].forEach(play); });
   // Alguns servidores não entregam vídeo em partes; nesse caso, baixa inteiro e tenta de novo.
   let retried = false;
   video.addEventListener("error", async () => {
@@ -514,7 +515,7 @@ const initCarousels = () => {
   const showCarousel = (i) => {
     if (i === shown) return; shown = i;
     const c = CARR[i];
-    track.innerHTML = Array.from({ length: c.n }, (_, k) => `<div class="slide"><img src="assets/carrosseis/c${i + 1}-${pad(k + 1)}.webp" alt="${c.t}, lâmina ${k + 1} de ${c.n}" ${k > 1 ? 'loading="lazy"' : ""} draggable="false"></div>`).join("");
+    track.innerHTML = Array.from({ length: c.n }, (_, k) => `<div class="slide"><img src="assets/carrosseis/c${i + 1}-${pad(k + 1)}.webp" alt="${c.t}, lâmina ${k + 1} de ${c.n}" loading="lazy" decoding="async" draggable="false"></div>`).join("");
     $(".visor-n", visor).textContent = `Carrossel ${pad(i + 1)}\u00a0· ${c.n} lâminas`;
     $("h3", visor).textContent = c.t;
     $(".visor-linha", visor).textContent = c.l;
@@ -834,75 +835,8 @@ const initMisc = () => {
   addEventListener("keydown", (e) => { if (e.key === "Escape" && sheet.classList.contains("open")) shut(); });
 };
 
-// ───────── Rodapé em pontos (Halftone Wordmark Footer, porte fiel) ─────────
-function hwfHex(hex) { const m = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec((hex || "").trim()); if (!m) return null; const h = m[1].length === 3 ? m[1].split("").map((c) => c + c).join("") : m[1]; return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)]; }
-function hwfRadius(coverage, gap) { const c = coverage < 0 ? 0 : coverage > 1 ? 1 : coverage; return Math.sqrt(c) * gap * 0.56; }
-function hwfStep(x, y, vx, vy, hx, hy, px, py, r) { const dx = x - px, dy = y - py, d2 = dx * dx + dy * dy; if (r > 0 && d2 < r * r) { const d = Math.sqrt(d2) + 0.001; const f = (1 - d / r) * 2.6; vx += (dx / d) * f; vy += (dy / d) * f; } vx = (vx + (hx - x) * 0.05) * 0.84; vy = (vy + (hy - y) * 0.05) * 0.84; return [x + vx, y + vy, vx, vy]; }
-function hwfWarmth(x, y, hx, hy, span) { const d = Math.hypot(x - hx, y - hy); return span > 0 ? Math.min(1, d / span) : 0; }
-const initFooter = () => {
-  const root = $(".hwf-root"), canvas = $("canvas", root), ctx = canvas.getContext("2d");
-  const o = { background: "#0E0C13", dotGap: 6, radius: 80, crop: 0.2, grain: 0.5 };
-  const ink = hwfHex("#F2EEE8"), amber = hwfHex("#FFB547"), warm = hwfHex("#FF7A1A");
-  let w = 0, h = 0, dpr = 1, px = -1e5, py = -1e5, raf = 0, visible = true, awake = true;
-  let ring = { x: 0, y: 0, t: -1 }, dots = new Float32Array(0), count = 0, grainTile = null, logoBox = null;
-  const logo = new Image(), grainImg = new Image();
-  grainImg.src = "assets/marca/grao_tile_256.png"; grainImg.onload = () => { grainTile = grainImg; wake(); };
-  const measureLogo = () => {
-    const c = document.createElement("canvas"); c.width = 1124; c.height = Math.round(1124 * logo.naturalHeight / logo.naturalWidth);
-    const g = c.getContext("2d", { willReadFrequently: true }); g.drawImage(logo, 0, 0, c.width, c.height);
-    const d = g.getImageData(0, 0, c.width, c.height).data; let x0 = c.width, y0 = c.height, x1 = 0, y1 = 0;
-    for (let y = 0; y < c.height; y++) for (let x = 0; x < c.width; x++) if (d[(y * c.width + x) * 4 + 3] > 20) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
-    logoBox = { sx: x0 / c.width, sy: y0 / c.height, sw: (x1 - x0 + 1) / c.width, sh: (y1 - y0 + 1) / c.height };
-  };
-  const layout = () => {
-    w = Math.max(1, root.clientWidth); h = Math.max(1, root.clientHeight); dpr = Math.min(devicePixelRatio || 1, 2);
-    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
-    if (!logoBox) { dots = new Float32Array(0); count = 0; return; }
-    const mask = document.createElement("canvas"); mask.width = w; mask.height = h;
-    const m = mask.getContext("2d", { willReadFrequently: true });
-    const drawW = (w * 1.02) / logoBox.sw, drawH = drawW * logo.naturalHeight / logo.naturalWidth, capH = logoBox.sh * drawH;
-    m.drawImage(logo, (w - w * 1.02) / 2 - logoBox.sx * drawW, h + capH * o.crop - (logoBox.sy * drawH + capH), drawW, drawH);
-    const img = m.getImageData(0, 0, w, h).data, gap = o.dotGap, cols = Math.ceil(w / gap), rows = Math.ceil(h / gap), tmp = [];
-    for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < cols; gx++) {
-      let sum = 0;
-      for (let sy = 0; sy < 3; sy++) for (let sx = 0; sx < 3; sx++) { const X = Math.min(w - 1, Math.floor(gx * gap + ((sx + 0.5) * gap) / 3)), Y = Math.min(h - 1, Math.floor(gy * gap + ((sy + 0.5) * gap) / 3)); sum += img[(Y * w + X) * 4 + 3]; }
-      const cov = sum / (9 * 255); if (cov < 0.06) continue;
-      const hx = gx * gap + gap / 2, hy = gy * gap + gap / 2; tmp.push(hx, hy, 0, 0, hx, hy, hwfRadius(cov, gap));
-    }
-    dots = new Float32Array(tmp); count = tmp.length / 7; awake = true;
-  };
-  const draw = (now) => {
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.fillStyle = o.background; ctx.fillRect(0, 0, w, h);
-    const r = !reduced ? o.radius : 0, ringAge = ring.t < 0 ? 1e9 : now - ring.t, ringR = ringAge * 0.9; let moving = false;
-    for (let i = 0; i < count; i++) {
-      const j = i * 7; let x = dots[j], y = dots[j + 1], vx = dots[j + 2], vy = dots[j + 3]; const hx = dots[j + 4], hy = dots[j + 5];
-      if (!reduced) {
-        if (ringAge < 900) { const dx = hx - ring.x, dy = hy - ring.y, d = Math.sqrt(dx * dx + dy * dy) + 0.001, band = 1 - Math.min(1, Math.abs(d - ringR) / 26); if (band > 0) { const f = band * 3.2 * (1 - ringAge / 900); vx += (dx / d) * f; vy += (dy / d) * f; } }
-        const s = hwfStep(x, y, vx, vy, hx, hy, px, py, r); x = s[0]; y = s[1]; vx = s[2]; vy = s[3];
-        if (Math.abs(vx) + Math.abs(vy) > 0.02 || Math.abs(x - hx) + Math.abs(y - hy) > 0.05) moving = true; else { x = hx; y = hy; vx = 0; vy = 0; }
-        dots[j] = x; dots[j + 1] = y; dots[j + 2] = vx; dots[j + 3] = vy;
-      }
-      const k = hwfWarmth(x, y, hx, hy, 28);
-      if (k > 0.02) { const a = k < 0.5 ? ink : amber, b = k < 0.5 ? amber : warm, t = k < 0.5 ? k * 2 : (k - 0.5) * 2; ctx.fillStyle = `rgb(${Math.round(a[0] + (b[0] - a[0]) * t)},${Math.round(a[1] + (b[1] - a[1]) * t)},${Math.round(a[2] + (b[2] - a[2]) * t)})`; }
-      else ctx.fillStyle = "#F2EEE8";
-      ctx.beginPath(); ctx.arc(x, y, dots[j + 6], 0, 6.2832); ctx.fill();
-    }
-    if (grainTile) { ctx.globalAlpha = o.grain * 0.18; ctx.globalCompositeOperation = "overlay"; const pattern = ctx.createPattern(grainTile, "repeat"); if (pattern) { ctx.fillStyle = pattern; ctx.fillRect(0, 0, w, h); } ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"; }
-    awake = moving || ringAge < 900 || px > -1e4;
-  };
-  const tick = (now) => { raf = 0; if (!visible) return; draw(now); if (awake) raf = requestAnimationFrame(tick); };
-  const wake = () => { awake = true; if (!raf && visible) raf = requestAnimationFrame(tick); };
-  const toLocal = (e) => { const b = canvas.getBoundingClientRect(); return [((e.clientX - b.left) * w) / (b.width || w), ((e.clientY - b.top) * h) / (b.height || h)]; };
-  root.addEventListener("pointermove", (e) => { const p = toLocal(e); px = p[0]; py = p[1]; wake(); });
-  root.addEventListener("pointerleave", () => { px = -1e5; py = -1e5; wake(); });
-  root.addEventListener("pointerdown", (e) => { if (reduced || e.target.closest("a,button")) return; const p = toLocal(e); ring = { x: p[0], y: p[1], t: performance.now() }; wake(); });
-  $(".hwf-up", root).addEventListener("click", () => scrollTo(0));
-  new ResizeObserver(() => { layout(); wake(); }).observe(root);
-  new IntersectionObserver(([e]) => { visible = e ? e.isIntersecting : true; if (visible) wake(); }).observe(root);
-  logo.onload = () => { measureLogo(); layout(); wake(); };
-  logo.onerror = () => banner("assets/marca/logotipo_nevoa.svg");
-  logo.src = "assets/marca/logotipo_nevoa.svg";
-};
+// ───────── Rodapé ─────────
+const initFooter = () => { $(".hwf-up").addEventListener("click", () => scrollTo(0)); };
 
 function banner(url) {
   const b = document.createElement("div"); b.setAttribute("role", "alert");
