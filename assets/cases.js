@@ -87,6 +87,9 @@ function iniciar() {
     if (!slot) return;
     gsap.to(cursor, { x: slot.offsetLeft - 8, y: slot.offsetTop - 10, duration: .35, ease: "power3.out" });
     if (innerWidth <= 1200) grid.scrollTo({ left: slot.offsetLeft - grid.clientWidth / 2 + slot.offsetWidth / 2, behavior: "smooth" });
+    // desktop em tela baixa: a grade rola na vertical; mantém o item atual visível
+    else if (slot.offsetTop < grid.scrollTop || slot.offsetTop + slot.offsetHeight > grid.scrollTop + grid.clientHeight)
+      grid.scrollTo({ top: slot.offsetTop - grid.clientHeight / 2 + slot.offsetHeight / 2, behavior: "smooth" });
   }
   function aplicarFiltro(id) {
     filtro = FILTROS.some((f) => f.id === id) ? id : "todos";

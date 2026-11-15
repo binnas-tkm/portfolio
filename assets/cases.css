@@ -131,7 +131,11 @@
 
 /* Inventário */
 #cases .inventario { display: flex; flex-direction: column; min-height: 0; }
-#cases .inv-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+/* Em telas baixas a grade encolhe e rola dentro do painel, para as setas nunca saírem da borda */
+#cases .inv-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;
+  flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(242, 238, 232, .2) transparent;
+  padding: 10px 6px 12px; margin: -10px -6px 4px;
+  -webkit-mask: linear-gradient(#000 calc(100% - 14px), transparent); mask: linear-gradient(#000 calc(100% - 14px), transparent); }
 #cases .slot { position: relative; aspect-ratio: 1; display: grid; place-items: center; cursor: pointer;
   background: rgba(14, 12, 19, .55); border: 1px solid var(--linha); border-radius: var(--raio-m); color: var(--texto-fraco);
   font: inherit; transition: border-color .3s, background-color .3s, opacity .3s; padding: 0; }
@@ -153,7 +157,7 @@
 #cases .inv-cursor { position: absolute; top: 0; left: 0; width: 24px; height: 24px; z-index: 3; pointer-events: none; }
 #cases .inv-cursor img { display: block; width: 24px; height: 24px; image-rendering: pixelated; animation: casesBob 1.2s steps(2) infinite; }
 @keyframes casesBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-#cases .inv-nav { margin-top: auto; padding-top: var(--s2); border-top: 1px solid var(--linha); display: flex; justify-content: space-between; align-items: center; }
+#cases .inv-nav { flex: none; margin-top: auto; padding-top: var(--s2); border-top: 1px solid var(--linha); display: flex; justify-content: space-between; align-items: center; }
 #cases .inv-pagina { font: 500 13px/1 var(--font-titulo); font-variant-numeric: tabular-nums; }
 #cases .nav-seta { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; color: var(--nevoa); font: inherit;
   background: var(--vidro); border: 1px solid var(--linha); transition: background-color .3s; }
@@ -272,7 +276,7 @@
   #cases .ficha { order: 3; overflow: visible; }
   #cases .ficha-scroll { overflow: visible; }
   #cases .cases-rodape { order: 4; justify-content: center; }
-  #cases .inv-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px 2px 4px; margin: -10px -2px 0; scrollbar-width: none; }
+  #cases .inv-grid { -webkit-mask: none; mask: none; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px 2px 4px; margin: -10px -2px 0; scrollbar-width: none; }
   #cases .inv-grid::-webkit-scrollbar { display: none; }
   #cases .slot { flex: 0 0 80px; scroll-snap-align: center; }
   #cases .dicas { display: none; }
