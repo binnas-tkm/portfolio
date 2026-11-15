@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; worker-src 'none'; manifest-src 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; worker-src 'none'; manifest-src 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Vinicius Teixeira · Estrategista de Conteúdo</title>
 <meta name="description" content="Portfólio de Vinicius Teixeira, estrategista de conteúdo em Fortaleza. Conteúdo, mídias, inbound e automação de marketing, com cases do Cineteatro São Luiz, do Enem Action e de campanhas de moda.">
@@ -22,8 +22,12 @@
 <link rel="icon" href="assets/marca/simbolo_cor_negativo.svg">
 <link rel="preload" href="assets/fonts/Unbounded.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/Manrope.woff" as="font" type="font/woff" crossorigin>
-<link rel="modulepreload" href="assets/app.js?v=41">
+<link rel="modulepreload" href="assets/app.js?v=43">
 <link rel="modulepreload" href="assets/icones.js?v=3">
+<link rel="modulepreload" href="assets/cases.js?v=14">
+<link rel="modulepreload" href="assets/cases-data.js?v=5">
+<link rel="stylesheet" href="assets/cases.css?v=21">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js" defer></script>
 <link rel="modulepreload" href="assets/glass-folder.js">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script src="assets/boot.js"></script>
@@ -114,12 +118,9 @@ p, li, dd, .lead { text-wrap: pretty; }
 .seta:hover { border-color: var(--brasa); background: rgb(255 122 26 / .12); }
 .seta svg { width: 14px; height: 11px; }
 .seta.prev svg { transform: scaleX(-1); }
-.claro .seta { border-color: var(--noite-50); color: var(--noite); }
 .dots { display: flex; gap: 8px; align-items: center; }
 .dots button { width: 8px; height: 8px; border-radius: 99px; background: var(--nevoa-30); transition: width .3s var(--ease), background .3s; }
 .dots button[aria-current="true"] { width: 22px; background: var(--brasa); }
-.claro .dots button { background: var(--noite-12); }
-.claro .dots button[aria-current="true"] { background: var(--brasa); }
 
 /* ───────── Véu ───────── */
 .veil { position: fixed; inset: 0; z-index: 60; background: var(--noite); }
@@ -207,10 +208,9 @@ p, li, dd, .lead { text-wrap: pretty; }
 .slider-ctrl { margin-top: var(--s2); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .slider-ctrl .botoes { display: flex; gap: 10px; }
 .slide-leg { font-size: 13px; color: var(--nevoa-50); min-height: 1.4em; }
-.claro .slide-leg { color: var(--noite-50); }
 /* Nos cases e nos workshops, o nome de cada imagem já aparece no quadro logo abaixo: a legenda sai e as setas ficam à direita */
-.case .slider-ctrl > .slide-leg, .workshop .slider-ctrl > .slide-leg { display: none; }
-.case .slider-ctrl, .workshop .slider-ctrl { justify-content: flex-end; }
+.workshop .slider-ctrl > .slide-leg { display: none; }
+.workshop .slider-ctrl { justify-content: flex-end; }
 .foto { aspect-ratio: 4 / 5; }
 .foto img { width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
 
@@ -275,35 +275,7 @@ p, li, dd, .lead { text-wrap: pretty; }
 .seam { position: absolute; left: 0; right: 0; top: 0; height: 30svh; width: 100%; pointer-events: none; z-index: 30; }
 
 /* ───────── 5 · Cases (bloco claro) ───────── */
-.claro { background: var(--nevoa); color: var(--noite); }
-.claro .rotulo { color: var(--noite-50); }
-.claro .lead { color: var(--noite-70); }
-.cases .sec-head { position: relative; z-index: 31; }
-.case { margin-top: var(--s7); display: grid; grid-template-columns: var(--cols-r); gap: var(--gap); align-items: start; position: relative; z-index: 31; }
-.sec-head + .case { margin-top: var(--head); }
-.case.inverso { grid-template-columns: var(--cols); }
-.case.inverso .case-media { order: 2; }
-.case-texto h3 { margin-top: var(--s2); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(24px, 2.2vw, 34px); letter-spacing: -.03em; line-height: 1.1; }
-.case-texto .lead { margin-top: var(--s2); }
-.case-texto .nota { margin-top: var(--s1); font-size: 13px; line-height: 1.5; color: var(--noite-50); }
-.case-nums { margin-top: var(--s4); display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); border-top: 1px solid var(--noite-12); }
-.case-nums div { padding: var(--s2) var(--s2) 0 0; }
-.case-nums div + div { padding-left: var(--s2); border-left: 1px solid var(--noite-12); }
-.case-nums dt { font-family: var(--font-titulo); font-weight: 500; font-size: clamp(22px, 2vw, 30px); letter-spacing: -.05em; line-height: 1; }
-.case-nums dd { margin-top: 8px; font-size: 12.5px; line-height: 1.35; color: var(--noite-70); }
-.entregas { margin-top: var(--s4); display: grid; gap: var(--s1); font-size: 14.5px; }
-.entregas li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; line-height: 1.45; }
-.entregas li::before { content: ""; margin-top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--brasa); }
-.entregas b { font-weight: 700; }
-.claro .chips li { border-color: var(--noite-12); color: var(--noite-70); }
-.case-ferr { margin-top: var(--s3); padding-top: var(--s2); border-top: 1px solid var(--noite-12); font-size: 13px; line-height: 1.5; color: var(--noite-70); }
-.case-ferr .rotulo { display: block; margin-bottom: 4px; font-size: 10px; color: var(--noite-50); }
 /* Material em destaque: acompanha a imagem do carrossel */
-.case-media .material { margin-top: var(--s3); }
-.material { padding: var(--s3); border-radius: var(--r); background: rgb(14 12 19 / .045); border: 1px solid var(--noite-12); }
-.material h4 { margin-top: var(--s1); font-family: var(--font-titulo); font-weight: 500; font-size: 17px; letter-spacing: -.02em; line-height: 1.25; }
-.material p.material-l { margin-top: var(--s1); font-size: 14.5px; line-height: 1.5; color: var(--noite-70); min-height: 3em; }
-.material .btn { margin-top: var(--s3); }
 .evento { margin-top: var(--s4); }
 .evento h3 { margin-top: var(--s1); font-family: var(--font-titulo); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); letter-spacing: -.02em; line-height: 1.2; }
 .evento .lead { margin-top: var(--s2); }
@@ -557,24 +529,13 @@ dialog { color: var(--nevoa); }
   .layer { position: relative; }
 }
 @media (min-width: 1024px) {
-  .case-texto, .form-grid > .slider { position: sticky; top: var(--s7); }
-  .case .palco { aspect-ratio: 16 / 10; }
-  .case-media .material { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s4); align-items: center; }
-  .case-media .material > * { grid-column: 1; }
-  .case-media .material .btn { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; }
+  .form-grid > .slider { position: sticky; top: var(--s7); }
 }
 @media (max-width: 1023px) {
-  .sobre-grid, .case, .case.inverso, .auto, .form-grid, .visor, .work-grid { grid-template-columns: 1fr; }
+  .sobre-grid, .auto, .form-grid, .visor, .work-grid { grid-template-columns: 1fr; }
   .work-grid { grid-template-rows: auto; grid-template-areas: "head" "media" "evento"; row-gap: var(--s4); }
   .workshop .evento { margin-top: 0; }
   .sobre-foto { max-width: 420px; }
-  .case.inverso .case-media { order: 0; }
-  .case { row-gap: var(--s4); }
-  .case-texto { display: contents; }
-  .case-head { order: 1; }
-  .case .case-media, .case.inverso .case-media { order: 2; }
-  .case-corpo { order: 3; }
-  .case-corpo > :first-child { margin-top: 0; }
   .metodo-grid, .grupos { grid-template-columns: 1fr 1fr; }
   .depo-grid { grid-template-columns: 1fr; }
   .grupo, .grupo:nth-child(n+4) { grid-column: auto; }
@@ -602,9 +563,7 @@ dialog { color: var(--nevoa); }
   .tl-texto p { padding-top: 10px; }
   .tl-float { display: none; }
   .fatos { grid-template-columns: 1fr; }
-  .case-nums { grid-auto-flow: row; grid-template-columns: 1fr; }
-  .fatos div + div, .case-nums div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--nevoa-12); padding-top: 16px; margin-top: 16px; }
-  .case-nums div + div { border-top-color: var(--noite-12); }
+  .fatos div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--nevoa-12); padding-top: 16px; margin-top: 16px; }
   .metodo-grid, .grupos { grid-template-columns: 1fr; }
   .etapa { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--s2); align-items: center; padding: var(--s3); }
   .etapa p { margin-top: 0; }
@@ -625,8 +584,6 @@ dialog { color: var(--nevoa); }
   .certs-lista .meta { display: block; margin-top: 2px; font-size: 13px; line-height: 1.45; }
   .certs-lista .sep { display: none; }
   .contato-redes { flex-direction: column; gap: var(--s2); }
-  .case { margin-top: var(--s6); }
-  .sec-head + .case { margin-top: var(--head); }
   .plate-head { flex-direction: column; align-items: flex-start; gap: var(--s2); }
   .plate-num { display: block; }
   .plate-num span { display: block; margin-top: var(--s1); }
@@ -750,133 +707,106 @@ dialog { color: var(--nevoa); }
 </section>
 
 <!-- 5 · Cases -->
-<section id="cases" class="sec cases claro" aria-labelledby="cases-t">
-  <canvas class="seam" data-seam="#0E0C13" aria-hidden="true"></canvas>
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="rotulo" data-fade>Cases</p>
-      <h2 id="cases-t" class="titulo h2" data-split="words" data-stagger="80">Projetos em destaque</h2>
+<section id="cases" class="cases" aria-labelledby="cases-titulo">
+  <div class="luz-layer" aria-hidden="true"></div>
+  <div class="bokeh-layer" aria-hidden="true"><span class="bokeh k1"></span><span class="bokeh k2"></span><span class="bokeh k3"></span><span class="bokeh k4"></span></div>
+  <div class="loot-bg" aria-hidden="true">
+    <model-viewer class="loot b7" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="-20deg 110deg 105%" loading="lazy"></model-viewer>
+    <model-viewer class="loot b8" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="160deg 45deg 105%" loading="lazy"></model-viewer>
+    <model-viewer class="loot b9" environment-image="neutral" exposure="1.0" interaction-prompt="none" camera-orbit="45deg 20deg 105%" loading="lazy"></model-viewer>
+  </div>
+  <div class="camada-palco cases-stage">
+    <model-viewer id="case-model" alt="" environment-image="neutral" exposure="1" tone-mapping="neutral" shadow-intensity="0" interaction-prompt="none" camera-orbit="0deg 90deg 380%" field-of-view="30deg" loading="eager"></model-viewer>
+  </div>
+  <div class="camada-palco stage-fx" aria-hidden="true"><div class="ignicao"></div></div>
+  <div class="loot-fg" aria-hidden="true">
+    <model-viewer class="loot b1" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="45deg 120deg 105%" loading="lazy"></model-viewer>
+    <model-viewer class="loot b2" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-120deg 45deg 105%" loading="lazy"></model-viewer>
+    <model-viewer class="loot b3" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="200deg 90deg 105%" loading="lazy"></model-viewer>
+    <model-viewer class="loot b4" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="10deg 20deg 105%" loading="lazy"></model-viewer>
+    <model-viewer class="loot b5" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="-45deg 160deg 105%" loading="lazy"></model-viewer>
+    <model-viewer class="loot b6" environment-image="neutral" exposure="1.2" interaction-prompt="none" camera-orbit="80deg 75deg 105%" loading="lazy"></model-viewer>
+  </div>
+  <div class="fagulhas" aria-hidden="true"></div>
+
+  <div class="cases-ui">
+    <header class="cases-hud">
+      <div>
+        <span class="rotulo">Cases</span>
+        <h2 id="cases-titulo" class="titulo hud-titulo">Inventário de <em class="acento">projetos</em></h2>
+      </div>
+      <div class="hud-direita">
+        <nav class="abas" role="tablist" aria-label="Filtrar projetos"></nav>
+        <div class="hud-status"><span class="rotulo">Item</span><span class="hud-contador" data-f="contador">01 / 11</span></div>
+      </div>
+    </header>
+
+    <aside class="painel inventario" aria-label="Inventário de projetos">
+      <div class="painel-topo"><span class="rotulo">Inventário</span><span class="rotulo" data-f="total">11 itens</span></div>
+      <div class="inv-grid" role="listbox" aria-label="Projetos">
+        <div class="inv-cursor" aria-hidden="true"><img src="assets/marca/simbolo_pixel.svg" alt="" width="24" height="24" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="inv-nav">
+        <button type="button" class="nav-seta" data-dir="-1" aria-label="Projeto anterior">←</button>
+        <span class="inv-pagina" data-f="pagina">01 / 11</span>
+        <button type="button" class="nav-seta" data-dir="1" aria-label="Próximo projeto">→</button>
+      </div>
+    </aside>
+
+    <div class="cases-centro">
+      <div class="palco-area"></div>
+      <div class="ferramentas">
+        <p class="rotulo" id="ferr-rotulo">Ferramentas utilizadas</p>
+        <div class="equip-row" role="list" aria-labelledby="ferr-rotulo"></div>
+      </div>
     </div>
 
-    <article class="case" id="case-csl" aria-labelledby="csl-t">
-      <div class="case-media slider" data-slider data-case="csl" data-rise data-delay="100">
-        <div class="slider-view"><div class="slider-track">
-          <div class="slide"><div class="palco"><div class="mk-doc"><span class="folha"></span><span class="folha"></span><img loading="lazy" decoding="async" src="assets/capas/plano-doc.webp" alt="Capa do Plano de Comunicação Digital 2027&#8288;–&#8288;2030 do Cineteatro São Luiz" data-leg="Plano de Comunicação Digital 2027&#8288;–&#8288;2030&nbsp;· documento"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/plano-apresentacao.webp" alt="Capa da apresentação do plano" loading="lazy" data-leg="Plano de Comunicação Digital&nbsp;· apresentação"></div><div class="mk-base"></div></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img class="tela-topo" decoding="async" src="assets/capas/dash-curva-abc.webp" alt="Dashboard da curva ABC de bilheteria do Cineteatro São Luiz, com os números borrados" loading="lazy" data-leg="Dashboard&nbsp;· Curva ABC de bilheteria (números borrados)"></div><div class="mk-base"></div></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img class="tela-topo" decoding="async" src="assets/capas/dash-okrs.webp" alt="Dashboard dos OKRs 2027–2030 do Cineteatro São Luiz, com os números borrados" loading="lazy" data-leg="Dashboard&nbsp;· OKRs 2027&#8288;–&#8288;2030 (números borrados)"></div><div class="mk-base"></div></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/linha-editorial.webp" alt="Capa da Linha Editorial para os canais digitais" loading="lazy" data-leg="Linha Editorial para os canais digitais"></div><div class="mk-base"></div></div></div></div>
-        </div></div>
-        <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
-        <div class="material" data-material-box="csl" aria-live="polite">
-          <p class="rotulo"><span class="material-n">01 / 05</span>&nbsp;· Material em destaque</p>
-          <h4 class="material-t"></h4>
-          <p class="material-l"></p>
-          <button class="btn btn--escuro" data-material="csl"><span class="material-b">Entender o plano</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
+    <article class="painel ficha" aria-label="Ficha do projeto">
+      <div class="ficha-scroll">
+      <div class="ficha-topo" data-anim>
+        <div class="selo"><strong data-f="numero">01</strong><em class="acento" data-f="categoria">plano</em></div>
+        <div>
+          <div class="ficha-linha"><span class="rotulo" data-f="meta"></span><span class="ficha-data" data-f="data" hidden></span></div>
+          <h3 class="titulo ficha-titulo" data-f="titulo"></h3>
         </div>
       </div>
-      <div class="case-texto" data-rise data-delay="200">
-        <div class="case-head">
-          <p class="rotulo">Cineteatro São Luiz&nbsp;· ago/2025&nbsp;–&nbsp;hoje</p>
-          <h3 id="csl-t">Comunicação digital do Cineteatro São Luiz</h3>
-          <p class="lead">Faço a gestão da comunicação digital do Cineteatro, equipamento da Secult CE. Planejo e opero, ao mesmo tempo, programações de teatro, cinema, música, dança e outras, com alto volume de demandas. Oriento a equipe de criação e levo os dados de canal e de bilheteria para a curadoria.</p>
-        </div>
-        <div class="case-corpo">
-          <dl class="case-nums">
-            <div><dt>17&nbsp;KRs</dt><dd>em 6 objetivos, ligados aos objetivos da casa, com metas em três níveis</dd></div>
-            <div><dt>16 sprints</dt><dd>trimestrais, com revisão de resultados ao fim de cada um</dd></div>
-            <!-- PENDENTE: confirmar se fui eu quem ativou o LinkedIn institucional em jan/26. Se sim: +1.200% de seguidores no LinkedIn do Cineteatro entre jan/26 e out/26, o primeiro canal novo do ecossistema -->
-          </dl>
-          <ul class="entregas">
-            <li><span><b>Dashboard de KPIs</b> dos canais digitais, com os OKRs e marcos anuais</span></li>
-            <li><span><b>Curva ABC de bilheteria e dashboard</b>, adotados para apoiar o processo curatorial</span></li>
-            <li><span><b>Linha editorial</b> com seis editorias e 40% da pauta em conteúdo de repertório</span></li>
-            <li><span><b>Automações com IA</b> ligadas às tarefas da equipe</span></li>
-          </ul>
-          <p class="case-ferr"><span class="rotulo">Ferramentas</span>ClickUp&nbsp;· Google Sheets&nbsp;· Looker Studio&nbsp;· Google Analytics 4&nbsp;· Meta Business Suite&nbsp;· Manychat&nbsp;· Photoshop&nbsp;· Canva&nbsp;· CapCut&nbsp;· Claude&nbsp;· Zapier</p>
-        </div>
+      <div class="ficha-bloco bloco-linha" data-anim><span class="rotulo">Impacto</span><div class="nivel" data-f="nivel"></div></div>
+      <div class="ficha-bloco" data-anim><span class="rotulo">Atributos</span><div class="attrs" data-f="atributos"></div></div>
+      <div class="ficha-bloco no-completo" data-anim data-bloco="resultados"><span class="rotulo">Resultados</span><div class="kpis" data-f="resultados"></div></div>
+      <div class="ficha-bloco no-completo" data-anim><span class="rotulo">Missão</span><p class="missao" data-f="missao"></p></div>
+      <div class="ficha-bloco no-completo" data-anim><span class="rotulo">Entregas</span><ul class="entregas" data-f="entregas"></ul><span class="rotulo entregas-mais" data-f="mais"></span></div>
+      <div class="ficha-bloco no-completo" data-anim><span class="rotulo">Habilidades</span><ul class="chips habilidades" data-f="habilidades"></ul></div>
+      </div>
+      <div class="ficha-pe">
+        <p class="ficha-chamada" data-anim>Quer saber o que foi feito, por quê e como? Confira os detalhes do projeto.</p>
+        <button type="button" class="cta" data-anim data-f="link">Abrir case completo <span class="cta-icone" aria-hidden="true">→</span></button>
       </div>
     </article>
 
-    <article class="case inverso" id="case-ea" aria-labelledby="ea-t">
-      <div class="case-media slider" data-slider data-case="ea" data-rise data-delay="100">
-        <div class="slider-view"><div class="slider-track">
-          <div class="slide"><div class="palco"><div class="mk-livro"><img loading="lazy" decoding="async" src="assets/capas/ebook-cinema.webp" alt="Capa do e-book Estudos sobre Cinema" data-leg="E&#8288;-&#8288;book Estudos sobre Cinema&nbsp;· isca digital"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-livro"><img decoding="async" src="assets/capas/ebook-moda.webp" alt="Capa do e-book sobre História da Moda" loading="lazy" data-leg="E&#8288;-&#8288;book História da Moda&nbsp;· isca digital"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-print"><img decoding="async" src="assets/capas/planner-redacao.webp" alt="Capa do Planner 30 dias de Redação" loading="lazy" data-leg="Planner 30 dias de Redação&nbsp;· isca digital"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-laptop"><div class="mk-tela"><img decoding="async" src="assets/capas/relatorio-2025.webp" alt="Capa do relatório anual de desempenho das redes sociais" loading="lazy" data-leg="Relatório anual de desempenho das redes"></div><div class="mk-base"></div></div></div></div>
-        </div></div>
-        <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
-        <div class="material" data-material-box="ea" aria-live="polite">
-          <p class="rotulo"><span class="material-n">01 / 04</span>&nbsp;· Material em destaque</p>
-          <h4 class="material-t"></h4>
-          <p class="material-l"></p>
-          <button class="btn btn--escuro" data-material="ea"><span class="material-b">Entender o material</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
-        </div>
+    <footer class="cases-rodape">
+      <div class="dicas">
+        <span><kbd>←</kbd><kbd>→</kbd> Navegar</span>
+        <span><kbd>Enter</kbd> Abrir case</span>
+        <span><kbd>1–9</kbd> Atalho</span>
       </div>
-      <div class="case-texto" data-rise data-delay="200">
-        <div class="case-head">
-          <p class="rotulo">Enem Action&nbsp;· YDUQS&nbsp;· 2023&nbsp;–&nbsp;2025</p>
-          <h3 id="ea-t">Inbound e captação de estudantes</h3>
-          <p class="lead">Na agência Desenrolado, cuidei de inbound, CRO, conteúdo e monitoramento de patrocinados do Enem Action em toda a jornada do estudante. Uma mesma narrativa acompanhava o lead da primeira isca digital até a chegada na universidade.</p>
-          <p class="nota">Os leads aquecidos na base do Enem Action seguem para o funil de outras marcas da YDUQS, como Estácio e Wyden.</p>
-        </div>
-        <div class="case-corpo">
-          <dl class="case-nums">
-            <div><dt>+12,9%</dt><dd>de aumento relativo na taxa de conversão do Simuladão, de 2023 para 2024</dd></div>
-            <div><dt>44,5%</dt><dd>dos leads Enem Action em 2024 vieram das campanhas em que atuei, o maior percentual entre as marcas do grupo</dd></div>
-            <!-- PENDENTE: taxa de conversão da landing page das iscas digitais -->
-          </dl>
-          <ul class="entregas">
-            <li><span><b>Iscas digitais</b> escritas por mim, como e&#8288;-&#8288;books e planner de redação, com a direção de arte orientada</span></li>
-            <li><span><b>Nutrição da base</b> por e&#8288;-&#8288;mail e WhatsApp, com aulões no YouTube para manter os leads ativos</span></li>
-            <li><span><b>Prova social</b> com aprovados do Simuladão 2023, em redes, site, newsletter e publi com a artista Maitê Padilha</span></li>
-            <li><span><b>Testes A/B</b> de criativos, formatos e abordagens</span></li>
-          </ul>
-          <p class="case-ferr"><span class="rotulo">Ferramentas</span>Meta&nbsp;Ads&nbsp;· Google&nbsp;Ads&nbsp;· RD Station&nbsp;· Google Analytics 4&nbsp;· Google Sheets&nbsp;· CapCut&nbsp;· Trello&nbsp;· Notion</p>
-        </div>
-      </div>
-    </article>
+      <div class="progresso" data-f="progresso"></div>
+    </footer>
+  </div>
+  <p class="sr-only" aria-live="polite" data-f="anuncio"></p>
+</section>
 
-    <article class="case" aria-labelledby="moda-t">
-      <div class="case-media slider" data-slider data-case="moda" data-rise data-delay="100">
-        <div class="slider-view"><div class="slider-track">
-          <div class="slide"><div class="palco"><div class="mk-foto"><img loading="lazy" decoding="async" src="assets/moda/fargo-faz-sol-1.webp" alt="Abertura da campanha Faz Sol Dentro de Mim, da Fargo: modelo na praia segurando uma bolsa de crochê" data-leg="Faz Sol Dentro de Mim&nbsp;· Fargo"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-foto"><img loading="lazy" decoding="async" src="assets/moda/fargo-faz-sol-2.webp" alt="Fotos da campanha Faz Sol Dentro de Mim em piquenique, casa com piscina e jardim" data-leg="Faz Sol Dentro de Mim&nbsp;· ensaio"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-foto"><img loading="lazy" decoding="async" src="assets/moda/vila-sol-oasis-1.webp" alt="Abertura da campanha Oásis, da Vila Sol: duas modelos de moda praia numa gruta" data-leg="Oásis&nbsp;· Vila Sol"></div></div></div>
-          <div class="slide"><div class="palco"><div class="mk-foto"><img loading="lazy" decoding="async" src="assets/moda/vila-sol-oasis-2.webp" alt="Fotos da campanha Oásis entre rochas, coqueiros e praia" data-leg="Oásis&nbsp;· ensaio"></div></div></div>
-        </div></div>
-        <div class="slider-ctrl"><p class="slide-leg"></p><div class="botoes"><button class="seta prev" aria-label="Anterior"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button><button class="seta next" aria-label="Próximo"><svg viewBox="0 0 13.7 10.7"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button></div></div>
-        <div class="material" data-material-box="moda" aria-live="polite">
-          <p class="rotulo"><span class="material-n">01 / 04</span>&nbsp;· Campanha em destaque</p>
-          <h4 class="material-t"></h4>
-          <p class="material-l"></p>
-          <button class="btn btn--escuro" data-material="moda"><span class="material-b">Entender a campanha</span> <svg viewBox="0 0 13.7 10.7" aria-hidden="true"><path d="M0 5.35H13M8 10.35L13 5.35L8 .35" stroke="currentColor" fill="none"/></svg></button>
-        </div>
-      </div>
-      <div class="case-texto" data-rise data-delay="200">
-        <div class="case-head">
-          <p class="rotulo">Fargo e Vila Sol&nbsp;· moda</p>
-          <h3 id="moda-t">Campanhas de moda</h3>
-          <p class="lead">Desenvolvi campanhas de moda do conceito à imagem final, para a Fargo e a Vila Sol. Em cada uma, criei a narrativa e o storytelling que guiaram as escolhas do ensaio e que depois foram contados em todos os canais da marca.</p>
-        </div>
-        <div class="case-corpo">
-          <ul class="entregas">
-            <li><span><b>Concepção conceitual</b> da narrativa de cada coleção</span></li>
-            <li><span><b>Planejamento de cenário</b> e do roteiro da diária</span></li>
-            <li><span><b>Produção executiva</b> do ensaio, da equipe às locações</span></li>
-            <li><span><b>Casting e styling</b>, com direção de acting das modelos</span></li>
-          </ul>
-          <p class="case-ferr"><span class="rotulo">Ferramentas</span>Photoshop&nbsp;· Illustrator&nbsp;· Meta Business Suite&nbsp;· Loja Integrada</p>
-        </div>
-      </div>
-    </article>
-
+<!-- 5b · Stories -->
+<section id="stories" class="sec" aria-labelledby="stories-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="rotulo" data-fade>Stories</p>
+      <h2 id="stories-t" class="titulo h2" data-split="words" data-stagger="80">Stories para Fargo e Enem Action</h2>
+    </div>
     <div class="stories">
       <article class="story" aria-labelledby="st-fargo-t">
       <div class="fone slider" data-slider data-rise data-delay="100">
         <div class="fone-corpo"><div class="slider-view"><div class="slider-track">
-          <div class="slide"><img decoding="async" src="assets/stories/fargo-01.webp" alt="Story da Fargo: Faz sol dentro de mim · verão 2021" data-leg="Faz sol dentro de mim&nbsp;· verão 2021"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-01.webp" alt="Story da Fargo: Faz sol dentro de mim · verão 2021" data-leg="Faz sol dentro de mim&nbsp;· verão 2021"></div>
           <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-02.webp" alt="Story da Fargo: Campanha de verão" data-leg="Campanha de verão"></div>
           <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-03.webp" alt="Story da Fargo: Collab Fargo + Linus" data-leg="Collab Fargo + Linus"></div>
           <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/fargo-04.webp" alt="Story da Fargo: As mais amadas da coleção" data-leg="As mais amadas da coleção"></div>
@@ -902,7 +832,7 @@ dialog { color: var(--nevoa); }
       <article class="story" aria-labelledby="st-enem-t">
       <div class="fone slider" data-slider data-rise data-delay="100">
         <div class="fone-corpo"><div class="slider-view"><div class="slider-track">
-          <div class="slide"><img decoding="async" src="assets/stories/enem-01.webp" alt="Story do Enem Action: Pauta quente: estreia de Divertida Mente 2" data-leg="Pauta quente: estreia de Divertida Mente&nbsp;2"></div>
+          <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/enem-01.webp" alt="Story do Enem Action: Pauta quente: estreia de Divertida Mente 2" data-leg="Pauta quente: estreia de Divertida Mente&nbsp;2"></div>
           <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/enem-02.webp" alt="Story do Enem Action: CTA para o e - book de moda" data-leg="CTA para o e&#8288;-&#8288;book de moda"></div>
           <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/enem-03.webp" alt="Story do Enem Action: CTA para o planner de redação" data-leg="CTA para o planner de redação"></div>
           <div class="slide"><img loading="lazy" decoding="async" src="assets/stories/enem-04.webp" alt="Story do Enem Action: #DicaBônus: e - book de cinema" data-leg="#DicaBônus: e&#8288;-&#8288;book de cinema"></div>
@@ -918,13 +848,11 @@ dialog { color: var(--nevoa); }
         </div>
       </article>
     </div>
-
   </div>
 </section>
 
 <!-- 6 · Carrosséis -->
 <section id="carrosseis" class="sec carr" aria-labelledby="carr-t">
-  <canvas class="seam" data-seam="#F2EEE8" aria-hidden="true"></canvas>
   <div class="carr-luz" aria-hidden="true"></div>
   <div class="wrap" style="position:relative;z-index:31">
     <div class="sec-head">
@@ -1184,6 +1112,8 @@ a.hwf-link:focus-visible, .hwf-up:focus-visible { outline: 1px solid currentColo
   </div>
 </dialog>
 
-<script type="module" src="assets/app.js?v=41"></script>
+<script type="module" src="assets/app.js?v=43"></script>
+<script type="module" src="assets/cases.js?v=14"></script>
+<!-- O model-viewer é carregado pelo cases.js quando a seção de cases se aproxima -->
 </body>
 </html>

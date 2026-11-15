@@ -34,6 +34,10 @@ const pad = (n) => String(n).padStart(2, "0");
 const subs = new Set();
 let rafId = 0;
 const loop = (t) => { rafId = requestAnimationFrame(loop); for (const s of [...subs]) if (t - s.last > s.fr()) { s.last = t; s.cb(t); } };
+// Quem está perto da tela (com folga de 120px). Os loops consultam isto antes de medir qualquer coisa.
+const perto = new Set();
+const ioPerto = new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? perto.add(e.target) : perto.delete(e.target))), { rootMargin: "120px 0px" });
+const vigiar = (el) => { if (el) ioPerto.observe(el); return el; };
 const subscribe = (cb, fr = () => 0) => { const s = { cb, fr, last: 0 }; subs.add(s); if (!rafId) rafId = requestAnimationFrame(loop); return () => subs.delete(s); };
 
 let lenis = null;
@@ -164,7 +168,9 @@ const initSeams = () => {
     // No celular, a barra do navegador dispara "resize" ao rolar; só redimensiona se o tamanho mudou de fato
     // (redimensionar apaga o canvas, e era isso que fazia a costura piscar).
     size(); addEventListener("resize", () => { if (canvas.clientWidth === w && canvas.clientHeight === h) return; size(); });
+    vigiar(canvas);
     subscribe(() => {
+      if (!perto.has(canvas)) return;
       const r = canvas.getBoundingClientRect();
       if (r.bottom < -50 || r.top > innerHeight + 50) return;
       const k = reduced ? 1 : Math.round(clamp01(1 - r.top / innerHeight) * 200) / 200;
@@ -339,7 +345,9 @@ const initTimeline = () => {
   const rail = $(".tl-rail svg");
   const runS = new Spring(0, { tension: 140, friction: 30 }, () => {});
   let lastRun = -1;
+  vigiar(list);
   subscribe(() => {
+    if (!perto.has(list)) return;
     const r = list.getBoundingClientRect();
     if (r.bottom < -100 || r.top > innerHeight + 100) return;
     const H = r.height;
@@ -360,9 +368,9 @@ const initTimeline = () => {
 
 // ───────── 4 · O que eu faço: a volta com quatro paradas ─────────
 const FRENTES = [
-  { n: "01", frente: "Planejamento e operação de comunicação digital", onde: "Cineteatro São Luiz", num: "4x", metrica: "mais engajamento no Instagram", base: "Em média, 36% das pessoas alcançadas interagem por mês desde ago/25. No ano anterior, eram 8% a 9%.", caso: "case-csl" },
-  { n: "02", frente: "Inbound e conversão em matrícula", onde: "Enem Action · YDUQS", num: "44,5%", metrica: "dos leads Enem Action em 2024 vieram das campanhas em que atuei", base: "o maior percentual entre as marcas do grupo", caso: "case-ea" },
-  { n: "03", frente: "Campanhas de captação", onde: "Simuladão do Enem", num: "+12,9%", metrica: "de aumento relativo na taxa de conversão", base: "de 2023 para 2024", caso: "case-ea" },
+  { n: "01", frente: "Planejamento e operação de comunicação digital", onde: "Cineteatro São Luiz", num: "4x", metrica: "mais engajamento no Instagram", base: "Em média, 36% das pessoas alcançadas interagem por mês desde ago/25. No ano anterior, eram 8% a 9%.", caso: "csl" },
+  { n: "02", frente: "Inbound e conversão em matrícula", onde: "Enem Action · YDUQS", num: "44,5%", metrica: "dos leads Enem Action em 2024 vieram das campanhas em que atuei", base: "o maior percentual entre as marcas do grupo", caso: "ea" },
+  { n: "03", frente: "Campanhas de captação", onde: "Simuladão do Enem", num: "+12,9%", metrica: "de aumento relativo na taxa de conversão", base: "de 2023 para 2024", caso: "ea" },
 ];
 const PATH = [[0.60, 0.88], [0.46, 0.82], [0.38, 0.60], [0.43, 0.36], [0.57, 0.19], [0.73, 0.14], [0.87, 0.21], [0.94, 0.36], [0.90, 0.54], [0.76, 0.58], [0.68, 0.70], [0.72, 0.86]];
 const STOP_IDX = [2, 4, 7];
@@ -374,7 +382,7 @@ const initFaz = () => {
     const r = FRENTES[i];
     body.innerHTML = `<p class="plate-frente">${r.frente}</p><p class="plate-onde">${r.onde}</p>
       <div class="plate-num"><b>${r.num}</b><span>${r.metrica}</span></div><p class="plate-base">${r.base}</p>
-      <a class="plate-link" href="#${r.caso}">Ver o case <span aria-hidden="true">→</span></a>`;
+      <a class="plate-link" href="#cases" data-cases-filtro="${r.caso}">Ver o case <span aria-hidden="true">→</span></a>`;
     if (anim) { body.classList.remove("troca"); void body.offsetWidth; body.classList.add("troca"); }
     $$("button", tabs).forEach((b, k) => b.setAttribute("aria-selected", k === i));
     $$(".stop", stopsBox).forEach((b, k) => b.classList.toggle("ativo", k === i));
@@ -459,7 +467,9 @@ const initFaz = () => {
     addEventListener("pointermove", (e) => { const r = section.getBoundingClientRect(); pointer.x = e.clientX - r.left; pointer.y = e.clientY - r.top; pointer.on = pointer.x >= 0 && pointer.y >= 0 && pointer.x <= r.width && pointer.y <= r.height && !e.target.closest(".plate"); }, { passive: true });
     document.addEventListener("pointerleave", () => (pointer.on = false));
   }
+  vigiar(section);
   subscribe((now) => {
+    if (!perto.has(section)) { last = 0; return; }
     const r = section.getBoundingClientRect();
     if (r.bottom < 0 || r.top > innerHeight) return;
     const dt = last ? Math.min(0.1, (now - last) / 1000) : 0; last = now;
@@ -678,8 +688,9 @@ const initMateriais = () => {
     preencher(caso, 0);
     $(`[data-case="${caso}"]`)?.addEventListener("slide", (e) => preencher(caso, e.detail));
   });
-  $$("[data-material]").forEach((btn) => btn.addEventListener("click", () => {
-    const caso = btn.dataset.material, m = MATERIAIS[caso][atual[caso] || 0];
+  // Abre o pop-up de um material. Também é usado pela seção de cases (cases.js), via window.VINNI
+  const abrir = (caso, i) => {
+    const m = MATERIAIS[caso]?.[i]; if (!m) return;
     $(".mat-rotulo", dlg).textContent = m.r || (caso === "csl" ? "Cineteatro São Luiz" : "Enem Action\u00a0· YDUQS");
     $("#material-titulo").textContent = m.t;
     $(".mat-lead", dlg).textContent = m.l;
@@ -697,7 +708,9 @@ const initMateriais = () => {
     abas[0].hidden = !m.ctx;
     aba(m.ctx ? 0 : 1);
     dlg.showModal(); lenis?.stop();
-  }));
+  };
+  $$("[data-material]").forEach((btn) => btn.addEventListener("click", () => abrir(btn.dataset.material, atual[btn.dataset.material] || 0)));
+  window.VINNI = { MATERIAIS, TOOL_SLUG, abrirMaterial: abrir };
   // no celular, as abas mostram uma parte por vez para o texto caber sem rolagem
   const abas = $$(".mat-abas button", dlg), partes = $$(".mat-blocos .passo", dlg);
   // cada aba aponta para uma parte (data-parte) e para o trecho dela que aparece (data-sub): Contexto e O quê dividem a primeira, Como e Recursos a terceira
@@ -787,7 +800,9 @@ const initFluxo = () => {
     s.addEventListener("pointerenter", () => { fixo = i; });
     s.addEventListener("pointerleave", () => { fixo = -1; });
   });
+  vigiar(box);
   subscribe((now) => {
+    if (!perto.has(box)) return;
     const r = box.getBoundingClientRect();
     if (r.bottom < 0 || r.top > innerHeight) return;
     if (reduced) return acende(fixo);
@@ -809,7 +824,8 @@ const initFluxo = () => {
 const initMisc = () => {
   $$("[data-curriculo]").forEach((a) => a.addEventListener("click", (e) => { if (a.getAttribute("href") === "#") { e.preventDefault(); scrollTo($("#contato")); } }));
   const move = $(".contato-foto-move"), sec = $("#contato");
-  subscribe(() => { const r = sec.getBoundingClientRect(); if (r.top > innerHeight || r.bottom < 0) return; const p = clamp01((innerHeight - r.top) / (r.height || 1)); move.style.transform = `translate3d(0, ${(1 - p) * 60}px, 0)`; }, () => 10);
+  vigiar(sec);
+  subscribe(() => { if (!perto.has(sec)) return; const r = sec.getBoundingClientRect(); if (r.top > innerHeight || r.bottom < 0) return; const p = clamp01((innerHeight - r.top) / (r.height || 1)); move.style.transform = `translate3d(0, ${(1 - p) * 60}px, 0)`; }, () => 10);
   const sheet = $(".sheet"), close = $(".sheet-close"), items = $$("li", sheet);
   const open = () => { sheet.classList.add("open"); lenis?.stop(); document.documentElement.style.overflow = "hidden"; close.focus(); items.forEach((li, i) => new Spring(0, { tension: 170, friction: 24 }, (v) => { li.style.opacity = v; li.style.transform = `translateY(${(1 - v) * 0.75}rem)`; }).to(1, 120 + i * 55)); };
   const shut = () => { sheet.classList.remove("open"); lenis?.start(); document.documentElement.style.overflow = ""; };
