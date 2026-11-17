@@ -535,7 +535,8 @@ dialog { color: var(--nevoa); }
 .certs-lista .meta { color: var(--nevoa-50); }
 
 /* ───────── 9 · Contato ───────── */
-.contato { padding: var(--s2); background: radial-gradient(120% 95% at 62% 118%, var(--ambar) 0%, var(--brasa) 15%, var(--rubro) 28%, rgb(106 76 156 / .9) 41%, var(--hora-azul) 54%, var(--noite) 78%); }
+/* margem para o respiro antes do painel ficar igual ao das outras seções (2 × --sec) */
+.contato { margin-top: calc(var(--sec) - var(--s2)); padding: var(--s2); background: radial-gradient(120% 95% at 62% 118%, var(--ambar) 0%, var(--brasa) 15%, var(--rubro) 28%, rgb(106 76 156 / .9) 41%, var(--hora-azul) 54%, var(--noite) 78%); }
 .contato-painel { position: relative; border-radius: var(--r); background: var(--noite) linear-gradient(var(--noite), var(--noite)); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: calc(100svh - 32px); }
 .contato-esq { display: flex; flex-direction: column; justify-content: space-between; gap: var(--s5); padding: clamp(24px, 4.4vw, 64px); }
 .contato h2 { font-size: clamp(40px, 5vw, 84px); max-width: 9em; }
@@ -608,7 +609,7 @@ dialog { color: var(--nevoa); }
   .hero-pe { flex-direction: column; align-items: flex-start; }
   .anel { height: 330px; }
   .anel-item { top: 56px; }
-  .contato { padding: var(--s1); }
+  .contato { margin-top: calc(var(--sec) - var(--s1)); padding: var(--s1); }
   .carr-fatos { grid-template-columns: 1fr; }
   .stories { margin-top: var(--s6); padding-top: var(--s4); }
   .story { grid-template-columns: 1fr; gap: var(--s3); }
