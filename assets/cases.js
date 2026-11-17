@@ -311,8 +311,18 @@ function iniciar() {
     if (e.key === "ArrowRight") { e.preventDefault(); passo(1); }
     else if (e.key === "ArrowLeft") { e.preventDefault(); passo(-1); }
     else if (/^[1-9]$/.test(e.key) && visiveis().includes(+e.key - 1)) selectCase(+e.key - 1);
-    else if (e.key === "Enter" && !e.target.closest("button, a")) $f("link").click();
+    else if (e.key === "Enter" && !e.isComposing && !e.repeat && !e.metaKey && !e.ctrlKey && !e.altKey && enterAbre(e.target)) { e.preventDefault(); $f("link").click(); }
   };
+  // Enter/return abre o case também depois de clicar nas setas ou num slot (o foco fica nesses botões e antes o Enter
+  // só repetia o clique deles). Fora da seção, links e botões e as abas de filtro mantêm o comportamento normal.
+  const enterAbre = (alvo) => {
+    if (!alvo.closest("button, a, [tabindex]")) return true;
+    return section.contains(alvo) && !alvo.closest(".aba");
+  };
+  // No Mac a tecla se chama return; nos demais sistemas, Enter
+  const ehMac = /mac|iphone|ipad/i.test(navigator.userAgentData?.platform || navigator.platform || navigator.userAgent);
+  const kbdEnter = $(".dicas [data-tecla='enter']");
+  if (kbdEnter && ehMac) { kbdEnter.textContent = "return"; kbdEnter.title = "Tecla return"; }
   document.addEventListener("keydown", onKey);
   let toqueX = null;
   $(".cases-centro").addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") toqueX = e.clientX; });
